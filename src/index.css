@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "./assets/fonts/fonts.css";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+body {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+@layer utilities {
+  @keyframes star-movement-bottom {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-100%, 0%);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes star-movement-top {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(100%, 0%);
+      opacity: 0;
+    }
+  }
+  
+  .animate-star-movement-bottom {
+    animation: star-movement-bottom linear infinite alternate;
+  }
+  
+  .animate-star-movement-top {
+    animation: star-movement-top linear infinite alternate;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee var(--duration) linear infinite;
+  }
+
+  .animate-marquee-vertical {
+    animation: marquee-vertical var(--duration) linear infinite;
+  }
+}
+
+.spline-transparent canvas {
+  background: transparent !important;
+}
+
+.spline-transparent {
+  background: transparent !important;
+}
+
+/* NeueMachina Font */
+.neue-machina {
+  font-family: 'NeueMachina' !important;
+  font-display: swap;
+  font-weight: normal !important;
+}
+
+/* Force all canvas backgrounds transparent */
+canvas {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+spline-viewer {
+  background: transparent !important;
+}
+
+/* Override WebGL canvas */
+canvas[data-engine] {
+  background: transparent !important;
+  background-color: transparent !important;
+}

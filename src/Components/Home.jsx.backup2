@@ -1,0 +1,648 @@
+import React, { useState, useEffect } from "react";
+import Spline from "@splinetool/react-spline";
+import Navbar from "./Navbar";
+import StaggeredMenu from "./StaggeredMenu/StaggeredMenu";
+import MagicBento from "./MagicBento";
+import GradientText from "./GradientText";
+import StarBorder from "./StarBorder";
+import Loader from "./Loader";
+import Footer from "./Footer";
+import Orb from "./Orb";
+import { ThreeDMarquee } from "./ThreeDMarquee";
+import RadialOrbitalTimeline from "./RadialOrbitalTimeline";
+import FramerEmbed from "./FramerEmbed";
+import { Code, Palette, Rocket, Users, Zap, Globe } from "lucide-react";
+
+
+const menuItems = [
+  { label: "Home", ariaLabel: "Go to home page", link: "/" },
+  { label: "About", ariaLabel: "Learn about us", link: "/about" },
+  { label: "Services", ariaLabel: "View our services", link: "/services" },
+  { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
+];
+
+const socialItems = [
+  { label: "Twitter", link: "https://twitter.com" },
+  { label: "GitHub", link: "https://github.com" },
+  { label: "LinkedIn", link: "https://linkedin.com" },
+];
+
+const timelineData = [
+  {
+    id: 1,
+    title: "Design",
+    date: "Phase 1",
+    content: "UI/UX design and prototyping for modern web applications.",
+    category: "Creative",
+    icon: Palette,
+    relatedIds: [2, 3],
+    status: "completed",
+    energy: 95,
+  },
+  {
+    id: 2,
+    title: "Development",
+    date: "Phase 2",
+    content: "Full-stack development with React, Node.js, and modern frameworks.",
+    category: "Technical",
+    icon: Code,
+    relatedIds: [1, 4],
+    status: "in-progress",
+    energy: 80,
+  },
+  {
+    id: 3,
+    title: "Strategy",
+    date: "Phase 3",
+    content: "Digital strategy and business growth planning.",
+    category: "Business",
+    icon: Zap,
+    relatedIds: [1, 5],
+    status: "completed",
+    energy: 90,
+  },
+  {
+    id: 4,
+    title: "Launch",
+    date: "Phase 4",
+    content: "Product launch and deployment to production.",
+    category: "Deployment",
+    icon: Rocket,
+    relatedIds: [2, 6],
+    status: "pending",
+    energy: 60,
+  },
+  {
+    id: 5,
+    title: "Marketing",
+    date: "Phase 5",
+    content: "Digital marketing and SEO optimization.",
+    category: "Growth",
+    icon: Globe,
+    relatedIds: [3, 6],
+    status: "in-progress",
+    energy: 75,
+  },
+  {
+    id: 6,
+    title: "Scale",
+    date: "Phase 6",
+    content: "Scaling infrastructure and team growth.",
+    category: "Expansion",
+    icon: Users,
+    relatedIds: [4, 5],
+    status: "pending",
+    energy: 50,
+  },
+];
+
+const TestimonialCard = ({ quote, name, role, image }) => (
+  <article className="rounded-2xl border p-6 border-white/10 bg-neutral-900/70">
+    <blockquote className="text-[16px] sm:text-[18px] text-neutral-100">
+      <span className="inline-flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-neutral-400">
+          <path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path>
+          <path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"></path>
+        </svg>
+        "{quote}"
+      </span>
+    </blockquote>
+    <div className="mt-5 flex items-center gap-3">
+      <img className="h-10 w-10 rounded-full object-cover ring-2 ring-white/10" src={image} alt={name} />
+      <div>
+        <div className="text-sm font-medium">{name}</div>
+        <div className="text-xs text-neutral-400">{role}</div>
+      </div>
+    </div>
+  </article>
+);
+
+export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  return (
+    <div className="w-full" style={{background: "radial-gradient(ellipse 150% 100% at 0% 0%, #1a2570 0%, #0f1654 15%, #0a1040 35%, #060b28 60%, #020515 85%, #000000 100%)"}}>
+      {/* Desktop Navbar */
+      <div className="hidden md:block">
+        <Navbar />
+      </div>
+
+      {/* Mobile StaggeredMenu */}
+      <div className="md:hidden">
+        <StaggeredMenu
+          position="right"
+          items={menuItems}
+          socialItems={socialItems}
+          displaySocials={true}
+          displayItemNumbering={false}
+          menuButtonColor="#fff"
+          openMenuButtonColor="#fff"
+          changeMenuColorOnOpen={false}
+          colors={["#B19EEF", "#5227FF"]}
+          accentColor="#0071BC"
+          isFixed={true}
+          onMenuOpen={() => console.log("Menu opened")}
+          onMenuClose={() => console.log("Menu closed")}
+        />
+      </div>
+      <main className="w-full relative flex items-center justify-center overflow-hidden md:mt-0 z-20" style={{background: "radial-gradient(ellipse 150% 100% at 0% 0%, #1a2570 0%, #0f1654 15%, #0a1040 35%, #060b28 60%, #020515 85%, #000000 100%)"}}>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-blue-500/5 blur-3xl pointer-events-none"></div>
+        <div className="w-full h-[85vh] md:h-[calc(100vh-5rem)] min-h-[500px] flex items-center justify-center">
+          <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
+            <Spline
+              scene="https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode"
+              className="w-full h-full"
+            />
+          </div>
+        </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
+          <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
+            <h1
+              className="text-3xl md:text-5xl lg:text-7xl font-bold text-center neue-machina"
+              style={{
+                fontFamily: "NeueMachina",
+                fontWeight: "normal",
+              }}
+            >
+              <GradientText
+                colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="inline-block"
+              >
+                Creative Solutions
+                <br />
+                That Drive Real Business Growth
+              </GradientText>
+            </h1>
+          </div>
+          <div className="pointer-events-auto pb-[8vh]">
+            <StarBorder
+              thickness={1.5}
+              speed="2.5s"
+              color="cyan"
+              className="cursor-pointer hover:scale-105 transition-transform min-w-[200px] md:min-w-[250px]"
+            >
+              Get Started
+            </StarBorder>
+          </div>
+        </div>
+      </main>
+
+      {/* Services Hero Section */}
+      <section className="relative py-20 lg:py-32 overflow-hidden border-t border-white/5" style={{background: "radial-gradient(ellipse 150% 100% at 0% 0%, #1a2570 0%, #0f1654 15%, #0a1040 35%, #060b28 60%, #020515 85%, #000000 100%)"}}>
+        <div className="w-full px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Left Side - Text Content */}
+            <div className="text-left max-w-4xl lg:w-1/2 px-8 lg:px-16">
+              <h1 className="text-4xl lg:text-6xl font-medium tracking-tight leading-tight mb-8 text-white">
+                We build the solutions that drive
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400"> digital business growth.</span>
+              </h1>
+              <p className="text-xl text-zinc-400 leading-relaxed mb-10 font-light tracking-tight max-w-2xl">
+                We take ownership of complex web development projects like custom applications, e-commerce platforms, and scalable systems — freeing up your team to focus on core business operations.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-16">
+                <button className="bg-white text-black px-8 py-3.5 rounded-full font-medium text-[15px] flex items-center gap-2 hover:bg-zinc-200 transition-all shadow-[0_0_25px_rgba(255,255,255,0.15)] group">
+                  Start Your Project
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-0.5 transition-transform">
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </button>
+                <div className="flex gap-6 text-[11px] font-medium text-zinc-500 uppercase tracking-widest">
+                  <span className="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500">
+                      <path d="M20 6 9 17l-5-5"></path>
+                    </svg>
+                    Result Driven
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-500">
+                      <path d="M20 6 9 17l-5-5"></path>
+                    </svg>
+                    Modern Stack
+                  </span>
+                </div>
+              </div>
+
+              <div className="border-t border-white/10 pt-8 w-full">
+                <p className="text-[11px] tracking-[0.2em] text-zinc-600 uppercase font-medium">
+                  // Built with React, Next.js, Node.js, and Cloud Infrastructure
+                </p>
+              </div>
+            </div>
+
+            {/* Right Side - RadialOrbitalTimeline */}
+            <div className="lg:w-1/2 w-full h-[600px] flex items-center">
+              <RadialOrbitalTimeline timelineData={timelineData} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Online Shopping Section */}
+      <section className="py-16 border-t border-zinc-200 dark:border-zinc-700" style={{background: "radial-gradient(ellipse 150% 100% at 0% 0%, #1a2570 0%, #0f1654 15%, #0a1040 35%, #060b28 60%, #020515 85%, #000000 100%)"}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <div className="w-12 h-12 bg-[#EDFB81] rounded-xl flex items-center justify-center mb-4 text-2xl">🛒</div>
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-2">Online Shopping</h2>
+          <p className="text-zinc-500 dark:text-zinc-400">Buy prepaid cards for Amazon, Adidas, Zalando and more.</p>
+        </div>
+
+        <div className="overflow-hidden group w-full relative">
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-zinc-50 dark:from-[#09090b] to-transparent z-10"></div>
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-zinc-50 dark:from-[#09090b] to-transparent z-10"></div>
+
+          <div className="flex w-full gap-6">
+            <div className="flex animate-[marquee_40s_linear_infinite] group-hover:[animation-play-state:paused] w-max gap-6">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex gap-6">
+                  <div className="w-[300px] bg-white dark:bg-[#18181b] rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 hover:border-[#EDFB81]/50 transition-colors shadow-sm flex flex-col gap-4">
+                    <div className="h-32 bg-[#2D3394] rounded-xl flex items-center justify-center text-5xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                      <span className="relative z-10">🏃</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-zinc-900 dark:text-white tracking-tight">Decathlon</h4>
+                      <p className="text-xs text-zinc-500 font-medium uppercase tracking-wide">Sportswear</p>
+                    </div>
+                    <button className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                      <span>Select amount</span>
+                      <span>▼</span>
+                    </button>
+                  </div>
+
+                  <div className="w-[300px] bg-white dark:bg-[#18181b] rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 hover:border-[#EDFB81]/50 transition-colors shadow-sm flex flex-col gap-4">
+                    <div className="h-32 bg-[#E50010] rounded-xl flex items-center justify-center text-5xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                      <span className="relative z-10">👕</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-zinc-900 dark:text-white tracking-tight">H&M</h4>
+                      <p className="text-xs text-zinc-500 font-medium uppercase tracking-wide">Fashion Retail</p>
+                    </div>
+                    <button className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                      <span>Select amount</span>
+                      <span>▼</span>
+                    </button>
+                  </div>
+
+                  <div className="w-[300px] bg-white dark:bg-[#18181b] rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 hover:border-[#EDFB81]/50 transition-colors shadow-sm flex flex-col gap-4">
+                    <div className="h-32 bg-black rounded-xl flex items-center justify-center text-5xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-zinc-800/30"></div>
+                      <span className="relative z-10">👟</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-zinc-900 dark:text-white tracking-tight">Adidas</h4>
+                      <p className="text-xs text-zinc-500 font-medium uppercase tracking-wide">Shoes & Clothing</p>
+                    </div>
+                    <button className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                      <span>Select amount</span>
+                      <span>▼</span>
+                    </button>
+                  </div>
+
+                  <div className="w-[300px] bg-white dark:bg-[#18181b] rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 hover:border-[#EDFB81]/50 transition-colors shadow-sm flex flex-col gap-4">
+                    <div className="h-32 bg-[#FF9900] rounded-xl flex items-center justify-center text-5xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                      <span className="relative z-10">📦</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-zinc-900 dark:text-white tracking-tight">Amazon</h4>
+                      <p className="text-xs text-zinc-500 font-medium uppercase tracking-wide">Everything Store</p>
+                    </div>
+                    <button className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                      <span>Select amount</span>
+                      <span>▼</span>
+                    </button>
+                  </div>
+
+                  <div className="w-[300px] bg-white dark:bg-[#18181b] rounded-2xl p-4 border border-zinc-200 dark:border-zinc-700 hover:border-[#EDFB81]/50 transition-colors shadow-sm flex flex-col gap-4">
+                    <div className="h-32 bg-zinc-100 dark:bg-black rounded-xl flex items-center justify-center text-5xl border border-zinc-200 dark:border-zinc-800">
+                      <span>👗</span>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-lg text-zinc-900 dark:text-white tracking-tight">Zara</h4>
+                      <p className="text-xs text-zinc-500 font-medium uppercase tracking-wide">Clothing</p>
+                    </div>
+                    <button className="w-full flex justify-between items-center px-3 py-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                      <span>Select amount</span>
+                      <span>▼</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* MagicBento Section */}
+      <section className="w-full h-auto flex flex-col items-center justify-center overflow-hidden py-10 px-4 md:px-8 lg:px-16 relative" style={{background: "radial-gradient(ellipse 150% 100% at 0% 0%, #1a2570 0%, #0f1654 15%, #0a1040 35%, #060b28 60%, #020515 85%, #000000 100%)"}}>
+        <h2
+          className="text-3xl md:text-5xl lg:text-6xl font-normal text-center mb-4 mt-16 relative z-10"
+          style={{ fontFamily: "NeueMachina" }}
+        >
+          <span style={{ color: "#FFFFFF" }}>Transform Your </span>
+          <GradientText
+            colors={["#008B8B", "#87CEEB", "#008B8B", "#87CEEB"]}
+            animationSpeed={3}
+            showBorder={false}
+            className="inline-block"
+          >
+            Digital
+          </GradientText>
+          <span style={{ color: "#FFFFFF" }}> Presence</span>
+        </h2>
+        <p
+          className="text-base md:text-lg text-center mb-12 max-w-3xl relative z-10"
+          style={{ color: "#9CA3AF" }}
+        >
+          From web development to digital marketing, we provide complete
+          solutions to grow your business online.
+        </p>
+        <div className="relative z-10">
+          <MagicBento spotlightRadius={610} enableTilt enableMagnetism />
+        </div>
+      </section>
+
+      {/* Prepaid Cards Section */}
+      <section className="relative pt-32 pb-10 overflow-hidden" style={{background: "radial-gradient(ellipse 150% 100% at 0% 0%, #1a2570 0%, #0f1654 15%, #0a1040 35%, #060b28 60%, #020515 85%, #000000 100%)"}}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center z-10 relative mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 mb-8">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EDFB81] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#EDFB81]"></span>
+            </span>
+            <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Global delivery in seconds</span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter text-zinc-900 dark:text-white leading-[1.1] mb-6">
+            Prepaid cards <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-900 to-zinc-500 dark:from-white dark:to-zinc-500">for everything.</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+            Use our cards for online shopping, payments, subscriptions and securely purchase on the internet without a bank account.
+          </p>
+        </div>
+
+        <div className="w-full relative py-8 overflow-hidden">
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#000000] via-[#0a0a2e] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#000000] via-[#0a0a2e] to-transparent z-10 pointer-events-none"></div>
+          
+          <div style={{transform: 'rotate(-5deg) translateY(20px) scale(1.1)'}}>
+          {/* Row 1 */}
+          <div className="flex gap-6 animate-[marquee-reverse_60s_linear_infinite] hover:[animation-play-state:paused] w-max mb-6">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="flex gap-6">
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Prepaid cards for everything - perfect for all my needs!"
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=256&auto=format&fit=crop" alt="Aisha" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Aisha Green</div>
+                        <div className="text-xs text-neutral-300">Online Shopper</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Use our cards for online shopping and payments seamlessly."
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=256&auto=format&fit=crop" alt="Michael" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Michael Chen</div>
+                        <div className="text-xs text-neutral-300">Digital Buyer</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Perfect for subscriptions and secure purchases on the internet."
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=256&auto=format&fit=crop" alt="Priya" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Priya Patel</div>
+                        <div className="text-xs text-neutral-300">Subscription User</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Securely purchase without a bank account - game changer!"
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1546456073-6712f79251bb?q=80&w=256&auto=format&fit=crop" alt="Jonas" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Jonas Weber</div>
+                        <div className="text-xs text-neutral-300">Freelancer</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Cards work everywhere - online shopping made so easy!"
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=256&auto=format&fit=crop" alt="Liam" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Liam O'Connor</div>
+                        <div className="text-xs text-neutral-300">E-commerce User</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2 */}
+          <div className="flex gap-6 animate-[marquee_60s_linear_infinite] w-max hover:[animation-play-state:paused]">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="flex gap-6">
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Integrations were seamless. We saved 120+ hours first quarter."
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=256&auto=format&fit=crop" alt="Rachel" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Rachel Adams</div>
+                        <div className="text-xs text-neutral-300">Product Manager</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Switching platforms was our best decision this year."
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&auto=format&fit=crop" alt="Carlos" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Carlos Rivera</div>
+                        <div className="text-xs text-neutral-300">CEO</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Transparency removed all doubt. We know where we stand."
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=256&auto=format&fit=crop" alt="Sofia" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Sofia Martinez</div>
+                        <div className="text-xs text-neutral-300">Analytics Lead</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "Predictive models helped us spot trends early and act faster."
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=256&auto=format&fit=crop" alt="Noah" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Noah Bennett</div>
+                        <div className="text-xs text-neutral-300">Strategy Director</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+
+                <article className="w-64 h-40 rounded-2xl border p-4 border-white/10 bg-neutral-900/70 flex flex-col justify-between shadow-xl">
+                  <blockquote className="text-sm text-white leading-snug">
+                    "The platform is intuitive, secure, and delivers measurable results."
+                  </blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <img className="h-8 w-8 rounded-full object-cover ring-2 ring-white/10" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=256&auto=format&fit=crop" alt="Emma" />
+                      <div>
+                        <div className="text-sm font-semibold text-white">Emma Wilson</div>
+                        <div className="text-xs text-neutral-300">Tech Lead</div>
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+          </div>
+        </div>
+
+        <style jsx>{`
+          @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+          }
+          @keyframes marquee-reverse {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0%); }
+          }
+        `}</style>
+      </section>
+
+      {/* Framer Embed Section */}
+      <section className="w-full" style={{background: "radial-gradient(ellipse 150% 100% at 0% 0%, #1a2570 0%, #0f1654 15%, #0a1040 35%, #060b28 60%, #020515 85%, #000000 100%)"}}>
+        <FramerEmbed />
+      </section>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+}

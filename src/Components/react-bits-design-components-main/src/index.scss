@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import "./scss/sidebar.scss";
+@import "./scss/category.scss";
+@import "./scss/landingpage.scss";
+@import "./content/TextAnimations/SplitText/SplitText.scss";
+@import "./content/TextAnimations/BlurText/BlurText.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+input[type="color"] {
+  border: 2px solid #999;
+  border-radius: 15px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0;
+  width: 60px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  min-width: 100%;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  padding: 0 4em;
+}
+
+.back-to-top {
+  background: #060606 !important;
+  border: 1px solid #222;
+}
