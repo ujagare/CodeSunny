@@ -188,13 +188,23 @@ export default function Home() {
         <main className="w-full relative flex items-center justify-center overflow-hidden md:mt-0 z-20 bg-[#050515] hero">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute inset-0 pointer-events-none"></div>
-          <div className="w-full h-[85vh] md:h-[calc(100vh-5rem)] min-h-[500px] flex items-center justify-center spline-wrapper">
+          {/* Desktop Spline */}
+          <div className="hidden md:flex w-full h-[calc(100vh-5rem)] min-h-[500px] items-center justify-center spline-wrapper">
             <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
               <Spline
                 scene="https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode"
                 className="w-full h-full"
               />
             </div>
+          </div>
+
+          {/* Mobile Spline */}
+          <div className="md:hidden w-full h-[85vh] flex items-center justify-center spline-wrapper">
+            <Spline
+              scene="https://prod.spline.design/MnZq8ZS9No-Q1nR3/scene.splinecode"
+              width={360}
+              height={718}
+            />
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">

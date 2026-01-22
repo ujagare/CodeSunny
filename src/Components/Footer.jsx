@@ -207,19 +207,12 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-center items-center text-sm">
           {/* Copyright */}
           <p className="text-center text-white">
-            &copy; {new Date().getFullYear()} CodeSunny. All rights reserved.
+            &copy; {new Date().getFullYear()}. All rights reserved.
           </p>
         </div>
       </div>
 
-      {/* Text hover effect */}
-      {isVisible && (
-        <div className="w-full justify-center items-center h-[30rem] -mt-52 -mb-36 relative z-50 hidden md:flex" style={{ pointerEvents: 'auto' }}>
-          <div style={{ width: '150%', pointerEvents: 'auto' }}>
-            <TextHoverEffect text="CODE SUNNY" />
-          </div>
-        </div>
-      )}
+
 
       <FooterBackgroundGradient />
     </footer>
