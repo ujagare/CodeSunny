@@ -1,16 +1,105 @@
-# React + Vite
+# CodeSunny - Modern Web Development Agency
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive web development agency website built with React, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✨ Modern UI with gradient effects and animations
+- 📱 Fully responsive design (mobile, tablet, desktop)
+- 🎨 Beautiful service showcase pages
+- ⚡ Fast performance with Vite
+- 🎯 SEO optimized
+- 🌙 Dark theme with custom styling
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 18
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Animations**: Custom CSS animations
+- **3D Graphics**: Spline
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/CodeSunny.git
+cd CodeSunny
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start development server
+```bash
+npm run dev
+```
+
+4. Build for production
+```bash
+npm run build
+```
+
+## Project Structure
+
+```
+CodeSunny/
+├── src/
+│   ├── Components/
+│   │   ├── Home.jsx
+│   │   ├── Services.jsx
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   └── ...
+│   ├── assets/
+│   ├── App.jsx
+│   └── main.jsx
+├── public/
+├── index.html
+├── vite.config.js
+├── tailwind.config.js
+└── package.json
+```
+
+## Pages
+
+- **Home**: Landing page with hero section and services overview
+- **Services**: Detailed service offerings (Web Development, UI/UX Design, Digital Marketing, etc.)
+- **About**: Company information and team details
+- **Contact**: Contact form and information
+
+## Responsive Design
+
+- Mobile-first approach
+- Optimized for all screen sizes
+- Touch-friendly interface
+- Fast loading on mobile networks
+
+## Performance Optimizations
+
+- Canvas optimization for Spline 3D graphics
+- Mobile hero height limiting (70vh on mobile)
+- Lazy loading for images
+- CSS animations for smooth transitions
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Contact
+
+For inquiries, visit our website or contact us through the contact page.
+
+---
+
+Built with ❤️ by CodeSunny Team
