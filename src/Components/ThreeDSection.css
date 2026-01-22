@@ -1,0 +1,173 @@
+:root {
+  --depth: 5000px;
+  --bg-color: #030303;
+  --cyan: #22d3ee;
+  --navy: #1e3a8a;
+  --lime: #a3e635;
+  --yellow: #facc15;
+}
+
+.threed-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  perspective: 800px;
+  /* Lowered for closer feel */
+  overflow: hidden;
+}
+
+.threed-world {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.section-room {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Industrial Grid Floor */
+.floor-grid {
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.02) 1px, transparent 1px);
+  background-size: 100px 100px;
+  transform: rotateX(90deg) translateZ(-300px);
+  transform-style: preserve-3d;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  pointer-events: none;
+  opacity: 0.3;
+  /* More subtle */
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 7s ease-in-out infinite 1s;
+}
+
+.threed-fog {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  /* Removed background as requested */
+  pointer-events: none;
+  z-index: 50;
+}
+
+.custom-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d4d4d8;
+  transition: all 0.3s;
+}
+
+.custom-input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--cyan);
+}
+
+/* Pattern Classes based on Logo */
+.pattern-dots {
+  background-image: radial-gradient(var(--lime) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+.pattern-lines {
+  background: repeating-linear-gradient(45deg,
+      transparent,
+      transparent 5px,
+      rgba(34, 211, 238, 0.1) 5px,
+      rgba(34, 211, 238, 0.1) 6px);
+}
+
+.glass-panel {
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Custom Checkbox */
+.checkbox-wrapper input:checked+div {
+  background-color: var(--cyan);
+  border-color: var(--cyan);
+  color: black;
+}
+
+/* 3D Transform utilities - adapted for standard CSS */
+.rotate-x-12 {
+  --tw-rotate-x: 12deg;
+  transform: rotateX(var(--tw-rotate-x));
+}
+
+.rotate-y-12 {
+  --tw-rotate-y: 12deg;
+  transform: rotateY(var(--tw-rotate-y));
+}
+
+.rotate-z-2 {
+  --tw-rotate-z: 2deg;
+  transform: rotateZ(var(--tw-rotate-z));
+}
+
+.rotate-y-6 {
+  --tw-rotate-y: 6deg;
+  transform: rotateY(var(--tw-rotate-y));
+}
+
+.-rotate-z-3 {
+  --tw-rotate-z: -3deg;
+  transform: rotateZ(var(--tw-rotate-z));
+}
+
+.-rotate-y-12 {
+  --tw-rotate-y: -12deg;
+  transform: rotateY(var(--tw-rotate-y));
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}

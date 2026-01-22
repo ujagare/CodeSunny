@@ -105,11 +105,11 @@ function Footer() {
               alt="CodeSunny Logo" 
               className="w-24 h-24 md:w-32 md:h-32 object-contain mb-0"
             />
-            <p className="text-sm leading-relaxed text-gray-400 mb-4">
+            <p className="text-sm leading-relaxed text-white mb-4">
               Innovative solutions for digital growth.
             </p>
             {/* Social icons */}
-            <div className="flex space-x-4 text-gray-400">
+            <div className="flex space-x-4 text-white">
               {socialLinks.map(({ icon, label, href }) => (
                 <a
                   key={label}
@@ -127,21 +127,15 @@ function Footer() {
           <div className="grid grid-cols-2 gap-6 lg:col-span-2">
             {footerLinks.slice(0, 2).map((section) => (
               <div key={section.title}>
-                <h4 className="text-base md:text-lg font-semibold mb-4 md:mb-6">
-                  <GradientText
-                    colors={["#008B8B", "#87CEEB", "#008B8B", "#87CEEB"]}
-                    animationSpeed={3}
-                    showBorder={false}
-                  >
-                    {section.title}
-                  </GradientText>
+                <h4 className="text-base md:text-lg font-semibold mb-4 md:mb-6 text-left md:text-left">
+                  <span className="text-white">{section.title}</span>
                 </h4>
                 <ul className="space-y-2 md:space-y-3">
                   {section.links.map((link) => (
                     <li key={link.label} className="relative">
                       <a
                         href={link.href}
-                        className="text-gray-400 hover:text-[#00CED1] transition-colors text-sm"
+                        className="text-white hover:text-[#00CED1] transition-colors text-sm"
                       >
                         {link.label}
                       </a>
@@ -159,21 +153,15 @@ function Footer() {
           <div className="grid grid-cols-2 gap-6 lg:col-span-2">
             {/* Helpful Links */}
             <div>
-              <h4 className="text-base md:text-lg font-semibold mb-4 md:mb-6">
-                <GradientText
-                  colors={["#008B8B", "#87CEEB", "#008B8B", "#87CEEB"]}
-                  animationSpeed={3}
-                  showBorder={false}
-                >
-                  {footerLinks[2].title}
-                </GradientText>
+              <h4 className="text-base md:text-lg font-semibold mb-4 md:mb-6 text-left md:text-left">
+                <span className="text-white">{footerLinks[2].title}</span>
               </h4>
               <ul className="space-y-2 md:space-y-3">
                 {footerLinks[2].links.map((link) => (
                   <li key={link.label} className="relative">
                     <a
                       href={link.href}
-                      className="text-gray-400 hover:text-[#00CED1] transition-colors text-sm"
+                      className="text-white hover:text-[#00CED1] transition-colors text-sm"
                     >
                       {link.label}
                     </a>
@@ -187,14 +175,8 @@ function Footer() {
 
             {/* Contact section */}
             <div>
-              <h4 className="text-base md:text-lg font-semibold mb-4 md:mb-6">
-                <GradientText
-                  colors={["#008B8B", "#87CEEB", "#008B8B", "#87CEEB"]}
-                  animationSpeed={3}
-                  showBorder={false}
-                >
-                  Contact Us
-                </GradientText>
+              <h4 className="text-base md:text-lg font-semibold mb-4 md:mb-6 text-left md:text-left">
+                <span className="text-white">Contact Us</span>
               </h4>
               <ul className="space-y-3 md:space-y-4">
                 {contactInfo.map((item, i) => (
@@ -203,12 +185,12 @@ function Footer() {
                     {item.href ? (
                       <a
                         href={item.href}
-                        className="text-gray-400 hover:text-[#00CED1] transition-colors text-sm"
+                        className="text-white hover:text-[#00CED1] transition-colors text-sm"
                       >
                         {item.text}
                       </a>
                     ) : (
-                      <span className="text-gray-400 hover:text-[#00CED1] transition-colors text-sm">
+                      <span className="text-white hover:text-[#00CED1] transition-colors text-sm">
                         {item.text}
                       </span>
                     )}
@@ -224,7 +206,7 @@ function Footer() {
         {/* Footer bottom */}
         <div className="flex flex-col md:flex-row justify-center items-center text-sm">
           {/* Copyright */}
-          <p className="text-center text-gray-400">
+          <p className="text-center text-white">
             &copy; {new Date().getFullYear()} CodeSunny. All rights reserved.
           </p>
         </div>
