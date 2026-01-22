@@ -31,7 +31,7 @@ A modern, responsive web development agency website built with React, Vite, and 
 
 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/CodeSunny.git
+git clone https://github.com/ujagare/CodeSunny.git
 cd CodeSunny
 ```
 
@@ -50,6 +50,11 @@ npm run dev
 npm run build
 ```
 
+5. Preview production build
+```bash
+npm run preview
+```
+
 ## Project Structure
 
 ```
@@ -60,15 +65,27 @@ CodeSunny/
 │   │   ├── Services.jsx
 │   │   ├── About.jsx
 │   │   ├── Contact.jsx
+│   │   ├── DigitalMarketing.jsx
+│   │   ├── UIUXDesign.jsx
+│   │   ├── WebDevelopment.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
 │   │   └── ...
 │   ├── assets/
+│   ├── config/
+│   ├── contexts/
+│   ├── hooks/
+│   ├── lib/
+│   ├── Utils/
 │   ├── App.jsx
+│   ├── index.css
 │   └── main.jsx
 ├── public/
 ├── index.html
 ├── vite.config.js
 ├── tailwind.config.js
-└── package.json
+├── package.json
+└── README.md
 ```
 
 ## Pages
@@ -77,6 +94,7 @@ CodeSunny/
 - **Services**: Detailed service offerings (Web Development, UI/UX Design, Digital Marketing, etc.)
 - **About**: Company information and team details
 - **Contact**: Contact form and information
+- **Service Pages**: Individual pages for each service with detailed information
 
 ## Responsive Design
 
@@ -91,6 +109,21 @@ CodeSunny/
 - Mobile hero height limiting (70vh on mobile)
 - Lazy loading for images
 - CSS animations for smooth transitions
+- Vite's fast build and HMR (Hot Module Replacement)
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
 ## License
 
