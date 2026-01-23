@@ -40,3 +40,7 @@ Thumbs.db
 3d-marquee.tsx
 google-gemini-effect-demo.tsx
 google-gemini-effect-demo (1).tsx
+
+# Next.js artifacts
+home/
+.next/
