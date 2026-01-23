@@ -64,6 +64,10 @@ body {
     animation: marquee var(--duration) linear infinite;
   }
 
+  .animate-marquee-reverse {
+    animation: marquee var(--duration) linear infinite reverse;
+  }
+
   .animate-marquee-vertical {
     animation: marquee-vertical var(--duration) linear infinite;
   }

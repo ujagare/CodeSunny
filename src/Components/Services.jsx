@@ -12,7 +12,6 @@ import digitalMarketingImage from "../assets/images/digital-marketing.png";
 import ElectricBorder from "./ElectricBorder";
 import AnimatedBeamDemo from "./AnimatedBeamDemo";
 
-
 const menuItems = [
   { label: "Home", ariaLabel: "Go to home page", link: "/" },
   { label: "About", ariaLabel: "Learn about us", link: "/about" },
@@ -88,17 +87,29 @@ const Services = () => {
 
         {/* New Hero Section */}
         <section className="w-full min-h-screen md:min-h-auto md:bg-center lg:pt-48 lg:pb-48 max-w-none mr-auto ml-auto pt-0 pr-6 pb-32 md:pb-32 pl-6 relative flex items-center">
-          <div className="absolute top-0 right-0 bottom-0 left-0" data-container-bg="true"></div>
+          <div
+            className="absolute top-0 right-0 bottom-0 left-0"
+            data-container-bg="true"
+          ></div>
           <div className="grid lg:grid-cols-2 max-w-7xl mr-auto ml-auto items-center w-full">
             {/* Left Column: Copy & Form */}
             <div className="max-w-xl z-10 mt-24 md:mt-0">
-              <p className="hidden md:block uppercase text-xs font-semibold tracking-tight font-dm-sans mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Comprehensive Digital Solutions</p>
+              <p className="hidden md:block uppercase text-xs font-semibold tracking-tight font-dm-sans mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                Comprehensive Digital Solutions
+              </p>
               <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-stone-50 tracking-tight font-instrument-serif mb-8">
-                <span className="block"><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Expert</span> Services</span>
+                <span className="block">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                    Expert
+                  </span>{" "}
+                  Services
+                </span>
                 <span className="block">For Your Success.</span>
               </h1>
               <p className="leading-relaxed text-sm md:text-lg tracking-tight font-dm-sans max-w-lg mb-10 text-stone-50">
-                We deliver cutting-edge web development, UI/UX design, digital marketing, and cloud solutions to transform your business and drive sustainable growth.
+                We deliver cutting-edge web development, UI/UX design, digital
+                marketing, and cloud solutions to transform your business and
+                drive sustainable growth.
               </p>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 md:mb-16">
                 <div className="inline-block bg-transparent w-full sm:w-auto">
@@ -245,10 +256,21 @@ const Services = () => {
             </div>
             {/* Right Column: UI Mockups */}
             <div className="mt-8 sm:mt-0 relative perspective-1000">
-              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4aa0ba0f-cf6d-4050-bf33-824539eb56e0_1600w.png" alt="Product UI" className="w-full h-auto block" />
+              <img
+                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4aa0ba0f-cf6d-4050-bf33-824539eb56e0_1600w.png"
+                alt="Product UI"
+                className="w-full h-auto block"
+              />
             </div>
           </div>
-          <div className="spline-container absolute top-0 left-0 w-full h-full -z-10"><iframe src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW" frameBorder="0" width="100%" height="100%"></iframe></div>
+          <div className="spline-container absolute top-0 left-0 w-full h-full -z-10">
+            <iframe
+              src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            ></iframe>
+          </div>
         </section>
 
         <section className="relative">
@@ -266,14 +288,14 @@ const Services = () => {
                     See what's new
                   </a>
                 </div>
-                <h1 className="sm:text-5xl lg:text-6xl xl:text-7xl text-4xl font-semibold tracking-tight">
+                <h1 className="text-4xl lg:text-6xl font-medium tracking-tight capitalize">
                   <GradientText
                     colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
                     animationSpeed={3}
                     showBorder={false}
                     className="inline-block"
                   >
-                    Build, launch, and scale in days — not months.
+                    Build, launch, and scale in days not months.
                   </GradientText>
                 </h1>
                 <p className="text-base sm:text-lg text-slate-400 max-w-xl">
@@ -282,17 +304,137 @@ const Services = () => {
                   where it counts.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <a
-                    href="#get-started"
-                    className="inline-flex items-center justify-center gap-2 rounded-md bg-sky-500/90 hover:bg-sky-400 text-slate-900 px-5 py-3 text-sm font-medium ring-1 ring-sky-300/40 hover:ring-sky-300 transition-all"
-                  >
-                    Start free
-                  </a>
+                  <style jsx>{`
+                    @property --gradient-angle {
+                      syntax: "<angle>";
+                      initial-value: 0deg;
+                      inherits: false;
+                    }
+
+                    .shiny-cta-demo {
+                      --gradient-angle: 0deg;
+                      position: relative;
+                      overflow: hidden;
+                      border-radius: 9999px;
+                      padding: 0.875rem 1.75rem;
+                      font-size: 0.875rem;
+                      line-height: 1.2;
+                      font-weight: 500;
+                      color: #ffffff;
+                      background:
+                        linear-gradient(#000000, #000000) padding-box,
+                        conic-gradient(
+                            from var(--gradient-angle),
+                            transparent 0%,
+                            #1d4ed8 5%,
+                            #8484ff 15%,
+                            #1d4ed8 30%,
+                            transparent 40%,
+                            transparent 100%
+                          )
+                          border-box;
+                      border: 2px solid transparent;
+                      box-shadow: inset 0 0 0 1px #1a1818;
+                      cursor: pointer;
+                      animation: border-spin 2.5s linear infinite;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      gap: 0.5rem;
+                    }
+
+                    @keyframes border-spin {
+                      to {
+                        --gradient-angle: 360deg;
+                      }
+                    }
+
+                    .shiny-cta-demo:active {
+                      transform: translateY(1px);
+                    }
+
+                    .shiny-cta-demo::before {
+                      content: "";
+                      pointer-events: none;
+                      position: absolute;
+                      left: 50%;
+                      top: 50%;
+                      transform: translate(-50%, -50%);
+                      width: calc(100% - 6px);
+                      height: calc(100% - 6px);
+                      background: radial-gradient(
+                          circle at 2px 2px,
+                          white 0.5px,
+                          transparent 0
+                        )
+                        padding-box;
+                      background-size: 4px 4px;
+                      background-repeat: space;
+                      mask-image: conic-gradient(
+                        from calc(var(--gradient-angle) + 45deg),
+                        black,
+                        transparent 10% 90%,
+                        black
+                      );
+                      border-radius: inherit;
+                      opacity: 0.4;
+                    }
+
+                    .shiny-cta-demo::after {
+                      content: "";
+                      pointer-events: none;
+                      position: absolute;
+                      left: 50%;
+                      top: 50%;
+                      transform: translate(-50%, -50%);
+                      width: 100%;
+                      aspect-ratio: 1;
+                      background: linear-gradient(
+                        -50deg,
+                        transparent,
+                        #1d4ed8,
+                        transparent
+                      );
+                      mask-image: radial-gradient(
+                        circle at bottom,
+                        transparent 40%,
+                        black
+                      );
+                      opacity: 0.6;
+                      animation: shimmer 4s linear infinite;
+                    }
+
+                    @keyframes shimmer {
+                      to {
+                        transform: translate(-50%, -50%) rotate(360deg);
+                      }
+                    }
+
+                    .shiny-cta-demo span {
+                      position: relative;
+                      z-index: 2;
+                    }
+                  `}</style>
                   <a
                     href="#demo"
-                    className="inline-flex items-center justify-center gap-2 hover:text-white hover:bg-white/4 ring-1 ring-white/10 hover:ring-white/20 transition-all text-sm text-slate-200 rounded-md pt-3 pr-5 pb-3 pl-5"
+                    className="shiny-cta-demo focus:outline-none"
                   >
-                    Book a demo
+                    <span>Book a demo</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{ position: "relative", zIndex: 2 }}
+                    >
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path>
+                    </svg>
                   </a>
                 </div>
                 <div className="flex items-center gap-6 pt-3">
@@ -474,243 +616,23 @@ const Services = () => {
           </div>
         </section>
 
-
-        {/* Sticky Workflows Section */}
-        <section
-          id="workflows"
-          className="relative border-b border-white/10 z-10"
-        >
-          <div className="container mx-auto px-4 max-w-7xl">
-            <div className="flex flex-col lg:flex-row">
-              {/* Sticky Left Side */}
-              <div className="lg:w-1/2 lg:h-screen sticky top-0 flex flex-col justify-center pt-24 pb-12 lg:py-0 pr-0 lg:pr-20 border-r-0 lg:border-r border-white/10 z-20">
-                <span className="text-xs uppercase tracking-widest text-blue-500 mb-4 font-mono">
-                  Process_Map
-                </span>
-                <h2 className="text-4xl md:text-6xl uppercase tracking-tighter mb-12">
-                  <GradientText
-                    colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
-                    animationSpeed={3}
-                    showBorder={false}
-                    className="inline-block"
-                  >
-                    Digital <br /> Protocol
-                  </GradientText>
-                </h2>
-
-                {/* Steps Navigation */}
-                <div className="space-y-6 relative mb-12 hidden lg:block">
-                  <div className="group cursor-pointer flex items-center gap-6">
-                    <div className="h-12 w-0.5 bg-neutral-800 relative overflow-hidden">
-                      <div
-                        className={`absolute top-0 left-0 w-full h-full transition-all duration-500 ${activeStep === 1 ? "bg-white" : "bg-neutral-800"}`}
-                      ></div>
-                    </div>
-                    <div>
-                      <h3
-                        className={`text-lg uppercase tracking-widest transition-colors duration-500 ${activeStep === 1 ? "text-white" : "text-neutral-600"}`}
-                      >
-                        01 / Architecture
-                      </h3>
-                      <p className="text-xs text-neutral-500 font-mono mt-1">
-                        Foundational analysis & strategy.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="group cursor-pointer flex items-center gap-6">
-                    <div className="h-12 w-0.5 bg-neutral-800 relative overflow-hidden">
-                      <div
-                        className={`absolute top-0 left-0 w-full h-full transition-all duration-500 ${activeStep === 2 ? "bg-white" : "bg-neutral-800"}`}
-                      ></div>
-                    </div>
-                    <div>
-                      <h3
-                        className={`text-lg uppercase tracking-widest transition-colors duration-500 ${activeStep === 2 ? "text-white" : "text-neutral-600"}`}
-                      >
-                        02 / Development
-                      </h3>
-                      <p className="text-xs text-neutral-500 font-mono mt-1">
-                        Next.js application build.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="group cursor-pointer flex items-center gap-6">
-                    <div className="h-12 w-0.5 bg-neutral-800 relative overflow-hidden">
-                      <div
-                        className={`absolute top-0 left-0 w-full h-full transition-all duration-500 ${activeStep === 3 ? "bg-white" : "bg-neutral-800"}`}
-                      ></div>
-                    </div>
-                    <div>
-                      <h3
-                        className={`text-lg uppercase tracking-widest transition-colors duration-500 ${activeStep === 3 ? "text-white" : "text-neutral-600"}`}
-                      >
-                        03 / Scale
-                      </h3>
-                      <p className="text-xs text-neutral-500 font-mono mt-1">
-                        SEO & Revenue Optimisation.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Dynamic Visual Display */}
-                <div className="w-full aspect-video bg-neutral-900 border border-white/10 relative overflow-hidden rounded-lg hidden lg:block shadow-2xl">
-                  {/* Image 1 */}
-                  <div
-                    className={`absolute inset-0 flex items-center justify-center bg-[#080808] transition-all duration-700 ${activeStep === 1 ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-                  >
-                    <img
-                      src={webDevImage}
-                      alt="Technical Audit"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Image 2 */}
-                  <div
-                    className={`absolute inset-0 flex items-center justify-center bg-[#080808] transition-all duration-700 ${activeStep === 2 ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-                  >
-                    <img
-                      src={uiUxImage}
-                      alt="Modern Development"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Image 3 */}
-                  <div
-                    className={`absolute inset-0 flex items-center justify-center bg-[#080808] transition-all duration-700 ${activeStep === 3 ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-                  >
-                    <img
-                      src={digitalMarketingImage}
-                      alt="Growth"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Scrolling Right Side */}
-              <div className="lg:w-1/2">
-                <div className="h-[10vh] hidden lg:block"></div>
-
-                <div
-                  className="min-h-[80vh] flex flex-col justify-center px-0 lg:px-20 py-20 border-b border-white/10 lg:border-b-0 workflow-step-content"
-                  data-step="1"
-                >
-                  <span className="text-xs font-mono text-neutral-600 mb-2">
-                    PHASE_01
-                  </span>
-                  <h3 className="text-3xl text-white mb-6 tracking-tight">
-                    Technical Audit & Architecture
-                  </h3>
-                  <div className="w-full aspect-video bg-neutral-900 border border-white/10 relative overflow-hidden rounded-lg mb-8 flex lg:hidden items-center justify-center">
-                    <img
-                      src={webDevImage}
-                      alt="Technical Audit"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-neutral-400 leading-relaxed mb-8">
-                    Before code touches screen, we map your digital ecosystem.
-                    We analyse site structure, keyword gaps, and competitor
-                    velocity.
-                  </p>
-                  <ul className="space-y-4 text-sm text-neutral-300 font-mono">
-                    <li className="flex items-center gap-3">
-                      <span className="text-purple-500">✓</span> Site
-                      Architecture Mapping
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-neutral-600">✓</span> Competitor
-                      Analysis
-                    </li>
-                  </ul>
-                </div>
-
-                <div
-                  className="min-h-[80vh] flex flex-col justify-center px-0 lg:px-20 py-20 border-b border-white/10 lg:border-b-0 workflow-step-content"
-                  data-step="2"
-                >
-                  <span className="text-xs font-mono text-neutral-600 mb-2">
-                    PHASE_02
-                  </span>
-                  <h3 className="text-3xl text-white mb-6 tracking-tight">
-                    Modern Development
-                  </h3>
-                  <div className="w-full aspect-video bg-neutral-900 border border-white/10 relative overflow-hidden rounded-lg mb-8 flex lg:hidden items-center justify-center">
-                    <img
-                      src={uiUxImage}
-                      alt="Modern Development"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-neutral-400 leading-relaxed mb-8">
-                    We engineer bespoke web applications using modern frameworks
-                    (Next.js, React) ensuring lightning-fast load times.
-                  </p>
-                  <ul className="space-y-4 text-sm text-neutral-300 font-mono">
-                    <li className="flex items-center gap-3">
-                      <span className="text-blue-500">✓</span> Modern Stack
-                      (Next.js)
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-neutral-600">✓</span> Core Web
-                      Vitals Optimisation
-                    </li>
-                  </ul>
-                </div>
-
-                <div
-                  className="min-h-[80vh] flex flex-col justify-center px-0 lg:px-20 py-20 workflow-step-content"
-                  data-step="3"
-                >
-                  <span className="text-xs font-mono text-neutral-600 mb-2">
-                    PHASE_03
-                  </span>
-                  <h3 className="text-3xl text-white mb-6 tracking-tight">
-                    Search & Revenue Growth
-                  </h3>
-                  <div className="w-full aspect-video bg-neutral-900 border border-white/10 relative overflow-hidden rounded-lg mb-8 flex lg:hidden items-center justify-center">
-                    <img
-                      src={digitalMarketingImage}
-                      alt="Growth"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-neutral-400 leading-relaxed mb-8">
-                    A beautiful site is useless if no one sees it. We deploy
-                    advanced on-page and off-page SEO strategies.
-                  </p>
-                  <ul className="space-y-4 text-sm text-neutral-300 font-mono">
-                    <li className="flex items-center gap-3">
-                      <span className="text-green-500">✓</span> Keyword
-                      Domination
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <span className="text-neutral-600">✓</span> Conversion
-                      Rate Optimisation
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
         <section className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
+            <div className="mb-20">
+              <AnimatedBeamDemo />
+            </div>
             <h2
-              className="text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-center mb-4 text-white"
+              className="text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-center mb-4"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Our
-              <span className="text-white">
-                {" "}
-                Services
-              </span>
+              <GradientText
+                colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="inline-block"
+              >
+                Our Services
+              </GradientText>
             </h2>
             <p
               className="text-base md:text-lg text-center mb-12 max-w-3xl mx-auto text-gray-400"
@@ -719,9 +641,6 @@ const Services = () => {
               Comprehensive digital solutions tailored to elevate your business
               and drive measurable results.
             </p>
-            <div className="mb-20">
-              <AnimatedBeamDemo />
-            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <Link to="/services/web-development" className="block h-full">
                 <ElectricBorder
@@ -732,66 +651,66 @@ const Services = () => {
                   className="h-full"
                 >
                   <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="relative z-10">
-                    <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
-                      <div
-                        className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                        style={{
-                          borderTopColor: "#60a5fa",
-                          borderLeftColor: "#60a5fa",
-                        }}
-                      ></div>
-                      <div
-                        className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                        style={{
-                          borderBottomColor: "#34d399",
-                          borderRightColor: "#34d399",
-                        }}
-                      ></div>
-                      <svg
-                        className="w-8 h-8"
-                        fill="none"
-                        stroke="url(#gradient1)"
-                        viewBox="0 0 24 24"
-                      >
-                        <defs>
-                          <linearGradient
-                            id="gradient1"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="100%"
-                          >
-                            <stop
-                              offset="0%"
-                              style={{ stopColor: "#60a5fa", stopOpacity: 1 }}
-                            />
-                            <stop
-                              offset="100%"
-                              style={{ stopColor: "#34d399", stopOpacity: 1 }}
-                            />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                        />
-                      </svg>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="relative z-10">
+                      <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
+                        <div
+                          className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                          style={{
+                            borderTopColor: "#60a5fa",
+                            borderLeftColor: "#60a5fa",
+                          }}
+                        ></div>
+                        <div
+                          className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                          style={{
+                            borderBottomColor: "#34d399",
+                            borderRightColor: "#34d399",
+                          }}
+                        ></div>
+                        <svg
+                          className="w-8 h-8"
+                          fill="none"
+                          stroke="url(#gradient1)"
+                          viewBox="0 0 24 24"
+                        >
+                          <defs>
+                            <linearGradient
+                              id="gradient1"
+                              x1="0%"
+                              y1="0%"
+                              x2="100%"
+                              y2="100%"
+                            >
+                              <stop
+                                offset="0%"
+                                style={{ stopColor: "#60a5fa", stopOpacity: 1 }}
+                              />
+                              <stop
+                                offset="100%"
+                                style={{ stopColor: "#34d399", stopOpacity: 1 }}
+                              />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-semibold mb-3 text-white">
+                        Web Development
+                      </h3>
+                      <p className="text-white text-base leading-relaxed">
+                        Frontend, Backend, and Full Stack solutions built with
+                        modern technologies for scalable and high-performance
+                        websites.
+                      </p>
                     </div>
-                    <h3 className="text-2xl font-semibold mb-3 text-white">
-                      Web Development
-                    </h3>
-                    <p className="text-white text-base leading-relaxed">
-                      Frontend, Backend, and Full Stack solutions built with
-                      modern technologies for scalable and high-performance
-                      websites.
-                    </p>
                   </div>
-                </div>
-              </ElectricBorder>
+                </ElectricBorder>
               </Link>
               <Link to="/services/ui-ux-design" className="block h-full">
                 <ElectricBorder
@@ -802,65 +721,65 @@ const Services = () => {
                   className="h-full"
                 >
                   <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="relative z-10">
-                    <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
-                      <div
-                        className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                        style={{
-                          borderTopColor: "#60a5fa",
-                          borderLeftColor: "#60a5fa",
-                        }}
-                      ></div>
-                      <div
-                        className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                        style={{
-                          borderBottomColor: "#34d399",
-                          borderRightColor: "#34d399",
-                        }}
-                      ></div>
-                      <svg
-                        className="w-8 h-8"
-                        fill="none"
-                        stroke="url(#gradient2)"
-                        viewBox="0 0 24 24"
-                      >
-                        <defs>
-                          <linearGradient
-                            id="gradient2"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="100%"
-                          >
-                            <stop
-                              offset="0%"
-                              style={{ stopColor: "#60a5fa", stopOpacity: 1 }}
-                            />
-                            <stop
-                              offset="100%"
-                              style={{ stopColor: "#34d399", stopOpacity: 1 }}
-                            />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-                        />
-                      </svg>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="relative z-10">
+                      <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
+                        <div
+                          className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                          style={{
+                            borderTopColor: "#60a5fa",
+                            borderLeftColor: "#60a5fa",
+                          }}
+                        ></div>
+                        <div
+                          className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                          style={{
+                            borderBottomColor: "#34d399",
+                            borderRightColor: "#34d399",
+                          }}
+                        ></div>
+                        <svg
+                          className="w-8 h-8"
+                          fill="none"
+                          stroke="url(#gradient2)"
+                          viewBox="0 0 24 24"
+                        >
+                          <defs>
+                            <linearGradient
+                              id="gradient2"
+                              x1="0%"
+                              y1="0%"
+                              x2="100%"
+                              y2="100%"
+                            >
+                              <stop
+                                offset="0%"
+                                style={{ stopColor: "#60a5fa", stopOpacity: 1 }}
+                              />
+                              <stop
+                                offset="100%"
+                                style={{ stopColor: "#34d399", stopOpacity: 1 }}
+                              />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-semibold mb-3 text-white">
+                        UI/UX Design
+                      </h3>
+                      <p className="text-white text-base leading-relaxed">
+                        Modern and responsive design that creates intuitive user
+                        experiences and beautiful interfaces for your brand.
+                      </p>
                     </div>
-                    <h3 className="text-2xl font-semibold mb-3 text-white">
-                      UI/UX Design
-                    </h3>
-                    <p className="text-white text-base leading-relaxed">
-                      Modern and responsive design that creates intuitive user
-                      experiences and beautiful interfaces for your brand.
-                    </p>
                   </div>
-                </div>
-              </ElectricBorder>
+                </ElectricBorder>
               </Link>
               <Link to="/services/digital-marketing" className="block h-full">
                 <ElectricBorder
@@ -924,8 +843,8 @@ const Services = () => {
                         Digital Marketing
                       </h3>
                       <p className="text-white text-base leading-relaxed">
-                        SEO optimization and Social Media strategies to grow your
-                        online presence and reach your target audience
+                        SEO optimization and Social Media strategies to grow
+                        your online presence and reach your target audience
                         effectively.
                       </p>
                     </div>
@@ -941,66 +860,66 @@ const Services = () => {
                   className="h-full"
                 >
                   <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="relative z-10">
-                    <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
-                      <div
-                        className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                        style={{
-                          borderTopColor: "#60a5fa",
-                          borderLeftColor: "#60a5fa",
-                        }}
-                      ></div>
-                      <div
-                        className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                        style={{
-                          borderBottomColor: "#34d399",
-                          borderRightColor: "#34d399",
-                        }}
-                      ></div>
-                      <svg
-                        className="w-8 h-8"
-                        fill="none"
-                        stroke="url(#gradient4)"
-                        viewBox="0 0 24 24"
-                      >
-                        <defs>
-                          <linearGradient
-                            id="gradient4"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="100%"
-                          >
-                            <stop
-                              offset="0%"
-                              style={{ stopColor: "#60a5fa", stopOpacity: 1 }}
-                            />
-                            <stop
-                              offset="100%"
-                              style={{ stopColor: "#34d399", stopOpacity: 1 }}
-                            />
-                          </linearGradient>
-                        </defs>
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="relative z-10">
+                      <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
+                        <div
+                          className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                          style={{
+                            borderTopColor: "#60a5fa",
+                            borderLeftColor: "#60a5fa",
+                          }}
+                        ></div>
+                        <div
+                          className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                          style={{
+                            borderBottomColor: "#34d399",
+                            borderRightColor: "#34d399",
+                          }}
+                        ></div>
+                        <svg
+                          className="w-8 h-8"
+                          fill="none"
+                          stroke="url(#gradient4)"
+                          viewBox="0 0 24 24"
+                        >
+                          <defs>
+                            <linearGradient
+                              id="gradient4"
+                              x1="0%"
+                              y1="0%"
+                              x2="100%"
+                              y2="100%"
+                            >
+                              <stop
+                                offset="0%"
+                                style={{ stopColor: "#60a5fa", stopOpacity: 1 }}
+                              />
+                              <stop
+                                offset="100%"
+                                style={{ stopColor: "#34d399", stopOpacity: 1 }}
+                              />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-semibold mb-3 text-white">
+                        E-commerce Solutions
+                      </h3>
+                      <p className="text-white text-base leading-relaxed">
+                        Complete online store development with payment
+                        integration, inventory management, and seamless shopping
+                        experiences.
+                      </p>
                     </div>
-                    <h3 className="text-2xl font-semibold mb-3 text-white">
-                      E-commerce Solutions
-                    </h3>
-                    <p className="text-white text-base leading-relaxed">
-                      Complete online store development with payment
-                      integration, inventory management, and seamless shopping
-                      experiences.
-                    </p>
                   </div>
-                </div>
-              </ElectricBorder>
+                </ElectricBorder>
               </Link>
               <Link to="/services/seo-optimization" className="block h-full">
                 <ElectricBorder
@@ -1151,5 +1070,3 @@ const Services = () => {
 };
 
 export default Services;
-
-

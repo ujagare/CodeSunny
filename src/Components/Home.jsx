@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -23,33 +23,37 @@ const testimonials = [
     author: {
       name: "Rajesh Kumar",
       handle: "@rajeshtech",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
     },
-    text: "CodeSunny transformed our web presence. Their team delivered exceptional results on time and within budget."
+    text: "CodeSunny transformed our web presence. Their team delivered exceptional results on time and within budget.",
   },
   {
     author: {
       name: "Priya Sharma",
       handle: "@priyadesign",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
     },
-    text: "The UI/UX design work was outstanding. They understood our vision perfectly and executed it flawlessly."
+    text: "The UI/UX design work was outstanding. They understood our vision perfectly and executed it flawlessly.",
   },
   {
     author: {
       name: "Amit Patel",
       handle: "@amitdev",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
     },
-    text: "Best digital marketing agency we've worked with. Our ROI increased by 300% in just 6 months."
+    text: "Best digital marketing agency we've worked with. Our ROI increased by 300% in just 6 months.",
   },
   {
     author: {
       name: "Neha Singh",
       handle: "@nehamarketing",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
     },
-    text: "Their e-commerce solutions helped us scale from startup to 7-figure revenue. Highly recommended!"
+    text: "Their e-commerce solutions helped us scale from startup to 7-figure revenue. Highly recommended!",
   },
 ];
 
@@ -140,44 +144,54 @@ const serviceCards = [
   {
     link: "/services/web-development",
     title: "Web Development",
-    description: "Frontend, Backend, and Full Stack solutions built with modern technologies for scalable and high-performance websites.",
+    description:
+      "Frontend, Backend, and Full Stack solutions built with modern technologies for scalable and high-performance websites.",
     gradientId: "gradient1",
     svgPath: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
   },
   {
     link: "/services/ui-ux-design",
     title: "UI/UX Design",
-    description: "Modern and responsive design that creates intuitive user experiences and beautiful interfaces for your brand.",
+    description:
+      "Modern and responsive design that creates intuitive user experiences and beautiful interfaces for your brand.",
     gradientId: "gradient2",
-    svgPath: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+    svgPath:
+      "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
   },
   {
     link: "/services/digital-marketing",
     title: "Digital Marketing",
-    description: "SEO optimization and Social Media strategies to grow your online presence and reach your target audience effectively.",
+    description:
+      "SEO optimization and Social Media strategies to grow your online presence and reach your target audience effectively.",
     gradientId: "gradient3",
-    svgPath: "M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
+    svgPath:
+      "M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
   },
   {
     link: "/services/ecommerce-solutions",
     title: "E-commerce Solutions",
-    description: "Complete online store development with payment integration, inventory management, and seamless shopping experiences.",
+    description:
+      "Complete online store development with payment integration, inventory management, and seamless shopping experiences.",
     gradientId: "gradient4",
-    svgPath: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
+    svgPath:
+      "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
   },
   {
     link: "/services/seo-optimization",
     title: "SEO Optimisation",
-    description: "Search engine optimization to boost your rankings, increase visibility, and drive organic traffic to your website.",
+    description:
+      "Search engine optimization to boost your rankings, increase visibility, and drive organic traffic to your website.",
     gradientId: "gradient5",
     svgPath: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",
   },
   {
     link: "/services/cloud-solutions",
     title: "Cloud Solutions",
-    description: "Reliable hosting and deployment services with scalable infrastructure to keep your applications running 24/7.",
+    description:
+      "Reliable hosting and deployment services with scalable infrastructure to keep your applications running 24/7.",
     gradientId: "gradient6",
-    svgPath: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
+    svgPath:
+      "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z",
   },
 ];
 
@@ -236,7 +250,6 @@ export default function Home() {
             </div>
           </div>
 
-
           <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
@@ -283,7 +296,7 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
               <div className="text-left max-w-4xl lg:w-1/2 px-4 md:px-8 lg:px-16 w-full">
                 <h1
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight mb-6 md:mb-8 text-white"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight mb-6 md:mb-8 text-white capitalize"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                   We build the solutions that drive
@@ -298,7 +311,7 @@ export default function Home() {
                 >
                   We take ownership of complex web development projects like
                   custom applications, e-commerce platforms, and scalable
-                  systems — freeing up your team to focus on core business
+                  systems freeing up your team to focus on core business
                   operations.
                 </p>
 
@@ -565,11 +578,17 @@ export default function Home() {
                               >
                                 <stop
                                   offset="0%"
-                                  style={{ stopColor: "#60a5fa", stopOpacity: 1 }}
+                                  style={{
+                                    stopColor: "#60a5fa",
+                                    stopOpacity: 1,
+                                  }}
                                 />
                                 <stop
                                   offset="100%"
-                                  style={{ stopColor: "#34d399", stopOpacity: 1 }}
+                                  style={{
+                                    stopColor: "#34d399",
+                                    stopOpacity: 1,
+                                  }}
                                 />
                               </linearGradient>
                             </defs>
