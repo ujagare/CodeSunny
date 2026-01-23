@@ -1,14 +1,10 @@
 import React, { forwardRef, useRef } from "react";
-import { cn } from "@/lib/utils";
 
 const Circle = forwardRef(({ className, children }, ref) => {
   return (
     <div
       ref={ref}
-      className={cn(
-        "z-10 flex size-12 items-center justify-center rounded-full border-2 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
-        className
-      )}
+      className={`z-10 flex size-12 items-center justify-center rounded-full border-2 bg-white p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)] ${className || ""}`}
     >
       {children}
     </div>
@@ -29,13 +25,28 @@ export function AnimatedBeamDemo({ className }) {
 
   return (
     <div
-      className={cn(
-        "relative flex h-[500px] w-full items-center justify-center overflow-hidden p-10",
-        className
-      )}
+      className={`relative flex h-[500px] w-full items-center justify-center overflow-hidden p-10 ${className || ""}`}
       ref={containerRef}
     >
-      <div className="flex size-full max-w-lg flex-row items-stretch justify-between gap-10">
+      <svg
+        className="absolute inset-0 w-full h-full"
+        style={{ pointerEvents: "none" }}
+      >
+        <defs>
+          <linearGradient id="beam-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#60a5fa" />
+            <stop offset="100%" stopColor="#34d399" />
+          </linearGradient>
+        </defs>
+        {/* Animated lines from left to center */}
+        <line x1="25%" y1="50%" x2="50%" y2="30%" stroke="url(#beam-gradient)" strokeWidth="2" opacity="0.7" />
+        <line x1="25%" y1="50%" x2="50%" y2="50%" stroke="url(#beam-gradient)" strokeWidth="2" opacity="0.7" />
+        <line x1="25%" y1="50%" x2="50%" y2="70%" stroke="url(#beam-gradient)" strokeWidth="2" opacity="0.7" />
+        {/* Animated lines from center to right */}
+        <line x1="50%" y1="50%" x2="75%" y2="50%" stroke="url(#beam-gradient)" strokeWidth="2" opacity="0.7" />
+      </svg>
+
+      <div className="flex size-full max-w-lg flex-row items-stretch justify-between gap-10 relative z-10">
         <div className="flex flex-col justify-center">
           <Circle ref={div7Ref}>
             <svg
@@ -66,52 +77,27 @@ export function AnimatedBeamDemo({ className }) {
         </div>
         <div className="flex flex-col justify-center gap-2">
           <Circle ref={div1Ref}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="#000" strokeWidth="2" fill="none" />
             </svg>
           </Circle>
           <Circle ref={div2Ref}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" stroke="#000" strokeWidth="2" fill="none" />
             </svg>
           </Circle>
           <Circle ref={div3Ref}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke="#000" strokeWidth="2" fill="none" />
             </svg>
           </Circle>
           <Circle ref={div4Ref}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke="#000" strokeWidth="2" fill="none" />
             </svg>
           </Circle>
           <Circle ref={div5Ref}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="#000" strokeWidth="2" fill="none" />
             </svg>
           </Circle>
@@ -119,18 +105,16 @@ export function AnimatedBeamDemo({ className }) {
       </div>
 
       <style jsx>{`
-        @keyframes beam {
-          0% {
-            stroke-dashoffset: 1000;
-          }
-          100% {
-            stroke-dashoffset: 0;
-          }
-        }
-
         svg line {
-          stroke-dasharray: 1000;
-          animation: beam 3s linear infinite;
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 1;
+          }
         }
       `}</style>
     </div>
