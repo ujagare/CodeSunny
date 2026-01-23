@@ -62,8 +62,8 @@ const Contact = () => {
       </div>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center pt-24 pb-16 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 w-full mb-32">
+      <main className="flex-1 flex flex-col items-center justify-center pt-24 pb-16 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-16 w-full mb-32">
           
           {/* Hero Text */}
           <section className="w-full lg:max-w-md space-y-6">
@@ -182,8 +182,8 @@ const Contact = () => {
             <div className="absolute -left-40 top-10 h-[70vh] w-[60vh] rounded-full blur-3xl opacity-25" style={{background: 'radial-gradient(closest-side, rgba(255,255,255,0.15), rgba(0,0,0,0))'}}></div>
           </div>
 
-          <div className="max-w-4xl mx-auto px-6">
-            <div className="text-center">
+          <div className="max-w-4xl mx-auto px-6 flex flex-col items-center justify-center">
+            <div className="text-center w-full">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-neutral-100 animate-in">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
                   <path d="M4 6l8 5 8-5"></path>
@@ -206,7 +206,7 @@ const Contact = () => {
               </p>
             </div>
 
-            <div className="mt-12 grid md:grid-cols-2 gap-8">
+            <div className="mt-12 grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
               <div className="relative rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur animate-in">
                 <h3 className="text-xl font-semibold text-white mb-6">Send a Message</h3>
                 <form className="space-y-6">

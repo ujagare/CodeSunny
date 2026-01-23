@@ -10,6 +10,7 @@ import webDevImage from "../assets/images/web-development.png";
 import uiUxImage from "../assets/images/ui-ux-design.png";
 import digitalMarketingImage from "../assets/images/digital-marketing.png";
 import ElectricBorder from "./ElectricBorder";
+import AnimatedBeamDemo from "./AnimatedBeamDemo";
 
 
 const menuItems = [
@@ -718,6 +719,9 @@ const Services = () => {
               Comprehensive digital solutions tailored to elevate your business
               and drive measurable results.
             </p>
+            <div className="mb-20">
+              <AnimatedBeamDemo />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <Link to="/services/web-development" className="block h-full">
                 <ElectricBorder

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
@@ -13,7 +15,43 @@ import { ThreeDMarquee } from "./ThreeDMarquee";
 import RadialOrbitalTimeline from "./RadialOrbitalTimeline";
 import FramerEmbed from "./FramerEmbed";
 import ElectricBorder from "./ElectricBorder";
+import { MarqueeTestimonials } from "./MarqueeTestimonials";
 import { Palette, Code, Zap, Rocket, Globe, Users } from "lucide-react";
+
+const testimonials = [
+  {
+    author: {
+      name: "Rajesh Kumar",
+      handle: "@rajeshtech",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "CodeSunny transformed our web presence. Their team delivered exceptional results on time and within budget."
+  },
+  {
+    author: {
+      name: "Priya Sharma",
+      handle: "@priyadesign",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "The UI/UX design work was outstanding. They understood our vision perfectly and executed it flawlessly."
+  },
+  {
+    author: {
+      name: "Amit Patel",
+      handle: "@amitdev",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "Best digital marketing agency we've worked with. Our ROI increased by 300% in just 6 months."
+  },
+  {
+    author: {
+      name: "Neha Singh",
+      handle: "@nehamarketing",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "Their e-commerce solutions helped us scale from startup to 7-figure revenue. Highly recommended!"
+  },
+];
 
 const menuItems = [
   { label: "Home", ariaLabel: "Go to home page", link: "/" },
@@ -198,14 +236,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mobile Spline */}
-          <div className="md:hidden w-full h-[85vh] flex items-center justify-center spline-wrapper">
-            <Spline
-              scene="https://prod.spline.design/MnZq8ZS9No-Q1nR3/scene.splinecode"
-              width={360}
-              height={718}
-            />
-          </div>
+
           <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
@@ -399,10 +430,34 @@ export default function Home() {
                         }
                       }
 
-                      .spline-wrapper canvas {
+                      .hero-spline {
+                        width: 100%;
+                        height: 100vh;
+                        overflow: hidden;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                      }
+
+                      .hero-spline canvas {
                         width: 100% !important;
                         height: 100% !important;
+                        display: block !important;
                         object-fit: contain;
+                        object-position: center;
+                      }
+
+                      @media (max-width: 768px) {
+                        .hero-spline {
+                          height: 70vh;
+                        }
+                      }
+
+                      @media (max-width: 480px) {
+                        .hero-spline {
+                          height: 60vh;
+                        }
                       }
                     `}</style>
                     <button className="shiny-cta focus:outline-none">
@@ -540,6 +595,12 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <MarqueeTestimonials
+          title="Trusted by Industry Leaders"
+          description="Join hundreds of companies that have transformed their business with CodeSunny"
+          testimonials={testimonials}
+        />
 
         <Footer />
       </div>
