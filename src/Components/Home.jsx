@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Spline from "@splinetool/react-spline";
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
@@ -264,34 +265,66 @@ export default function Home() {
           <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
-                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black md:font-bold text-center neue-machina"
+                className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black md:font-bold text-center neue-machina overflow-hidden"
                 style={{
                   fontFamily: "NeueMachina",
                   fontWeight: "900",
                 }}
               >
-                {/* Mobile: White text with gradient "Solutions" */}
-                <span className="block md:hidden text-white">
-                  Creative{" "}
-                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    Solutions
-                  </span>
-                  <br />
-                  That Drive Real Business Growth
+                {/* Mobile: Solid color text with animation */}
+                <span className="block md:hidden" style={{ color: "#02CAD4" }}>
+                  {"Creative Solutions That Drive Real Business Growth"
+                    .split(" ")
+                    .map((word, index) => (
+                      <span
+                        key={index}
+                        className="inline-block overflow-hidden"
+                        style={{ marginRight: "0.3em" }}
+                      >
+                        <motion.span
+                          initial={{ opacity: 0, y: "100%" }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.8,
+                            delay: index * 0.1,
+                            ease: [0.33, 1, 0.68, 1],
+                          }}
+                          style={{
+                            display: "inline-block",
+                          }}
+                        >
+                          {word}
+                        </motion.span>
+                      </span>
+                    ))}
                 </span>
 
-                {/* Desktop: Gradient text */}
-                <span className="hidden md:block">
-                  <GradientText
-                    colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
-                    animationSpeed={3}
-                    showBorder={false}
-                    className="inline-block"
-                  >
-                    Creative Solutions
-                    <br />
-                    That Drive Real Business Growth
-                  </GradientText>
+                {/* Desktop: Solid color text with animation */}
+                <span className="hidden md:block" style={{ color: "#02CAD4" }}>
+                  {"Creative Solutions That Drive Real Business Growth"
+                    .split(" ")
+                    .map((word, index) => (
+                      <span
+                        key={index}
+                        className="inline-block overflow-hidden"
+                        style={{ marginRight: "0.3em" }}
+                      >
+                        <motion.span
+                          initial={{ opacity: 0, y: "100%" }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.8,
+                            delay: index * 0.1,
+                            ease: [0.33, 1, 0.68, 1],
+                          }}
+                          style={{
+                            display: "inline-block",
+                          }}
+                        >
+                          {word}
+                        </motion.span>
+                      </span>
+                    ))}
                 </span>
               </h1>
 
@@ -340,23 +373,94 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
               <div className="text-left max-w-4xl lg:w-1/2 px-4 md:px-8 lg:px-16 w-full">
                 <h1
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight mb-6 md:mb-8 text-white capitalize"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-6 md:mb-8 text-white capitalize overflow-hidden"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
-                  We build the solutions that drive
-                  <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400">
-                    {" "}
-                    digital business growth.
-                  </span>
+                  <div className="whitespace-nowrap">
+                    {"We build the solutions that"
+                      .split(" ")
+                      .map((word, index) => (
+                        <span
+                          key={index}
+                          className="inline-block overflow-hidden"
+                          style={{ marginRight: "0.3em" }}
+                        >
+                          <motion.span
+                            initial={{ opacity: 0, y: "100%" }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.8,
+                              delay: index * 0.1,
+                              ease: [0.33, 1, 0.68, 1],
+                            }}
+                            style={{
+                              display: "inline-block",
+                            }}
+                          >
+                            {word}
+                          </motion.span>
+                        </span>
+                      ))}
+                  </div>
+                  <div
+                    className="whitespace-nowrap"
+                    style={{ color: "#02CAD4" }}
+                  >
+                    {"drive digital business growth."
+                      .split(" ")
+                      .map((word, index) => (
+                        <span
+                          key={index}
+                          className="inline-block overflow-hidden"
+                          style={{ marginRight: "0.3em" }}
+                        >
+                          <motion.span
+                            initial={{ opacity: 0, y: "100%" }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.8,
+                              delay: (5 + index) * 0.1,
+                              ease: [0.33, 1, 0.68, 1],
+                            }}
+                            style={{
+                              display: "inline-block",
+                            }}
+                          >
+                            {word}
+                          </motion.span>
+                        </span>
+                      ))}
+                  </div>
                 </h1>
                 <p
-                  className="text-base md:text-lg lg:text-xl text-zinc-400 leading-relaxed mb-8 md:mb-10 font-light tracking-tight max-w-2xl"
+                  className="text-base md:text-lg lg:text-xl text-zinc-400 leading-relaxed mb-8 md:mb-10 font-light tracking-tight max-w-2xl overflow-hidden"
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
-                  We take ownership of complex web development projects like
-                  custom applications, e-commerce platforms, and scalable
-                  systems freeing up your team to focus on core business
-                  operations.
+                  {"We take ownership of complex web development projects like custom applications, e-commerce platforms, and scalable systems freeing up your team to focus on core business operations."
+                    .split(" ")
+                    .map((word, index) => (
+                      <span
+                        key={index}
+                        className="inline-block overflow-hidden"
+                        style={{ marginRight: "0.3em" }}
+                      >
+                        <motion.span
+                          initial={{ opacity: 0, y: "100%" }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{
+                            duration: 0.8,
+                            delay: index * 0.05,
+                            ease: [0.33, 1, 0.68, 1],
+                          }}
+                          style={{ display: "inline-block" }}
+                        >
+                          {word}
+                        </motion.span>
+                      </span>
+                    ))}
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 md:mb-16">
@@ -546,7 +650,10 @@ export default function Home() {
                       "linear-gradient(to right, #60a5fa, #34d399) 1",
                   }}
                 >
-                  <p className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] uppercase font-medium text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400 break-words">
+                  <p
+                    className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] uppercase font-medium break-words"
+                    style={{ color: "#02CAD4" }}
+                  >
                     // Built with React, Next.js, Node.js, and Cloud
                     Infrastructure
                   </p>
@@ -563,7 +670,7 @@ export default function Home() {
         <section className="py-20 px-4 relative">
           <div className="max-w-7xl mx-auto relative z-10">
             <h1
-              className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left mb-12 text-white"
+              className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left mb-12 text-white overflow-hidden"
               style={{
                 fontFamily: "Poppins, sans-serif",
                 fontWeight: 500,
@@ -572,7 +679,27 @@ export default function Home() {
                 textTransform: "lowercase",
               }}
             >
-              Our services
+              {"Our services".split(" ").map((word, index) => (
+                <span
+                  key={index}
+                  className="inline-block overflow-hidden"
+                  style={{ marginRight: "0.3em" }}
+                >
+                  <motion.span
+                    initial={{ opacity: 0, y: "100%" }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.8,
+                      delay: index * 0.1,
+                      ease: [0.33, 1, 0.68, 1],
+                    }}
+                    style={{ display: "inline-block" }}
+                  >
+                    {word}
+                  </motion.span>
+                </span>
+              ))}
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {serviceCards.map((card, index) => (

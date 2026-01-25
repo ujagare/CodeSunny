@@ -1,4 +1,5 @@
 import { TestimonialCard } from "./TestimonialCard";
+import { motion } from "framer-motion";
 
 export function MarqueeTestimonials({
   title,
@@ -16,13 +17,53 @@ export function MarqueeTestimonials({
       <div className="flex flex-col items-center gap-4 text-center sm:gap-16">
         <div className="flex flex-col items-center gap-4 sm:gap-8">
           <h2
-            className="max-w-[720px] text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-white"
+            className="max-w-[720px] text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-white overflow-hidden"
             style={{ fontFamily: "Poppins, sans-serif" }}
           >
-            Trusted by Industry Leaders
+            {"Trusted by Industry Leaders".split(" ").map((word, index) => (
+              <span
+                key={index}
+                className="inline-block overflow-hidden"
+                style={{ marginRight: "0.3em" }}
+              >
+                <motion.span
+                  initial={{ opacity: 0, y: "100%" }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: [0.33, 1, 0.68, 1],
+                  }}
+                  style={{ display: "inline-block" }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
           </h2>
-          <p className="text-md max-w-[600px] font-medium text-gray-400 sm:text-xl">
-            {description}
+          <p className="text-md max-w-[600px] font-medium text-gray-400 sm:text-xl overflow-hidden">
+            {description.split(" ").map((word, index) => (
+              <span
+                key={index}
+                className="inline-block overflow-hidden"
+                style={{ marginRight: "0.3em" }}
+              >
+                <motion.span
+                  initial={{ opacity: 0, y: "100%" }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.05,
+                    ease: [0.33, 1, 0.68, 1],
+                  }}
+                  style={{ display: "inline-block" }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
           </p>
         </div>
 

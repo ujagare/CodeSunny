@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -80,9 +81,10 @@ const ProjectCard = ({ project }) => {
           </div>
 
           <div
-            className={`absolute inset-0 h-full w-full transition-opacity duration-500 ${
+            className={`absolute inset-0 h-full w-full transition-opacity duration-500 parallax-video-container ${
               isHovered ? "opacity-100" : "opacity-0"
             }`}
+            data-parallax-video
           >
             <video
               ref={videoRef}
@@ -112,7 +114,7 @@ export default function FeaturedProjects() {
       <div className="container mx-auto max-w-6xl px-8">
         <div className="mb-20">
           <h1
-            className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left text-white"
+            className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left text-white overflow-hidden"
             style={{
               fontFamily: "Poppins, sans-serif",
               fontWeight: 500,
@@ -121,7 +123,27 @@ export default function FeaturedProjects() {
               whiteSpace: "nowrap",
             }}
           >
-            Featured projects
+            {"Featured projects".split(" ").map((word, index) => (
+              <span
+                key={index}
+                className="inline-block overflow-hidden"
+                style={{ marginRight: "0.3em" }}
+              >
+                <motion.span
+                  initial={{ opacity: 0, y: "100%" }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: [0.33, 1, 0.68, 1],
+                  }}
+                  style={{ display: "inline-block" }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
           </h1>
         </div>
 

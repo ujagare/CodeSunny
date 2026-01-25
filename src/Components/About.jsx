@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import HeroSection from "./sections/hero";
@@ -9,6 +9,9 @@ import Leaders from "./sections/leaders";
 import SocialContact from "./sections/social-contact";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="w-full bg-[#050515] relative">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>

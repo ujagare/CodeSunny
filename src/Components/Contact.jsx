@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import Footer from "./Footer";
 import GradientText from "./GradientText";
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="w-full min-h-screen relative overflow-hidden font-[Inter] text-gray-100 selection:bg-indigo-600/50">
       {/* Base Background Color */}

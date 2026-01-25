@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import {
@@ -14,6 +14,9 @@ import ElectricBorder from "./ElectricBorder";
 import MobileNavbar from "./MobileNavbar";
 
 const CloudSolutions = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="w-full min-h-screen relative overflow-hidden font-[Manrope] text-white selection:bg-indigo-500/30">
       {/* Base Background Color */}

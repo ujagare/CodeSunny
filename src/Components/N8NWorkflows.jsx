@@ -9,7 +9,12 @@ import n8nLogo from "../assets/images/n8n_logo_3d.png";
 import socialMediaImg from "../assets/images/social_media_automation_workflow.png";
 import crmSyncImg from "../assets/images/crm_sync_workflow.png";
 
-const WorkflowCard = ({ title, description, image, icon: Icon, tags }) => (
+const WorkflowCard = ({ title, description, image, icon: Icon, tags }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  return (
   <motion.div 
     whileHover={{ y: -10, scale: 1.02 }}
     className="relative group bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl"

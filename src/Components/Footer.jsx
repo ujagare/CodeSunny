@@ -23,7 +23,7 @@ function Footer() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (footerRef.current) {
@@ -95,14 +95,17 @@ function Footer() {
   ];
 
   return (
-    <footer ref={footerRef} className="relative h-fit rounded-3xl m-4 md:m-8 mb-0" style={{ overflow: 'visible' }}>
+    <footer
+      ref={footerRef}
+      className="relative h-fit rounded-3xl m-4 md:m-8 mb-0 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto p-6 md:p-14 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-8 lg:gap-16 pb-8 md:pb-12">
           {/* Brand section */}
           <div className="flex flex-col -mt-2 md:-mt-6">
-            <img 
-              src="/src/assets/images/Logo.png" 
-              alt="CodeSunny Logo" 
+            <img
+              src="/src/assets/images/Logo.png"
+              alt="CodeSunny Logo"
               className="w-24 h-24 md:w-32 md:h-32 object-contain mb-0"
             />
             <p className="text-sm leading-relaxed text-white mb-4">
@@ -201,8 +204,6 @@ function Footer() {
           </div>
         </div>
 
-        <hr className="border-t border-gray-700 my-6 md:my-8" />
-
         {/* Footer bottom */}
         <div className="flex flex-col md:flex-row justify-center items-center text-sm">
           {/* Copyright */}
@@ -211,8 +212,6 @@ function Footer() {
           </p>
         </div>
       </div>
-
-
 
       <FooterBackgroundGradient />
     </footer>

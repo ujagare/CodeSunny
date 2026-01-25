@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Bot, BarChart3, Workflow, Cpu, Sparkles, ArrowUpRight } from "lucide-react";
+import {
+  Bot,
+  BarChart3,
+  Workflow,
+  Cpu,
+  Sparkles,
+  ArrowUpRight,
+} from "lucide-react";
 import GradientText from "./GradientText";
 
 // Import images
@@ -8,7 +15,14 @@ import n8nLogo from "../assets/images/n8n_logo_3d.png";
 import socialMediaImg from "../assets/images/social_media_automation_workflow.png";
 import crmSyncImg from "../assets/images/crm_sync_workflow.png";
 
-const BentoCard = ({ title, description, icon: Icon, image, className, delay }) => (
+const BentoCard = ({
+  title,
+  description,
+  icon: Icon,
+  image,
+  className,
+  delay,
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -18,7 +32,7 @@ const BentoCard = ({ title, description, icon: Icon, image, className, delay }) 
     className={`relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-colors hover:bg-white/10 ${className}`}
   >
     <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-linear-to-br from-purple-500/20 to-cyan-500/20 blur-3xl"></div>
-    
+
     {image && (
       <div className="absolute inset-0 opacity-20 transition-opacity group-hover:opacity-30">
         <img src={image} alt={title} className="h-full w-full object-cover" />
@@ -61,7 +75,7 @@ const AIAutomation = () => {
             <Sparkles size={14} />
             <span>AI-Powered Future</span>
           </motion.div>
-          
+
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
             <GradientText
               colors={["#A855F7", "#22D3EE", "#A855F7", "#22D3EE"]}
@@ -73,8 +87,9 @@ const AIAutomation = () => {
             </GradientText>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-slate-400">
-            Harness the power of artificial intelligence to streamline operations, 
-            enhance customer experiences, and drive unprecedented growth.
+            Harness the power of artificial intelligence to streamline
+            operations, enhance customer experiences, and drive unprecedented
+            growth.
           </p>
         </div>
 

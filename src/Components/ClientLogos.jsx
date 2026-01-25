@@ -40,7 +40,7 @@ const ClientLogos = () => {
         {/* Heading */}
         <div className="mb-16 md:mb-20">
           <h1
-            className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium text-white leading-tight capitalize"
+            className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium text-white leading-tight capitalize overflow-hidden"
             style={{
               fontFamily: "Poppins, sans-serif",
               fontWeight: 500,
@@ -48,7 +48,27 @@ const ClientLogos = () => {
               textAlign: "left",
             }}
           >
-            Global clients
+            {"Global clients".split(" ").map((word, index) => (
+              <span
+                key={index}
+                className="inline-block overflow-hidden"
+                style={{ marginRight: "0.3em" }}
+              >
+                <motion.span
+                  initial={{ opacity: 0, y: "100%" }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: [0.33, 1, 0.68, 1],
+                  }}
+                  style={{ display: "inline-block" }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
           </h1>
         </div>
 

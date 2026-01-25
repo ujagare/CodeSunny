@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import Footer from "./Footer";
 import GradientText from "./GradientText";
+import { ScrollBasedVelocityDemo } from "./ScrollBasedVelocityDemo";
 import geairImage from "../assets/images/geair.jpg";
 import earthImage from "../assets/images/earth.png";
 import webDevImage from "../assets/images/web-development.png";
@@ -15,6 +16,10 @@ import AnimatedBeamDemo from "./AnimatedBeamDemo";
 const Services = () => {
   const [activeStep, setActiveStep] = useState(1);
   const observerRef = useRef(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const sections = document.querySelectorAll("[data-step]");
@@ -587,7 +592,7 @@ const Services = () => {
         </section>
 
         <section className="py-20 px-4">
-          <div className="max-w-[1600px] mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="mb-20">
               <AnimatedBeamDemo />
             </div>
@@ -1033,6 +1038,10 @@ const Services = () => {
             </div>
           </div>
         </section>
+
+        <div className="bg-transparent">
+          <ScrollBasedVelocityDemo />
+        </div>
 
         <Footer />
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const AboutSummary = () => {
   return (
@@ -40,17 +41,16 @@ const AboutSummary = () => {
           </div>
 
           {/* Right Column: Text Content */}
-          <div className="w-full md:w-1/2 flex flex-col items-start text-left md:pl-8">
+          <div className="w-full md:w-full flex flex-col items-start text-left md:pl-8">
             <div className="mb-8 space-y-6">
               <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed tracking-tight text-white font-medium">
-                Since 2010, we have been helping our clients find exceptional
-                solutions for their businesses, creating memorable websites and
-                digital products.
-              </p>
-              <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed tracking-tight text-white font-medium">
-                CodeSunny doesn't do cookie-cutter solutions and we build
-                products exactly as they were during the design phase, no short
-                cuts or simplifications.
+                At CodeSunny, we don't believe in cookie-cutter solutions or
+                shortcuts. Every project receives our full attention and
+                expertise. We build products exactly as envisioned during the
+                design phase, maintaining the highest standards of quality,
+                performance, and user experience. Our commitment to excellence
+                ensures that your digital presence stands out and delivers
+                measurable value to your business and customers.
               </p>
             </div>
 
