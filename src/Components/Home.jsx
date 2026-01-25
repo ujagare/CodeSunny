@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Spline from "@splinetool/react-spline";
 import Navbar from "./Navbar";
-import StaggeredMenu from "./StaggeredMenu/StaggeredMenu";
+import MobileNavbar from "./MobileNavbar";
 import MagicBento from "./MagicBento";
 import GradientText from "./GradientText";
 import StarBorder from "./StarBorder";
@@ -15,8 +15,13 @@ import { ThreeDMarquee } from "./ThreeDMarquee";
 import RadialOrbitalTimeline from "./RadialOrbitalTimeline";
 import FramerEmbed from "./FramerEmbed";
 import ElectricBorder from "./ElectricBorder";
+import FeaturedProjects from "./FeaturedProjects";
 import { MarqueeTestimonials } from "./MarqueeTestimonials";
+import AboutSummary from "./AboutSummary";
+import ClientLogos from "./ClientLogos";
+import LightRays from "./LightRays";
 import { Palette, Code, Zap, Rocket, Globe, Users } from "lucide-react";
+import n8nImage from "../assets/images/n8n.png";
 
 const testimonials = [
   {
@@ -214,32 +219,38 @@ export default function Home() {
 
   return (
     <div className="w-full bg-[#050515] relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>
       <div className="relative z-10">
         <div className="hidden md:block">
           <Navbar />
         </div>
 
         <div className="md:hidden">
-          <StaggeredMenu
-            position="right"
-            items={menuItems}
-            socialItems={socialItems}
-            displaySocials={true}
-            displayItemNumbering={false}
-            menuButtonColor="#fff"
-            openMenuButtonColor="#fff"
-            changeMenuColorOnOpen={false}
-            colors={["#B19EEF", "#5227FF"]}
-            accentColor="#0071BC"
-            isFixed={true}
-            onMenuOpen={() => console.log("Menu opened")}
-            onMenuClose={() => console.log("Menu closed")}
-          />
+          <MobileNavbar />
         </div>
         <main className="w-full relative flex items-center justify-center overflow-hidden md:mt-0 z-20 bg-[#050515] hero">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-transparent pointer-events-none"></div>
+          <div className="absolute inset-0 bg-linear-to-br from-blue-600/20 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute inset-0 pointer-events-none"></div>
+
+          {/* Mobile LightRays Effect - Only visible on mobile */}
+          <div className="md:hidden absolute inset-0 w-full h-full">
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#667fff"
+              raysSpeed={1}
+              lightSpread={1.1}
+              rayLength={2.3}
+              followMouse={true}
+              mouseInfluence={0.1}
+              noiseAmount={0.02}
+              distortion={0}
+              className="custom-rays"
+              pulsating={false}
+              fadeDistance={2}
+              saturation={1}
+            />
+          </div>
+
           {/* Desktop Spline */}
           <div className="hidden md:flex w-full h-[calc(100vh-5rem)] min-h-[500px] items-center justify-center spline-wrapper">
             <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
@@ -253,23 +264,45 @@ export default function Home() {
           <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
-                className="text-3xl md:text-5xl lg:text-7xl font-bold text-center neue-machina"
+                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black md:font-bold text-center neue-machina"
                 style={{
                   fontFamily: "NeueMachina",
-                  fontWeight: "normal",
+                  fontWeight: "900",
                 }}
               >
-                <GradientText
-                  colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
-                  animationSpeed={3}
-                  showBorder={false}
-                  className="inline-block"
-                >
-                  Creative Solutions
+                {/* Mobile: White text with gradient "Solutions" */}
+                <span className="block md:hidden text-white">
+                  Creative{" "}
+                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    Solutions
+                  </span>
                   <br />
                   That Drive Real Business Growth
-                </GradientText>
+                </span>
+
+                {/* Desktop: Gradient text */}
+                <span className="hidden md:block">
+                  <GradientText
+                    colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
+                    animationSpeed={3}
+                    showBorder={false}
+                    className="inline-block"
+                  >
+                    Creative Solutions
+                    <br />
+                    That Drive Real Business Growth
+                  </GradientText>
+                </span>
               </h1>
+
+              {/* N8N Image - Mobile Only, Below Hero Text */}
+              <div className="block md:hidden mt-8 pointer-events-none">
+                <img
+                  src={n8nImage}
+                  alt="n8n Automation"
+                  className="w-20 h-20 object-contain opacity-80"
+                />
+              </div>
             </div>
             <div className="pointer-events-auto pb-[8vh]">
               <StarBorder
@@ -284,14 +317,25 @@ export default function Home() {
           </div>
         </main>
 
-        <section className="py-16 border-t border-zinc-200 dark:border-zinc-700">
-          <div className="overflow-hidden group w-full relative">
-            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-zinc-50 dark:from-[#09090b] to-transparent z-10"></div>
-            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-zinc-50 dark:from-[#09090b] to-transparent z-10"></div>
+        <section className="relative pt-16 md:pt-32 lg:pt-40 pb-16 md:pb-40 lg:pb-48 overflow-hidden">
+          {/* Desktop LightRays Effect - Only visible on desktop */}
+          <div className="hidden md:block absolute inset-0 w-full h-full">
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#667fff"
+              raysSpeed={0.8}
+              lightSpread={1.2}
+              rayLength={1.8}
+              followMouse={true}
+              mouseInfluence={0.05}
+              noiseAmount={0.01}
+              distortion={0}
+              className="custom-rays-desktop"
+              pulsating={false}
+              fadeDistance={1.5}
+              saturation={0.8}
+            />
           </div>
-        </section>
-
-        <section className="relative py-12 md:py-20 lg:py-32 overflow-hidden border-t border-white/5">
           <div className="w-full px-4 md:px-6 relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
               <div className="text-left max-w-4xl lg:w-1/2 px-4 md:px-8 lg:px-16 w-full">
@@ -300,7 +344,7 @@ export default function Home() {
                   style={{ fontFamily: "Poppins, sans-serif" }}
                 >
                   We build the solutions that drive
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400">
                     {" "}
                     digital business growth.
                   </span>
@@ -317,7 +361,7 @@ export default function Home() {
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 md:mb-16">
                   <div className="inline-block bg-transparent w-full sm:w-auto">
-                    <style jsx>{`
+                    <style>{`
                       @property --gradient-angle {
                         syntax: "<angle>";
                         initial-value: 0deg;
@@ -502,7 +546,7 @@ export default function Home() {
                       "linear-gradient(to right, #60a5fa, #34d399) 1",
                   }}
                 >
-                  <p className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] uppercase font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 break-words">
+                  <p className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] uppercase font-medium text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400 break-words">
                     // Built with React, Next.js, Node.js, and Cloud
                     Infrastructure
                   </p>
@@ -516,25 +560,20 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-20 px-4">
-          <div className="max-w-7xl mx-auto">
-            <h2
-              className="text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-center mb-4 text-white"
-              style={{ fontFamily: "Poppins, sans-serif" }}
+        <section className="py-20 px-4 relative">
+          <div className="max-w-7xl mx-auto relative z-10">
+            <h1
+              className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left mb-12 text-white"
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontWeight: 500,
+                color: "#FFFFFF",
+                textAlign: "left",
+                textTransform: "lowercase",
+              }}
             >
-              Our
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-                {" "}
-                Services
-              </span>
-            </h2>
-            <p
-              className="text-base md:text-lg text-center mb-12 max-w-3xl mx-auto text-gray-400"
-              style={{ fontFamily: "Poppins, sans-serif" }}
-            >
-              Comprehensive digital solutions tailored to elevate your business
-              and drive measurable results.
-            </p>
+              Our services
+            </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {serviceCards.map((card, index) => (
                 <Link key={index} to={card.link} className="block h-full">
@@ -545,7 +584,7 @@ export default function Home() {
                     borderRadius={18}
                   >
                     <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       <div className="relative z-10">
                         <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
                           <div
@@ -614,6 +653,10 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <FeaturedProjects />
+
+        <ClientLogos />
 
         <MarqueeTestimonials
           title="Trusted by Industry Leaders"

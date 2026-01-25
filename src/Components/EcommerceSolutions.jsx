@@ -1,22 +1,17 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { ShoppingCart, CreditCard, Package, Users, BarChart3, Zap, Rocket } from "lucide-react";
+import {
+  ShoppingCart,
+  CreditCard,
+  Package,
+  Users,
+  BarChart3,
+  Zap,
+  Rocket,
+} from "lucide-react";
 import ElectricBorder from "./ElectricBorder";
-import StaggeredMenu from "./StaggeredMenu/StaggeredMenu";
-
-const menuItems = [
-  { label: "Home", ariaLabel: "Go to home page", link: "/" },
-  { label: "About", ariaLabel: "Learn about us", link: "/about" },
-  { label: "Services", ariaLabel: "View our services", link: "/services" },
-  { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
-];
-
-const socialItems = [
-  { label: "Twitter", link: "https://twitter.com" },
-  { label: "GitHub", link: "https://github.com" },
-  { label: "LinkedIn", link: "https://linkedin.com" },
-];
+import MobileNavbar from "./MobileNavbar";
 
 const EcommerceSolutions = () => {
   return (
@@ -26,11 +21,11 @@ const EcommerceSolutions = () => {
 
       {/* Spline Background */}
       <div className="fixed top-0 w-full h-screen -z-10">
-        <iframe 
-          src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/" 
-          frameBorder="0" 
-          width="100%" 
-          height="100%" 
+        <iframe
+          src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/"
+          frameBorder="0"
+          width="100%"
+          height="100%"
           className="w-full h-full"
         ></iframe>
       </div>
@@ -39,38 +34,26 @@ const EcommerceSolutions = () => {
         <Navbar />
       </div>
 
-      {/* Mobile StaggeredMenu */}
+      {/* Mobile Navigation */}
       <div className="md:hidden">
-        <StaggeredMenu
-          position="right"
-          items={menuItems}
-          socialItems={socialItems}
-          displaySocials={true}
-          displayItemNumbering={false}
-          menuButtonColor="#fff"
-          openMenuButtonColor="#fff"
-          changeMenuColorOnOpen={false}
-          colors={["#B19EEF", "#5227FF"]}
-          accentColor="#0071BC"
-          isFixed={true}
-          onMenuOpen={() => console.log("Menu opened")}
-          onMenuClose={() => console.log("Menu closed")}
-        />
+        <MobileNavbar />
       </div>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center pt-24 pb-16 px-6">
-        
         {/* Hero Section */}
         <div className="container mx-auto px-6 py-16 md:py-32 relative z-10">
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
             <div className="mb-12">
-              <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-6 leading-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">E-commerce</span> 
-                {" "}Solutions
+              <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-light tracking-tighter mb-6 leading-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                  E-commerce
+                </span>{" "}
+                Solutions
               </h1>
-              <p className="text-gray-300 text-sm sm:text-base md:text-2xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
-                Complete online store development with secure payments, inventory management, and seamless shopping experiences.
+              <p className="text-gray-300 text-base sm:text-lg md:text-3xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
+                Complete online store development with secure payments,
+                inventory management, and seamless shopping experiences.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="shiny-cta">
@@ -80,7 +63,7 @@ const EcommerceSolutions = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent my-16"></div>
         </div>
 
@@ -94,33 +77,39 @@ const EcommerceSolutions = () => {
               {
                 icon: ShoppingCart,
                 title: "Store Setup & Configuration",
-                description: "Complete e-commerce store setup with product catalogs, categories, and inventory management systems."
+                description:
+                  "Complete e-commerce store setup with product catalogs, categories, and inventory management systems.",
               },
               {
                 icon: CreditCard,
                 title: "Payment Gateway Integration",
-                description: "Secure payment processing with Stripe, PayPal, and other major payment providers for seamless transactions."
+                description:
+                  "Secure payment processing with Stripe, PayPal, and other major payment providers for seamless transactions.",
               },
               {
                 icon: Package,
                 title: "Inventory Management",
-                description: "Real-time inventory tracking, stock management, and automated reorder systems to keep your business running smoothly."
+                description:
+                  "Real-time inventory tracking, stock management, and automated reorder systems to keep your business running smoothly.",
               },
               {
                 icon: Users,
                 title: "Customer Management",
-                description: "Customer profiles, order history, loyalty programs, and personalized shopping experiences."
+                description:
+                  "Customer profiles, order history, loyalty programs, and personalized shopping experiences.",
               },
               {
                 icon: BarChart3,
                 title: "Analytics & Reporting",
-                description: "Comprehensive sales analytics, customer insights, and performance metrics to drive business growth."
+                description:
+                  "Comprehensive sales analytics, customer insights, and performance metrics to drive business growth.",
               },
               {
                 icon: Zap,
                 title: "Performance Optimization",
-                description: "Fast loading times, mobile optimization, and conversion rate optimization for maximum sales."
-              }
+                description:
+                  "Fast loading times, mobile optimization, and conversion rate optimization for maximum sales.",
+              },
             ].map((service, index) => (
               <ElectricBorder
                 key={index}
@@ -166,7 +155,7 @@ const EcommerceSolutions = () => {
 
       <Footer />
 
-      <style jsx>{`
+      <style>{`
         @property --gradient-angle {
           syntax: "<angle>";
           initial-value: 0deg;

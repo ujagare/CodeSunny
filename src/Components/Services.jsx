@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import StaggeredMenu from "./StaggeredMenu/StaggeredMenu";
+import MobileNavbar from "./MobileNavbar";
 import Footer from "./Footer";
 import GradientText from "./GradientText";
 import geairImage from "../assets/images/geair.jpg";
@@ -11,19 +11,6 @@ import uiUxImage from "../assets/images/ui-ux-design.png";
 import digitalMarketingImage from "../assets/images/digital-marketing.png";
 import ElectricBorder from "./ElectricBorder";
 import AnimatedBeamDemo from "./AnimatedBeamDemo";
-
-const menuItems = [
-  { label: "Home", ariaLabel: "Go to home page", link: "/" },
-  { label: "About", ariaLabel: "Learn about us", link: "/about" },
-  { label: "Services", ariaLabel: "View our services", link: "/services" },
-  { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
-];
-
-const socialItems = [
-  { label: "Twitter", link: "https://twitter.com" },
-  { label: "GitHub", link: "https://github.com" },
-  { label: "LinkedIn", link: "https://linkedin.com" },
-];
 
 const Services = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -66,34 +53,20 @@ const Services = () => {
           <Navbar />
         </div>
 
-        {/* Mobile StaggeredMenu */}
+        {/* Mobile Navigation */}
         <div className="md:hidden">
-          <StaggeredMenu
-            position="right"
-            items={menuItems}
-            socialItems={socialItems}
-            displaySocials={true}
-            displayItemNumbering={false}
-            menuButtonColor="#fff"
-            openMenuButtonColor="#fff"
-            changeMenuColorOnOpen={false}
-            colors={["#B19EEF", "#5227FF"]}
-            accentColor="#0071BC"
-            isFixed={true}
-            onMenuOpen={() => console.log("Menu opened")}
-            onMenuClose={() => console.log("Menu closed")}
-          />
+          <MobileNavbar />
         </div>
 
         {/* New Hero Section */}
-        <section className="w-full min-h-screen md:min-h-auto md:bg-center lg:pt-48 lg:pb-48 max-w-none mr-auto ml-auto pt-0 pr-6 pb-32 md:pb-32 pl-6 relative flex items-center">
+        <section className="w-full min-h-screen md:min-h-auto md:bg-center lg:pt-48 lg:pb-48 max-w-none mr-auto ml-auto pt-0 pr-8 pb-32 md:pb-32 pl-8 relative flex items-center">
           <div
             className="absolute top-0 right-0 bottom-0 left-0"
             data-container-bg="true"
           ></div>
-          <div className="grid lg:grid-cols-2 max-w-7xl mr-auto ml-auto items-center w-full">
+          <div className="grid lg:grid-cols-2 max-w-7xl mr-auto ml-auto items-center w-full px-4">
             {/* Left Column: Copy & Form */}
-            <div className="max-w-xl z-10 mt-24 md:mt-0">
+            <div className="max-w-2xl z-10 mt-24 md:mt-0">
               <p className="hidden md:block uppercase text-xs font-semibold tracking-tight font-dm-sans mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
                 Comprehensive Digital Solutions
               </p>
@@ -106,14 +79,14 @@ const Services = () => {
                 </span>
                 <span className="block">For Your Success.</span>
               </h1>
-              <p className="leading-relaxed text-sm md:text-lg tracking-tight font-dm-sans max-w-lg mb-10 text-stone-50">
+              <p className="leading-relaxed text-sm md:text-lg tracking-tight font-dm-sans max-w-2xl mb-10 text-stone-50">
                 We deliver cutting-edge web development, UI/UX design, digital
                 marketing, and cloud solutions to transform your business and
                 drive sustainable growth.
               </p>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 md:mb-16">
                 <div className="inline-block bg-transparent w-full sm:w-auto">
-                  <style jsx>{`
+                  <style>{`
                     @property --gradient-angle {
                       syntax: "<angle>";
                       initial-value: 0deg;
@@ -304,7 +277,7 @@ const Services = () => {
                   where it counts.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <style jsx>{`
+                  <style>{`
                     @property --gradient-angle {
                       syntax: "<angle>";
                       initial-value: 0deg;
@@ -415,10 +388,7 @@ const Services = () => {
                       z-index: 2;
                     }
                   `}</style>
-                  <a
-                    href="#demo"
-                    className="shiny-cta-demo focus:outline-none"
-                  >
+                  <a href="#demo" className="shiny-cta-demo focus:outline-none">
                     <span>Book a demo</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -617,7 +587,7 @@ const Services = () => {
         </section>
 
         <section className="py-20 px-4">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-[1600px] mx-auto">
             <div className="mb-20">
               <AnimatedBeamDemo />
             </div>
@@ -1063,6 +1033,7 @@ const Services = () => {
             </div>
           </div>
         </section>
+
         <Footer />
       </div>
     </div>

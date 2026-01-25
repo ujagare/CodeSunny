@@ -1,22 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { Palette, Layout, Monitor, Smartphone, Grid, Layers, Rocket, ExternalLink } from "lucide-react";
+import {
+  Palette,
+  Layout,
+  Monitor,
+  Smartphone,
+  Grid,
+  Layers,
+  Rocket,
+} from "lucide-react";
 import ElectricBorder from "./ElectricBorder";
-import StaggeredMenu from "./StaggeredMenu/StaggeredMenu";
-
-const menuItems = [
-  { label: "Home", ariaLabel: "Go to home page", link: "/" },
-  { label: "About", ariaLabel: "Learn about us", link: "/about" },
-  { label: "Services", ariaLabel: "View our services", link: "/services" },
-  { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
-];
-
-const socialItems = [
-  { label: "Twitter", link: "https://twitter.com" },
-  { label: "GitHub", link: "https://github.com" },
-  { label: "LinkedIn", link: "https://linkedin.com" },
-];
+import MobileNavbar from "./MobileNavbar";
 
 const UiUxDesign = () => {
   return (
@@ -26,11 +21,11 @@ const UiUxDesign = () => {
 
       {/* Spline Background */}
       <div className="fixed top-0 w-full h-screen -z-10">
-        <iframe 
-          src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/" 
-          frameBorder="0" 
-          width="100%" 
-          height="100%" 
+        <iframe
+          src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/"
+          frameBorder="0"
+          width="100%"
+          height="100%"
           className="w-full h-full"
         ></iframe>
       </div>
@@ -39,38 +34,26 @@ const UiUxDesign = () => {
         <Navbar />
       </div>
 
-      {/* Mobile StaggeredMenu */}
+      {/* Mobile Navigation */}
       <div className="md:hidden">
-        <StaggeredMenu
-          position="right"
-          items={menuItems}
-          socialItems={socialItems}
-          displaySocials={true}
-          displayItemNumbering={false}
-          menuButtonColor="#fff"
-          openMenuButtonColor="#fff"
-          changeMenuColorOnOpen={false}
-          colors={["#B19EEF", "#5227FF"]}
-          accentColor="#0071BC"
-          isFixed={true}
-          onMenuOpen={() => console.log("Menu opened")}
-          onMenuClose={() => console.log("Menu closed")}
-        />
+        <MobileNavbar />
       </div>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center pt-24 pb-16 px-6">
-        
         {/* Hero Section */}
         <div className="container mx-auto px-6 py-16 md:py-32 relative z-10">
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
             <div className="mb-12">
-              <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-6 leading-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Design</span> 
-                {" "}that shapes the future
+              <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-light tracking-tighter mb-6 leading-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                  Design
+                </span>{" "}
+                that shapes the future
               </h1>
-              <p className="text-gray-300 text-sm sm:text-base md:text-2xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
-                We craft immersive digital experiences that transform brands and elevate businesses to new heights.
+              <p className="text-gray-300 text-base sm:text-lg md:text-3xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
+                We craft immersive digital experiences that transform brands and
+                elevate businesses to new heights.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="shiny-cta">
@@ -80,7 +63,7 @@ const UiUxDesign = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent my-16"></div>
         </div>
 
@@ -94,33 +77,39 @@ const UiUxDesign = () => {
               {
                 icon: Palette,
                 title: "Brand Identity",
-                description: "Crafting unique visual languages that resonate with your audience and define your brand's essence."
+                description:
+                  "Crafting unique visual languages that resonate with your audience and define your brand's essence.",
               },
               {
                 icon: Layout,
                 title: "UI/UX Design",
-                description: "Designing intuitive and engaging digital experiences that prioritize user needs and business goals."
+                description:
+                  "Designing intuitive and engaging digital experiences that prioritize user needs and business goals.",
               },
               {
                 icon: Monitor,
                 title: "Web Design",
-                description: "Creating visually stunning and responsive websites that leave a lasting impression on visitors."
+                description:
+                  "Creating visually stunning and responsive websites that leave a lasting impression on visitors.",
               },
               {
                 icon: Smartphone,
                 title: "Mobile App Design",
-                description: "Designing seamless mobile interfaces for iOS and Android that ensure a smooth user journey."
+                description:
+                  "Designing seamless mobile interfaces for iOS and Android that ensure a smooth user journey.",
               },
               {
                 icon: Layers,
                 title: "Motion Design",
-                description: "Bringing ideas to life with fluid animations and interactions that enhance usability and delight."
+                description:
+                  "Bringing ideas to life with fluid animations and interactions that enhance usability and delight.",
               },
               {
                 icon: Grid,
                 title: "Design Systems",
-                description: "Building scalable and consistent design systems to streamline development and maintain brand coherence."
-              }
+                description:
+                  "Building scalable and consistent design systems to streamline development and maintain brand coherence.",
+              },
             ].map((service, index) => (
               <ElectricBorder
                 key={index}
@@ -166,7 +155,7 @@ const UiUxDesign = () => {
 
       <Footer />
 
-      <style jsx>{`
+      <style>{`
         @property --gradient-angle {
           syntax: "<angle>";
           initial-value: 0deg;

@@ -217,9 +217,9 @@ export function AnimatedBeamDemo({ className }) {
   const div5Ref = React.useRef(null);
 
   return (
-    <div className="w-full">
-      <div className="mb-12 text-center">
-        <h2 className="text-4xl lg:text-6xl font-medium tracking-tight mb-3">
+    <div className="w-full px-0 md:px-0">
+      <div className="mb-8 md:mb-12 text-center px-0">
+        <h2 className="text-2xl md:text-4xl lg:text-6xl font-medium tracking-tight mb-3">
           <GradientText
             colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
             animationSpeed={3}
@@ -229,7 +229,7 @@ export function AnimatedBeamDemo({ className }) {
             Powerful Integrations
           </GradientText>
         </h2>
-        <p className="text-base md:text-lg text-gray-400">
+        <p className="text-sm md:text-base lg:text-lg text-gray-400 max-w-2xl mx-auto">
           Connect your favorite tools and automate your workflow seamlessly
         </p>
       </div>
@@ -241,22 +241,26 @@ export function AnimatedBeamDemo({ className }) {
         className="h-full"
       >
         <div
-          className={`relative flex h-[500px] w-full items-center justify-start overflow-hidden rounded-lg bg-transparent gap-20 ${className || ""}`}
+          className={`relative flex flex-col md:flex-row h-auto min-h-[500px] md:h-[450px] lg:h-[550px] w-full items-center justify-start overflow-hidden rounded-lg bg-transparent gap-8 md:gap-12 lg:gap-20 p-6 md:p-6 lg:p-8 ${className || ""}`}
           ref={containerRef}
         >
           <style>{circleStyles}</style>
-          <div className="flex flex-col justify-center items-start flex-1 pl-20">
-            <div className="flex items-center gap-4 mb-6">
-              <img src={n8nSvg} alt="n8n" className="w-16 h-16" />
-              <h3 className="text-3xl font-semibold text-white text-left">
+          <div className="flex flex-col justify-center items-center md:items-start flex-1 md:pl-6 lg:pl-20 text-center md:text-left py-4 md:py-0">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-4 md:mb-6">
+              <img
+                src={n8nSvg}
+                alt="n8n"
+                className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16"
+              />
+              <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold text-white">
                 Workflow Automation
               </h3>
             </div>
-            <p className="text-base text-gray-400 mb-8 max-w-md text-left">
+            <p className="text-xs md:text-sm lg:text-base text-gray-400 mb-4 md:mb-6 lg:mb-8 max-w-xs md:max-w-md">
               Streamline your business processes with intelligent automation.
               Connect your favorite tools and eliminate manual work.
             </p>
-            <style jsx>{`
+            <style>{`
               @property --gradient-angle {
                 syntax: "<angle>";
                 initial-value: 0deg;
@@ -268,8 +272,8 @@ export function AnimatedBeamDemo({ className }) {
                 position: relative;
                 overflow: hidden;
                 border-radius: 9999px;
-                padding: 0.875rem 1.75rem;
-                font-size: 0.875rem;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.75rem;
                 line-height: 1.2;
                 font-weight: 500;
                 color: #ffffff;
@@ -293,6 +297,13 @@ export function AnimatedBeamDemo({ className }) {
                 align-items: center;
                 justify-content: center;
                 gap: 0.5rem;
+              }
+
+              @media (min-width: 768px) {
+                .shiny-cta-beam {
+                  padding: 0.875rem 1.75rem;
+                  font-size: 0.875rem;
+                }
               }
 
               @keyframes border-spin {
@@ -371,8 +382,8 @@ export function AnimatedBeamDemo({ className }) {
               <span>Get Started</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
+                width="14"
+                height="14"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -380,6 +391,7 @@ export function AnimatedBeamDemo({ className }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 style={{ position: "relative", zIndex: 2 }}
+                className="md:w-4 md:h-4"
               >
                 <path d="M5 12h14"></path>
                 <path d="m12 5 7 7-7 7"></path>
@@ -387,101 +399,142 @@ export function AnimatedBeamDemo({ className }) {
             </button>
           </div>
 
+          {/* Horizontal line for mobile view */}
+          <div className="block md:hidden w-full">
+            <div className="h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30"></div>
+          </div>
+
           <ElectricBorder
             color="#60a5fa"
             speed={0.1}
             chaos={0.01}
             borderRadius={0}
-            className="h-full"
+            className="h-full hidden md:block"
           >
             <div className="h-full w-0.5 bg-transparent"></div>
           </ElectricBorder>
 
           <div
-            className="relative flex flex-1 flex-row items-stretch justify-between gap-10 px-8 pr-20"
+            className="relative flex flex-1 flex-row items-stretch justify-between gap-6 md:gap-8 lg:gap-10 px-4 py-4 md:px-6 md:py-0 lg:px-8 pr-6 md:pr-12 lg:pr-20"
             ref={beamContainerRef}
           >
-            <div className="flex flex-col justify-center gap-2">
-              <Circle ref={div1Ref}>
+            <div className="flex flex-col justify-center gap-2 md:gap-2">
+              <Circle ref={div1Ref} className="size-14 md:size-14 lg:size-12">
                 <img
                   src={googleSheetsSvg}
                   alt="Google Sheets"
-                  className="w-8 h-8"
+                  className="w-6 h-6 md:w-8 md:h-8 lg:w-8 lg:h-8"
                 />
               </Circle>
-              <Circle ref={div2Ref}>
-                <img src={slackSvg} alt="Slack" className="w-8 h-8" />
+              <Circle ref={div2Ref} className="size-14 md:size-14 lg:size-12">
+                <img
+                  src={slackSvg}
+                  alt="Slack"
+                  className="w-6 h-6 md:w-8 md:h-8 lg:w-8 lg:h-8"
+                />
               </Circle>
-              <Circle ref={div3Ref}>
-                <img src={postgresSvg} alt="Postgres" className="w-8 h-8" />
+              <Circle ref={div3Ref} className="size-14 md:size-14 lg:size-12">
+                <img
+                  src={postgresSvg}
+                  alt="Postgres"
+                  className="w-6 h-6 md:w-8 md:h-8 lg:w-8 lg:h-8"
+                />
               </Circle>
-              <Circle ref={div4Ref}>
+              <Circle ref={div4Ref} className="size-14 md:size-14 lg:size-12">
                 <img
                   src={httpRequestSvg}
                   alt="HTTP Request"
-                  className="w-8 h-8"
+                  className="w-6 h-6 md:w-8 md:h-8 lg:w-8 lg:h-8"
                 />
               </Circle>
-              <Circle ref={div5Ref}>
-                <img src={webhookSvg} alt="Webhook" className="w-8 h-8" />
+              <Circle ref={div5Ref} className="size-14 md:size-14 lg:size-12">
+                <img
+                  src={webhookSvg}
+                  alt="Webhook"
+                  className="w-6 h-6 md:w-8 md:h-8 lg:w-8 lg:h-8"
+                />
               </Circle>
             </div>
             <div className="flex flex-col justify-center">
-              <Circle ref={div6Ref} className="size-20 bg-white">
+              <Circle
+                ref={div6Ref}
+                className="size-20 md:size-20 lg:size-20 bg-white"
+              >
                 <img
                   src={openAiSvg}
                   alt="OpenAI"
-                  className="w-12 h-12"
+                  className="w-9 h-9 md:w-11 md:h-11 lg:w-12 lg:h-12"
                   style={{ filter: "invert(1)" }}
                 />
               </Circle>
             </div>
             <div className="flex flex-col justify-center">
-              <Circle ref={div7Ref} className="size-16">
-                <img src={whatsappSvg} alt="WhatsApp" className="w-10 h-10" />
+              <Circle ref={div7Ref} className="size-16 md:size-16 lg:size-16">
+                <img
+                  src={whatsappSvg}
+                  alt="WhatsApp"
+                  className="w-7 h-7 md:w-9 md:h-9 lg:w-10 lg:h-10"
+                />
               </Circle>
             </div>
             <AnimatedBeam
               containerRef={beamContainerRef}
               fromRef={div1Ref}
               toRef={div6Ref}
-              duration={5}
+              duration={3}
+              pathWidth={3}
+              gradientStartColor="#60a5fa"
+              gradientStopColor="#34d399"
             />
             <AnimatedBeam
               containerRef={beamContainerRef}
               fromRef={div2Ref}
               toRef={div6Ref}
-              duration={5}
+              duration={3}
               delay={0.2}
+              pathWidth={3}
+              gradientStartColor="#60a5fa"
+              gradientStopColor="#34d399"
             />
             <AnimatedBeam
               containerRef={beamContainerRef}
               fromRef={div3Ref}
               toRef={div6Ref}
-              duration={5}
+              duration={3}
               delay={0.4}
+              pathWidth={3}
+              gradientStartColor="#60a5fa"
+              gradientStopColor="#34d399"
             />
             <AnimatedBeam
               containerRef={beamContainerRef}
               fromRef={div4Ref}
               toRef={div6Ref}
-              duration={5}
+              duration={3}
               delay={0.6}
+              pathWidth={3}
+              gradientStartColor="#60a5fa"
+              gradientStopColor="#34d399"
             />
             <AnimatedBeam
               containerRef={beamContainerRef}
               fromRef={div5Ref}
               toRef={div6Ref}
-              duration={5}
+              duration={3}
               delay={0.8}
+              pathWidth={3}
+              gradientStartColor="#60a5fa"
+              gradientStopColor="#34d399"
             />
             <AnimatedBeam
               containerRef={beamContainerRef}
               fromRef={div7Ref}
               toRef={div6Ref}
-              duration={5}
-              pathWidth={3}
+              duration={3}
+              pathWidth={4}
               pathOpacity={0.5}
+              gradientStartColor="#60a5fa"
+              gradientStopColor="#34d399"
             />
           </div>
         </div>

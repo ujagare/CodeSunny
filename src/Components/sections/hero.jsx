@@ -52,7 +52,7 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full min-h-[80vh] md:min-h-screen pt-[100px] pb-0 flex flex-col">
-      <div className="relative flex-1 flex flex-col justify-between px-4 md:px-16 max-w-[1600px] mx-auto w-full overflow-visible">
+      <div className="relative flex-1 flex flex-col justify-between pl-6 pr-2 md:pl-20 md:pr-4 lg:pl-32 lg:pr-6 max-w-[1800px] mx-auto w-full overflow-visible">
         {/* Huge Animated Text Heading */}
         <div className="w-full mt-[10px] md:mt-[20px] relative overflow-visible">
           <h1
@@ -65,7 +65,7 @@ const HeroSection = () => {
               letterSpacing: "-0.04em",
             }}
           >
-            <span className="flex items-center justify-center md:justify-start gap-2 md:gap-4 overflow-hidden flex-wrap md:flex-nowrap">
+            <span className="flex items-center justify-center md:justify-start gap-1 md:gap-2 overflow-hidden flex-wrap md:flex-nowrap">
               <motion.span
                 className="text-[0.8em]"
                 initial={{ opacity: 0, scale: 0, rotate: -180 }}
@@ -78,10 +78,7 @@ const HeroSection = () => {
               <span className="overflow-hidden inline-block">
                 {animateWords("Digital", 0.2)}
               </span>
-              <span
-                className="overflow-hidden inline-block basis-full md:basis-auto pr-3 md:pr-6"
-                style={{ paddingLeft: 'clamp(60px, 20vw, 0px)' }}
-              >
+              <span className="overflow-hidden inline-block">
                 {animateWords("Solutions", 0.4)}
               </span>
             </span>
@@ -96,7 +93,7 @@ const HeroSection = () => {
                       "that transform your digital presence",
                       "and accelerate business growth",
                     ],
-                    0.6
+                    0.6,
                   )}
                 </h2>
               </div>
@@ -120,14 +117,14 @@ const HeroSection = () => {
                   "that transform your digital presence",
                   "and accelerate business growth",
                 ],
-                0.6
+                0.6,
               )}
             </h2>
           </div>
         </div>
 
         {/* Footer Link Section */}
-        <div className="w-full pt-[20px] md:pt-[40px] pb-[100px] md:pb-[150px] overflow-hidden pl-4 md:pl-0">
+        <div className="w-full pt-[20px] md:pt-[40px] pb-[100px] md:pb-[150px] overflow-hidden pl-6 pr-8 md:pl-20 md:pr-24 lg:pl-32 lg:pr-40 text-left">
           <motion.a
             href="#how-we-help"
             className="group inline-flex items-center no-underline border-b border-cyan-400 pb-1"

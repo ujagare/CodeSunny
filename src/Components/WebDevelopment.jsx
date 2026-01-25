@@ -1,22 +1,17 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { Code, Layout, Database, ShoppingCart, Server, Globe, Rocket } from "lucide-react";
+import {
+  Code,
+  Layout,
+  Database,
+  ShoppingCart,
+  Server,
+  Globe,
+  Rocket,
+} from "lucide-react";
 import ElectricBorder from "./ElectricBorder";
-import StaggeredMenu from "./StaggeredMenu/StaggeredMenu";
-
-const menuItems = [
-  { label: "Home", ariaLabel: "Go to home page", link: "/" },
-  { label: "About", ariaLabel: "Learn about us", link: "/about" },
-  { label: "Services", ariaLabel: "View our services", link: "/services" },
-  { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
-];
-
-const socialItems = [
-  { label: "Twitter", link: "https://twitter.com" },
-  { label: "GitHub", link: "https://github.com" },
-  { label: "LinkedIn", link: "https://linkedin.com" },
-];
+import MobileNavbar from "./MobileNavbar";
 
 const WebDevelopment = () => {
   return (
@@ -26,11 +21,11 @@ const WebDevelopment = () => {
 
       {/* Spline Background */}
       <div className="fixed top-0 w-full h-screen -z-10">
-        <iframe 
-          src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/" 
-          frameBorder="0" 
-          width="100%" 
-          height="100%" 
+        <iframe
+          src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/"
+          frameBorder="0"
+          width="100%"
+          height="100%"
           className="w-full h-full"
         ></iframe>
       </div>
@@ -39,38 +34,26 @@ const WebDevelopment = () => {
         <Navbar />
       </div>
 
-      {/* Mobile StaggeredMenu */}
+      {/* Mobile Navigation */}
       <div className="md:hidden">
-        <StaggeredMenu
-          position="right"
-          items={menuItems}
-          socialItems={socialItems}
-          displaySocials={true}
-          displayItemNumbering={false}
-          menuButtonColor="#fff"
-          openMenuButtonColor="#fff"
-          changeMenuColorOnOpen={false}
-          colors={["#B19EEF", "#5227FF"]}
-          accentColor="#0071BC"
-          isFixed={true}
-          onMenuOpen={() => console.log("Menu opened")}
-          onMenuClose={() => console.log("Menu closed")}
-        />
+        <MobileNavbar />
       </div>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center pt-24 pb-16 px-6">
-        
         {/* Hero Section */}
         <div className="container mx-auto px-6 py-16 md:py-32 relative z-10">
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
             <div className="mb-12">
-              <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-6 leading-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Web</span> 
-                {" "}Development
+              <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-light tracking-tighter mb-6 leading-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                  Web
+                </span>{" "}
+                Development
               </h1>
-              <p className="text-gray-300 text-sm sm:text-base md:text-2xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
-                Building high-performance, scalable, and visually stunning web applications using modern technologies.
+              <p className="text-gray-300 text-base sm:text-lg md:text-3xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
+                Building high-performance, scalable, and visually stunning web
+                applications using modern technologies.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="shiny-cta">
@@ -80,7 +63,7 @@ const WebDevelopment = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent my-16"></div>
         </div>
 
@@ -94,33 +77,39 @@ const WebDevelopment = () => {
               {
                 icon: Code,
                 title: "Frontend Development",
-                description: "Crafting responsive, interactive, and pixel-perfect user interfaces using React, Next.js, and Tailwind CSS."
+                description:
+                  "Crafting responsive, interactive, and pixel-perfect user interfaces using React, Next.js, and Tailwind CSS.",
               },
               {
                 icon: Server,
                 title: "Backend Development",
-                description: "Building robust, scalable, and secure server-side logic with Node.js, Express, and Python."
+                description:
+                  "Building robust, scalable, and secure server-side logic with Node.js, Express, and Python.",
               },
               {
                 icon: Database,
                 title: "Full Stack Solutions",
-                description: "End-to-end web application development, seamlessly integrating frontend and backend technologies."
+                description:
+                  "End-to-end web application development, seamlessly integrating frontend and backend technologies.",
               },
               {
                 icon: ShoppingCart,
                 title: "E-commerce Platforms",
-                description: "Developing custom online stores with secure payment gateways, inventory management, and user-friendly shopping experiences."
+                description:
+                  "Developing custom online stores with secure payment gateways, inventory management, and user-friendly shopping experiences.",
               },
               {
                 icon: Globe,
                 title: "API Integration",
-                description: "Connecting your applications with third-party services and APIs to extend functionality and streamline workflows."
+                description:
+                  "Connecting your applications with third-party services and APIs to extend functionality and streamline workflows.",
               },
               {
                 icon: Layout,
                 title: "CMS Development",
-                description: "Creating flexible Content Management Systems (CMS) to help you manage your website content with ease."
-              }
+                description:
+                  "Creating flexible Content Management Systems (CMS) to help you manage your website content with ease.",
+              },
             ].map((service, index) => (
               <ElectricBorder
                 key={index}
@@ -166,7 +155,7 @@ const WebDevelopment = () => {
 
       <Footer />
 
-      <style jsx>{`
+      <style>{`
         @property --gradient-angle {
           syntax: "<angle>";
           initial-value: 0deg;

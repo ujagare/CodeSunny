@@ -11,20 +11,7 @@ import {
   Rocket,
 } from "lucide-react";
 import ElectricBorder from "./ElectricBorder";
-import StaggeredMenu from "./StaggeredMenu/StaggeredMenu";
-
-const menuItems = [
-  { label: "Home", ariaLabel: "Go to home page", link: "/" },
-  { label: "About", ariaLabel: "Learn about us", link: "/about" },
-  { label: "Services", ariaLabel: "View our services", link: "/services" },
-  { label: "Contact", ariaLabel: "Get in touch", link: "/contact" },
-];
-
-const socialItems = [
-  { label: "Twitter", link: "https://twitter.com" },
-  { label: "GitHub", link: "https://github.com" },
-  { label: "LinkedIn", link: "https://linkedin.com" },
-];
+import MobileNavbar from "./MobileNavbar";
 
 const DigitalMarketing = () => {
   return (
@@ -47,23 +34,9 @@ const DigitalMarketing = () => {
         <Navbar />
       </div>
 
-      {/* Mobile StaggeredMenu */}
+      {/* Mobile Navigation */}
       <div className="md:hidden">
-        <StaggeredMenu
-          position="right"
-          items={menuItems}
-          socialItems={socialItems}
-          displaySocials={true}
-          displayItemNumbering={false}
-          menuButtonColor="#fff"
-          openMenuButtonColor="#fff"
-          changeMenuColorOnOpen={false}
-          colors={["#B19EEF", "#5227FF"]}
-          accentColor="#0071BC"
-          isFixed={true}
-          onMenuOpen={() => console.log("Menu opened")}
-          onMenuClose={() => console.log("Menu closed")}
-        />
+        <MobileNavbar />
       </div>
 
       {/* Main Content */}
@@ -72,13 +45,13 @@ const DigitalMarketing = () => {
         <div className="container mx-auto px-6 py-16 md:py-32 relative z-10">
           <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
             <div className="mb-12">
-              <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-light tracking-tighter mb-6 leading-tight">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+              <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-light tracking-tighter mb-6 leading-tight">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400">
                   Digital
                 </span>{" "}
                 Marketing Excellence
               </h1>
-              <p className="text-gray-300 text-sm sm:text-base md:text-2xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
+              <p className="text-gray-300 text-base sm:text-lg md:text-3xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
                 Strategic campaigns that drive growth, engagement, and
                 measurable results for your business.
               </p>
@@ -91,7 +64,7 @@ const DigitalMarketing = () => {
             </div>
           </div>
 
-          <div className="h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent my-16"></div>
+          <div className="h-px bg-linear-to-r from-transparent via-indigo-500/30 to-transparent my-16"></div>
         </div>
 
         {/* Service Cards Grid */}
@@ -147,7 +120,7 @@ const DigitalMarketing = () => {
                 className="h-full"
               >
                 <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-indigo-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="relative z-10">
                     <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-indigo-500/30 flex items-center justify-center">
                       <div
@@ -182,7 +155,7 @@ const DigitalMarketing = () => {
 
       <Footer />
 
-      <style jsx>{`
+      <style>{`
         @property --gradient-angle {
           syntax: "<angle>";
           initial-value: 0deg;
