@@ -22,7 +22,7 @@ import AboutSummary from "./AboutSummary";
 import ClientLogos from "./ClientLogos";
 import LightRays from "./LightRays";
 import { Palette, Code, Zap, Rocket, Globe, Users } from "lucide-react";
-import n8nImage from "../assets/images/n8n.png";
+// import n8nImage from "../assets/images/n8n.png";
 
 const testimonials = [
   {
@@ -329,13 +329,13 @@ export default function Home() {
               </h1>
 
               {/* N8N Image - Mobile Only, Below Hero Text */}
-              <div className="block md:hidden mt-8 pointer-events-none">
+              {/* <div className="block md:hidden mt-8 pointer-events-none">
                 <img
                   src={n8nImage}
                   alt="n8n Automation"
                   className="w-20 h-20 object-contain opacity-80"
                 />
-              </div>
+              </div> */}
             </div>
             <div className="pointer-events-auto pb-[8vh]">
               <StarBorder
