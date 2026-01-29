@@ -22,7 +22,7 @@ import AboutSummary from "./AboutSummary";
 import ClientLogos from "./ClientLogos";
 import LightRays from "./LightRays";
 import { Palette, Code, Zap, Rocket, Globe, Users } from "lucide-react";
-// import n8nImage from "../assets/images/n8n.png";
+import MetaTags from "./MetaTags";
 
 const testimonials = [
   {
@@ -219,22 +219,37 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full bg-[#050515] relative">
-      <div className="absolute inset-0 bg-linear-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>
-      <div className="relative z-10">
-        <div className="hidden md:block">
-          <Navbar />
-        </div>
+    <>
+      <MetaTags
+        title="CodeSunny - Web Development & Digital Solutions Agency"
+        description="Transform your business with CodeSunny. Expert web development, UI/UX design, digital marketing, e-commerce solutions, SEO optimization, and cloud services."
+        keywords="web development, UI/UX design, digital marketing, e-commerce, SEO, cloud solutions, web agency, React development"
+        url="https://codesunny.com"
+      />
+      <div className="w-full bg-[#050515] relative">
+        <div className="absolute inset-0 bg-linear-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>
 
-        <div className="md:hidden">
-          <MobileNavbar />
-        </div>
-        <main className="w-full relative flex items-center justify-center overflow-hidden md:mt-0 z-20 bg-[#050515] hero">
+        {/* Fixed Navbar */}
+        <header className="fixed top-0 left-0 right-0 z-[1000]">
+          <nav className="hidden md:block">
+            <Navbar />
+          </nav>
+
+          <nav className="md:hidden">
+            <MobileNavbar />
+          </nav>
+        </header>
+
+        {/* Main Content with padding-top for fixed navbar */}
+        <main className="w-full relative flex items-center justify-center overflow-hidden bg-[#050515] hero pt-20">
           <div className="absolute inset-0 bg-linear-to-br from-blue-600/20 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute inset-0 pointer-events-none"></div>
 
           {/* Mobile LightRays Effect - Only visible on mobile */}
-          <div className="md:hidden absolute inset-0 w-full h-full">
+          <div
+            className="md:hidden absolute inset-0 w-full h-full"
+            style={{ zIndex: 1 }}
+          >
             <LightRays
               raysOrigin="top-center"
               raysColor="#667fff"
@@ -262,7 +277,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none">
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none"
+            style={{ zIndex: 2 }}
+          >
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
                 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black md:font-bold text-center neue-machina overflow-hidden"
@@ -271,8 +289,8 @@ export default function Home() {
                   fontWeight: "900",
                 }}
               >
-                {/* Mobile: Solid color text with animation */}
-                <span className="block md:hidden" style={{ color: "#02CAD4" }}>
+                {/* Mobile: Mixed color text with animation */}
+                <span className="block md:hidden">
                   {"Creative Solutions That Drive Real Business Growth"
                     .split(" ")
                     .map((word, index) => (
@@ -291,6 +309,10 @@ export default function Home() {
                           }}
                           style={{
                             display: "inline-block",
+                            color:
+                              word === "Solutions" || word === "Creative"
+                                ? "#FFFFFF"
+                                : "#0071BC",
                           }}
                         >
                           {word}
@@ -299,8 +321,8 @@ export default function Home() {
                     ))}
                 </span>
 
-                {/* Desktop: Solid color text with animation */}
-                <span className="hidden md:block" style={{ color: "#02CAD4" }}>
+                {/* Desktop: Mixed color text with animation */}
+                <span className="hidden md:block">
                   {"Creative Solutions That Drive Real Business Growth"
                     .split(" ")
                     .map((word, index) => (
@@ -319,6 +341,10 @@ export default function Home() {
                           }}
                           style={{
                             display: "inline-block",
+                            color:
+                              word === "Solutions" || word === "Creative"
+                                ? "#FFFFFF"
+                                : "#0071BC",
                           }}
                         >
                           {word}
@@ -327,15 +353,6 @@ export default function Home() {
                     ))}
                 </span>
               </h1>
-
-              {/* N8N Image - Mobile Only, Below Hero Text */}
-              {/* <div className="block md:hidden mt-8 pointer-events-none">
-                <img
-                  src={n8nImage}
-                  alt="n8n Automation"
-                  className="w-20 h-20 object-contain opacity-80"
-                />
-              </div> */}
             </div>
             <div className="pointer-events-auto pb-[8vh]">
               <StarBorder
@@ -350,64 +367,104 @@ export default function Home() {
           </div>
         </main>
 
-        <section className="relative pt-16 md:pt-32 lg:pt-40 pb-16 md:pb-40 lg:pb-48 overflow-hidden">
-          {/* Desktop LightRays Effect - Only visible on desktop */}
-          <div className="hidden md:block absolute inset-0 w-full h-full">
-            <LightRays
-              raysOrigin="top-center"
-              raysColor="#667fff"
-              raysSpeed={0.8}
-              lightSpread={1.2}
-              rayLength={1.8}
-              followMouse={true}
-              mouseInfluence={0.05}
-              noiseAmount={0.01}
-              distortion={0}
-              className="custom-rays-desktop"
-              pulsating={false}
-              fadeDistance={1.5}
-              saturation={0.8}
-            />
-          </div>
-          <div className="w-full px-4 md:px-6 relative z-10">
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-              <div className="text-left max-w-4xl lg:w-1/2 px-4 md:px-8 lg:px-16 w-full">
-                <h1
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-6 md:mb-8 text-white capitalize overflow-hidden"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
-                  <div className="whitespace-nowrap">
-                    {"We build the solutions that"
-                      .split(" ")
-                      .map((word, index) => (
-                        <span
-                          key={index}
-                          className="inline-block overflow-hidden"
-                          style={{ marginRight: "0.3em" }}
-                        >
-                          <motion.span
-                            initial={{ opacity: 0, y: "100%" }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{
-                              duration: 0.8,
-                              delay: index * 0.1,
-                              ease: [0.33, 1, 0.68, 1],
-                            }}
-                            style={{
-                              display: "inline-block",
-                            }}
-                          >
-                            {word}
-                          </motion.span>
-                        </span>
-                      ))}
-                  </div>
-                  <div
-                    className="whitespace-nowrap"
-                    style={{ color: "#02CAD4" }}
+        <div className="relative" style={{ zIndex: 1 }}>
+          <section
+            className="relative pt-16 md:pt-32 lg:pt-40 pb-16 md:pb-40 lg:pb-48 overflow-hidden"
+            aria-labelledby="about-heading"
+          >
+            {/* Desktop LightRays Effect - Only visible on desktop */}
+            <div className="hidden md:block absolute inset-0 w-full h-full">
+              <LightRays
+                raysOrigin="top-center"
+                raysColor="#667fff"
+                raysSpeed={0.8}
+                lightSpread={1.2}
+                rayLength={1.8}
+                followMouse={true}
+                mouseInfluence={0.05}
+                noiseAmount={0.01}
+                distortion={0}
+                className="custom-rays-desktop"
+                pulsating={false}
+                fadeDistance={1.5}
+                saturation={0.8}
+              />
+            </div>
+            <div className="w-full px-4 md:px-6 relative" style={{ zIndex: 2 }}>
+              <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                <article className="text-left max-w-4xl lg:w-1/2 px-4 md:px-8 lg:px-16 w-full">
+                  <h2
+                    id="about-heading"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 md:mb-8 text-white capitalize overflow-hidden"
+                    style={{
+                      fontFamily: "Poppins, sans-serif",
+                      lineHeight: "0.95",
+                    }}
                   >
-                    {"drive digital business growth."
+                    <div className="whitespace-nowrap">
+                      {"We build the solutions that"
+                        .split(" ")
+                        .map((word, index) => (
+                          <span
+                            key={index}
+                            className="inline-block overflow-hidden"
+                            style={{ marginRight: "0.3em" }}
+                          >
+                            <motion.span
+                              initial={{ opacity: 0, y: "100%" }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{
+                                duration: 0.8,
+                                delay: index * 0.1,
+                                ease: [0.33, 1, 0.68, 1],
+                              }}
+                              style={{
+                                display: "inline-block",
+                              }}
+                            >
+                              {word}
+                            </motion.span>
+                          </span>
+                        ))}
+                    </div>
+                    <div
+                      className="whitespace-nowrap"
+                      style={{ color: "#FFFFFF" }}
+                    >
+                      {"drive digital business growth."
+                        .split(" ")
+                        .map((word, index) => (
+                          <span
+                            key={index}
+                            className="inline-block overflow-hidden"
+                            style={{ marginRight: "0.3em" }}
+                          >
+                            <motion.span
+                              initial={{ opacity: 0, y: "100%" }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{
+                                duration: 0.8,
+                                delay: (5 + index) * 0.1,
+                                ease: [0.33, 1, 0.68, 1],
+                              }}
+                              style={{
+                                display: "inline-block",
+                              }}
+                            >
+                              {word}
+                            </motion.span>
+                          </span>
+                        ))}
+                    </div>
+                  </h2>
+                  <p
+                    className="text-base md:text-lg lg:text-xl text-zinc-400 leading-relaxed mb-8 md:mb-10 font-light tracking-tight max-w-2xl overflow-hidden"
+                    style={{ fontFamily: "Poppins, sans-serif" }}
+                    role="doc-subtitle"
+                  >
+                    {"We take ownership of complex web development projects like custom applications, e-commerce platforms, and scalable systems freeing up your team to focus on core business operations."
                       .split(" ")
                       .map((word, index) => (
                         <span
@@ -421,51 +478,20 @@ export default function Home() {
                             viewport={{ once: true }}
                             transition={{
                               duration: 0.8,
-                              delay: (5 + index) * 0.1,
+                              delay: index * 0.05,
                               ease: [0.33, 1, 0.68, 1],
                             }}
-                            style={{
-                              display: "inline-block",
-                            }}
+                            style={{ display: "inline-block" }}
                           >
                             {word}
                           </motion.span>
                         </span>
                       ))}
-                  </div>
-                </h1>
-                <p
-                  className="text-base md:text-lg lg:text-xl text-zinc-400 leading-relaxed mb-8 md:mb-10 font-light tracking-tight max-w-2xl overflow-hidden"
-                  style={{ fontFamily: "Poppins, sans-serif" }}
-                >
-                  {"We take ownership of complex web development projects like custom applications, e-commerce platforms, and scalable systems freeing up your team to focus on core business operations."
-                    .split(" ")
-                    .map((word, index) => (
-                      <span
-                        key={index}
-                        className="inline-block overflow-hidden"
-                        style={{ marginRight: "0.3em" }}
-                      >
-                        <motion.span
-                          initial={{ opacity: 0, y: "100%" }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{
-                            duration: 0.8,
-                            delay: index * 0.05,
-                            ease: [0.33, 1, 0.68, 1],
-                          }}
-                          style={{ display: "inline-block" }}
-                        >
-                          {word}
-                        </motion.span>
-                      </span>
-                    ))}
-                </p>
+                  </p>
 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 md:mb-16">
-                  <div className="inline-block bg-transparent w-full sm:w-auto">
-                    <style>{`
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12 md:mb-16">
+                    <div className="inline-block bg-transparent w-full sm:w-auto">
+                      <style>{`
                       @property --gradient-angle {
                         syntax: "<angle>";
                         initial-value: 0deg;
@@ -621,178 +647,207 @@ export default function Home() {
                         }
                       }
                     `}</style>
-                    <button className="shiny-cta focus:outline-none">
-                      <span>Start Your Project</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        style={{ position: "relative", zIndex: 2 }}
-                      >
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-
-                <div
-                  className="pt-6 md:pt-8 w-full"
-                  style={{
-                    borderTop: "1px solid",
-                    borderImage:
-                      "linear-gradient(to right, #60a5fa, #34d399) 1",
-                  }}
-                >
-                  <p
-                    className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] uppercase font-medium break-words"
-                    style={{ color: "#02CAD4" }}
-                  >
-                    // Built with React, Next.js, Node.js, and Cloud
-                    Infrastructure
-                  </p>
-                </div>
-              </div>
-
-              <div className="lg:w-1/2 w-full h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center">
-                <RadialOrbitalTimeline timelineData={timelineData} />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-20 px-4 relative">
-          <div className="max-w-7xl mx-auto relative z-10">
-            <h1
-              className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left mb-12 text-white overflow-hidden"
-              style={{
-                fontFamily: "Poppins, sans-serif",
-                fontWeight: 500,
-                color: "#FFFFFF",
-                textAlign: "left",
-                textTransform: "lowercase",
-              }}
-            >
-              {"Our services".split(" ").map((word, index) => (
-                <span
-                  key={index}
-                  className="inline-block overflow-hidden"
-                  style={{ marginRight: "0.3em" }}
-                >
-                  <motion.span
-                    initial={{ opacity: 0, y: "100%" }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.8,
-                      delay: index * 0.1,
-                      ease: [0.33, 1, 0.68, 1],
-                    }}
-                    style={{ display: "inline-block" }}
-                  >
-                    {word}
-                  </motion.span>
-                </span>
-              ))}
-            </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {serviceCards.map((card, index) => (
-                <Link key={index} to={card.link} className="block h-full">
-                  <ElectricBorder
-                    color="#60a5fa"
-                    speed={0.1}
-                    chaos={0.01}
-                    borderRadius={18}
-                  >
-                    <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                      <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      <div className="relative z-10">
-                        <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
-                          <div
-                            className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                            style={{
-                              borderTopColor: "#60a5fa",
-                              borderLeftColor: "#60a5fa",
-                            }}
-                          ></div>
-                          <div
-                            className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                            style={{
-                              borderBottomColor: "#34d399",
-                              borderRightColor: "#34d399",
-                            }}
-                          ></div>
-                          <svg
-                            className="w-8 h-8"
-                            fill="none"
-                            stroke={`url(#${card.gradientId})`}
-                            viewBox="0 0 24 24"
-                          >
-                            <defs>
-                              <linearGradient
-                                id={card.gradientId}
-                                x1="0%"
-                                y1="0%"
-                                x2="100%"
-                                y2="100%"
-                              >
-                                <stop
-                                  offset="0%"
-                                  style={{
-                                    stopColor: "#60a5fa",
-                                    stopOpacity: 1,
-                                  }}
-                                />
-                                <stop
-                                  offset="100%"
-                                  style={{
-                                    stopColor: "#34d399",
-                                    stopOpacity: 1,
-                                  }}
-                                />
-                              </linearGradient>
-                            </defs>
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d={card.svgPath}
-                            />
-                          </svg>
-                        </div>
-                        <h3 className="text-2xl font-semibold mb-3 text-white">
-                          {card.title}
-                        </h3>
-                        <p className="text-white text-base leading-relaxed">
-                          {card.description}
-                        </p>
-                      </div>
+                      <button className="shiny-cta focus:outline-none">
+                        <span>Start Your Project</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          style={{ position: "relative", zIndex: 2 }}
+                        >
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                      </button>
                     </div>
-                  </ElectricBorder>
-                </Link>
-              ))}
+                  </div>
+
+                  <div
+                    className="pt-6 md:pt-8 w-full"
+                    style={{
+                      borderTop: "1px solid",
+                      borderImage:
+                        "linear-gradient(to right, #60a5fa, #34d399) 1",
+                    }}
+                  >
+                    <p
+                      className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] uppercase font-medium break-words"
+                      style={{ color: "#02CAD4" }}
+                    >
+                      // Built with React, Next.js, Node.js, and Cloud
+                      Infrastructure
+                    </p>
+                  </div>
+                </article>
+
+                <aside
+                  className="lg:w-1/2 w-full h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center"
+                  style={{ willChange: "auto" }}
+                >
+                  <RadialOrbitalTimeline timelineData={timelineData} />
+                </aside>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <FeaturedProjects />
+          <section
+            className="py-20 px-4 relative"
+            aria-labelledby="services-heading"
+            style={{ willChange: "auto" }}
+          >
+            <div className="max-w-7xl mx-auto relative" style={{ zIndex: 2 }}>
+              <h2
+                id="services-heading"
+                className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left mb-12 text-white overflow-hidden"
+                style={{
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 500,
+                  color: "#FFFFFF",
+                  textAlign: "left",
+                  textTransform: "lowercase",
+                }}
+              >
+                {"Our services".split(" ").map((word, index) => (
+                  <span
+                    key={index}
+                    className="inline-block overflow-hidden"
+                    style={{ marginRight: "0.3em" }}
+                  >
+                    <motion.span
+                      initial={{ opacity: 0, y: "100%" }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.8,
+                        delay: index * 0.1,
+                        ease: [0.33, 1, 0.68, 1],
+                      }}
+                      style={{ display: "inline-block" }}
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
+                ))}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {serviceCards.map((card, index) => (
+                  <article key={index} className="block h-full">
+                    <Link to={card.link} className="block h-full">
+                      <ElectricBorder
+                        color="#60a5fa"
+                        speed={0.1}
+                        chaos={0.01}
+                        borderRadius={18}
+                      >
+                        <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
+                          <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          <div className="relative z-10">
+                            <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
+                              <div
+                                className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                                style={{
+                                  borderTopColor: "#60a5fa",
+                                  borderLeftColor: "#60a5fa",
+                                }}
+                              ></div>
+                              <div
+                                className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                                style={{
+                                  borderBottomColor: "#34d399",
+                                  borderRightColor: "#34d399",
+                                }}
+                              ></div>
+                              <svg
+                                className="w-8 h-8"
+                                fill="none"
+                                stroke={`url(#${card.gradientId})`}
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <defs>
+                                  <linearGradient
+                                    id={card.gradientId}
+                                    x1="0%"
+                                    y1="0%"
+                                    x2="100%"
+                                    y2="100%"
+                                  >
+                                    <stop
+                                      offset="0%"
+                                      style={{
+                                        stopColor: "#60a5fa",
+                                        stopOpacity: 1,
+                                      }}
+                                    />
+                                    <stop
+                                      offset="100%"
+                                      style={{
+                                        stopColor: "#34d399",
+                                        stopOpacity: 1,
+                                      }}
+                                    />
+                                  </linearGradient>
+                                </defs>
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d={card.svgPath}
+                                />
+                              </svg>
+                            </div>
+                            <h3 className="text-2xl font-semibold mb-3 text-white">
+                              {card.title}
+                            </h3>
+                            <p className="text-white text-base leading-relaxed">
+                              {card.description}
+                            </p>
+                          </div>
+                        </div>
+                      </ElectricBorder>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
 
-        <ClientLogos />
+          <section aria-labelledby="projects-heading">
+            <h2 id="projects-heading" className="sr-only">
+              Featured Projects
+            </h2>
+            <FeaturedProjects />
+          </section>
 
-        <MarqueeTestimonials
-          title="Trusted by Industry Leaders"
-          description="Join hundreds of companies that have transformed their business with CodeSunny"
-          testimonials={testimonials}
-        />
+          <section aria-labelledby="clients-heading">
+            <h2 id="clients-heading" className="sr-only">
+              Our Clients
+            </h2>
+            <ClientLogos />
+          </section>
 
-        <Footer />
+          <section aria-labelledby="testimonials-heading">
+            <h2 id="testimonials-heading" className="sr-only">
+              Testimonials
+            </h2>
+            <MarqueeTestimonials
+              title="Trusted by Industry Leaders"
+              description="Join hundreds of companies that have transformed their business with CodeSunny"
+              testimonials={testimonials}
+            />
+          </section>
+
+          <footer>
+            <Footer />
+          </footer>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -17,8 +17,8 @@ export function MarqueeTestimonials({
       <div className="flex flex-col items-center gap-4 text-center sm:gap-16">
         <div className="flex flex-col items-center gap-4 sm:gap-8">
           <h2
-            className="max-w-[720px] text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-white overflow-hidden"
-            style={{ fontFamily: "Poppins, sans-serif" }}
+            className="max-w-[720px] text-4xl lg:text-6xl font-medium tracking-tight text-white overflow-hidden"
+            style={{ fontFamily: "Poppins, sans-serif", lineHeight: "0.95" }}
           >
             {"Trusted by Industry Leaders".split(" ").map((word, index) => (
               <span

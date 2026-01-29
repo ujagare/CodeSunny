@@ -1,10 +1,26 @@
 @import "tailwindcss";
 @import "./assets/fonts/fonts.css";
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-html, body, * {
-  font-family: 'Poppins', sans-serif !important;
+/* CSS Variables for Layout */
+:root {
+  --navbar-height: 80px;
+  --navbar-height-mobile: 72px;
+
+  /* Z-index hierarchy */
+  --z-content: 1;
+  --z-header: 10;
+  --z-overlay: 999;
+  --z-mobile-menu: 1000;
+  --z-mobile-menu-button: 1001;
+  --z-mobile-menu-close: 1002;
+}
+
+html,
+body,
+* {
+  font-family: "Poppins", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -20,7 +36,7 @@ html, body, * {
       opacity: 0;
     }
   }
-  
+
   @keyframes star-movement-top {
     0% {
       transform: translate(0%, 0%);
@@ -31,11 +47,11 @@ html, body, * {
       opacity: 0;
     }
   }
-  
+
   .animate-star-movement-bottom {
     animation: star-movement-bottom linear infinite alternate;
   }
-  
+
   .animate-star-movement-top {
     animation: star-movement-top linear infinite alternate;
   }
@@ -46,6 +62,15 @@ html, body, * {
     }
     to {
       transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(calc(100% + var(--gap)));
+    }
+    to {
+      transform: translateX(0);
     }
   }
 
@@ -81,7 +106,7 @@ html, body, * {
 
 /* NeueMachina Font */
 .neue-machina {
-  font-family: 'NeueMachina' !important;
+  font-family: "NeueMachina" !important;
   font-display: swap;
   font-weight: normal !important;
 }

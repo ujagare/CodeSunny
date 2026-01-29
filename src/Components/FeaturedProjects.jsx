@@ -71,11 +71,12 @@ const ProjectCard = ({ project }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gray-900 transition-transform duration-700">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gray-900 transition-transform duration-700" style={{ willChange: 'auto' }}>
           <div className="absolute inset-0 h-full w-full transition-opacity duration-500">
             <img
               src={project.imageUrl}
-              alt={project.description}
+              alt={`${project.title} - ${project.description}`}
+              loading="lazy"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
           </div>
@@ -92,7 +93,9 @@ const ProjectCard = ({ project }) => {
               loop
               muted
               playsInline
+              loading="lazy"
               className="h-full w-full object-cover"
+              aria-label={`${project.title} project video - ${project.description}`}
             />
           </div>
         </div>
@@ -110,7 +113,7 @@ export default function FeaturedProjects() {
   const rightColumnProjects = [projects[1], projects[3]];
 
   return (
-    <section className="text-white py-20">
+    <section className="text-white py-20" style={{ willChange: 'auto' }}>
       <div className="container mx-auto max-w-6xl px-8">
         <div className="mb-20">
           <h1
@@ -147,7 +150,7 @@ export default function FeaturedProjects() {
           </h1>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="flex flex-col md:flex-row gap-12" style={{ willChange: 'auto' }}>
           <div className="flex-1">
             {leftColumnProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />

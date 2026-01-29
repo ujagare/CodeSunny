@@ -10,6 +10,10 @@ A modern, responsive web development agency website built with React, Vite, and 
 - ⚡ Fast performance with Vite
 - 🎯 SEO optimized
 - 🌙 Dark theme with custom styling
+- 📲 Progressive Web App (PWA) - Installable on mobile & desktop
+- 🔌 Offline support with service worker
+- 🖼️ Lazy loading for images and videos
+- 🔍 Semantic HTML for better accessibility
 
 ## Tech Stack
 
@@ -19,6 +23,8 @@ A modern, responsive web development agency website built with React, Vite, and 
 - **Icons**: Lucide React
 - **Animations**: Custom CSS animations
 - **3D Graphics**: Spline
+- **PWA**: Vite PWA Plugin + Service Worker
+- **Performance**: Lazy loading, Code splitting, Caching
 
 ## Getting Started
 
@@ -107,9 +113,23 @@ CodeSunny/
 
 - Canvas optimization for Spline 3D graphics
 - Mobile hero height limiting (70vh on mobile)
-- Lazy loading for images
+- Lazy loading for images and videos
 - CSS animations for smooth transitions
 - Vite's fast build and HMR (Hot Module Replacement)
+- Service worker caching strategy
+- Progressive Web App (PWA) support
+- Semantic HTML for SEO
+- Descriptive alt tags for images
+
+## PWA Features
+
+- **Installable**: Add to home screen on mobile and desktop
+- **Offline Support**: Works without internet connection
+- **Fast Loading**: Cached assets load instantly
+- **App-like Experience**: Full screen, no browser UI
+- **Responsive**: Works on all screen sizes
+
+For detailed PWA setup and testing, see [PWA_SETUP_GUIDE.md](./PWA_SETUP_GUIDE.md)
 
 ## Available Scripts
 

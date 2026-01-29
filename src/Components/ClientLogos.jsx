@@ -87,7 +87,8 @@ const ClientLogos = () => {
             >
               <img
                 src={logo.src}
-                alt={logo.alt}
+                alt={`${logo.alt} - CodeSunny client logo`}
+                loading="lazy"
                 className={`max-h-full max-w-full object-contain transition-all duration-300 bg-transparent ${
                   logo.isSvg
                     ? "brightness-0 invert"

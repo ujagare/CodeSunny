@@ -9,7 +9,8 @@ export function TestimonialCard({ author, text, href, className = "" }) {
       <div className="flex items-center gap-2 md:gap-3">
         <img
           src={author.avatar}
-          alt={author.name}
+          alt={`${author.name} - testimonial author`}
+          loading="lazy"
           className="h-8 w-8 md:h-12 md:w-12 rounded-full object-cover"
         />
         <div className="flex flex-col items-start">

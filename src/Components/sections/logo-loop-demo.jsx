@@ -19,12 +19,7 @@ export function LogoLoopDemo() {
           fontFamily: 'Poppins', 
           fontSize: 'clamp(24px, 5vw, 38px)', 
           fontWeight: 500, 
-          background: 'linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)',
-          backgroundSize: '200% auto',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          animation: 'gradient 3s linear infinite',
+          color: '#0071BC',
           textAlign: 'left' 
         }}>
           (TRUSTED BY)

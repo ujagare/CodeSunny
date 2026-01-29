@@ -219,15 +219,8 @@ export function AnimatedBeamDemo({ className }) {
   return (
     <div className="w-full px-0 md:px-0">
       <div className="mb-8 md:mb-12 text-center px-0">
-        <h2 className="text-2xl md:text-4xl lg:text-6xl font-medium tracking-tight mb-3">
-          <GradientText
-            colors={["#00CED1", "#1E90FF", "#00CED1", "#1E90FF"]}
-            animationSpeed={3}
-            showBorder={false}
-            className="inline-block"
-          >
-            Powerful Integrations
-          </GradientText>
+        <h2 className="text-2xl md:text-4xl lg:text-6xl font-medium tracking-tight mb-3 text-white">
+          Powerful Integrations
         </h2>
         <p className="text-sm md:text-base lg:text-lg text-gray-400 max-w-2xl mx-auto">
           Connect your favorite tools and automate your workflow seamlessly
@@ -249,7 +242,8 @@ export function AnimatedBeamDemo({ className }) {
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-4 md:mb-6">
               <img
                 src={n8nSvg}
-                alt="n8n"
+                alt="n8n workflow automation platform logo"
+                loading="lazy"
                 className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16"
               />
               <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold text-white">

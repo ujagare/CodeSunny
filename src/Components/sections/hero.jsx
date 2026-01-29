@@ -16,7 +16,7 @@ const HeroSection = () => {
         style={{
           display: "inline-block",
           marginRight: "0.3em",
-          color: "#02CAD4",
+          color: "#0071BC",
         }}
       >
         {word}
@@ -71,7 +71,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, scale: 0, rotate: -180 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-                style={{ color: "#02CAD4" }}
+                style={{ color: "#0071BC" }}
               >
                 ✳︎
               </motion.span>
@@ -132,13 +132,7 @@ const HeroSection = () => {
               fontFamily: "Poppins",
               fontSize: "clamp(20px, 5vw, 30.4px)",
               fontWeight: 400,
-              background:
-                "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "gradient 3s linear infinite",
+              color: "#FFFFFF",
             }}
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}

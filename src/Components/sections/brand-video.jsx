@@ -13,6 +13,7 @@ const BrandVideo = () => {
             loop
             muted
             playsInline
+            loading="lazy"
             className="w-full h-full object-cover"
             style={{ 
               filter: 'grayscale(0%)',

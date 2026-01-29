@@ -12,153 +12,176 @@ import {
 } from "lucide-react";
 import ElectricBorder from "./ElectricBorder";
 import MobileNavbar from "./MobileNavbar";
+import MetaTags from "./MetaTags";
 
 const DigitalMarketing = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="w-full min-h-screen relative overflow-hidden font-[Manrope] text-white selection:bg-indigo-500/30">
-      {/* Base Background Color */}
-      <div className="fixed inset-0 bg-black -z-20"></div>
+    <>
+      <MetaTags
+        title="Digital Marketing Services - CodeSunny"
+        description="Strategic digital marketing services including SEO, social media marketing, email campaigns, content marketing, and PPC advertising to grow your business."
+        keywords="digital marketing, SEO, social media marketing, content marketing, email marketing, PPC, online marketing"
+        url="https://codesunny.com/services/digital-marketing"
+      />
+      <div className="w-full min-h-screen relative overflow-hidden font-[Manrope] text-white selection:bg-indigo-500/30">
+        {/* Base Background Color */}
+        <div className="fixed inset-0 bg-black -z-20"></div>
 
-      {/* Spline Background */}
-      <div className="fixed top-0 w-full h-screen -z-10">
-        <iframe
-          src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          className="w-full h-full"
-        ></iframe>
-      </div>
-
-      <div className="hidden md:block">
-        <Navbar />
-      </div>
-
-      {/* Mobile Navigation */}
-      <div className="md:hidden">
-        <MobileNavbar />
-      </div>
-
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col items-center pt-24 pb-16 px-6">
-        {/* Hero Section */}
-        <div className="container mx-auto px-6 py-16 md:py-32 relative z-10">
-          <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-            <div className="mb-12">
-              <h1 className="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-light tracking-tighter mb-6 leading-tight">
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400">
-                  Digital
-                </span>{" "}
-                Marketing Excellence
-              </h1>
-              <p className="text-gray-300 text-base sm:text-lg md:text-3xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
-                Strategic campaigns that drive growth, engagement, and
-                measurable results for your business.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="shiny-cta">
-                  <span>Start Project</span>
-                  <Rocket className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="h-px bg-linear-to-r from-transparent via-indigo-500/30 to-transparent my-16"></div>
+        {/* Spline Background */}
+        <div className="fixed top-0 w-full h-screen -z-10">
+          <iframe
+            src="https://my.spline.design/retrofuturismbganimation-Lb3VtL1bNaYUnirKNzn0FvaW/"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            className="w-full h-full"
+            title="3D Background Animation"
+          ></iframe>
         </div>
 
-        {/* Service Cards Grid */}
-        <div className="max-w-7xl mx-auto w-full">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-white">
-            Our Marketing Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-            {[
-              {
-                icon: Search,
-                title: "SEO Optimization",
-                description:
-                  "Improving your website's visibility on search engines to drive organic traffic and increase rankings.",
-              },
-              {
-                icon: Share2,
-                title: "Social Media Marketing",
-                description:
-                  "Building your brand presence across social platforms to engage with your audience and grow your community.",
-              },
-              {
-                icon: Mail,
-                title: "Email Marketing",
-                description:
-                  "Personalized email campaigns to nurture leads, retain customers, and drive conversions.",
-              },
-              {
-                icon: Users,
-                title: "Content Marketing",
-                description:
-                  "Creating valuable and relevant content to attract, acquire, and engage a clearly defined audience.",
-              },
-              {
-                icon: TrendingUp,
-                title: "PPC Advertising",
-                description:
-                  "Targeted pay-per-click campaigns to drive immediate traffic and generate high-quality leads.",
-              },
-              {
-                icon: BarChart,
-                title: "Analytics & Reporting",
-                description:
-                  "In-depth analysis of marketing performance to measure ROI and optimize strategies for better results.",
-              },
-            ].map((service, index) => (
-              <ElectricBorder
-                key={index}
-                color="#818cf8"
-                speed={0.1}
-                chaos={0.01}
-                borderRadius={18}
-                className="h-full"
-              >
-                <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                  <div className="absolute inset-0 bg-linear-to-br from-indigo-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="relative z-10">
-                    <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-indigo-500/30 flex items-center justify-center">
-                      <div
-                        className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                        style={{
-                          borderTopColor: "#818cf8",
-                          borderLeftColor: "#818cf8",
-                        }}
-                      ></div>
-                      <div
-                        className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                        style={{
-                          borderBottomColor: "#c084fc",
-                          borderRightColor: "#c084fc",
-                        }}
-                      ></div>
-                      <service.icon className="w-8 h-8 text-indigo-400" />
-                    </div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 text-white">
-                      {service.title}
-                    </h3>
-                    <p className="text-white text-sm sm:text-base leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
+        <header className="fixed top-0 left-0 right-0 z-[1000]">
+          <nav className="hidden md:block">
+            <Navbar />
+          </nav>
+
+          <nav className="md:hidden">
+            <MobileNavbar />
+          </nav>
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-1 flex flex-col items-center pt-24 pb-16 px-6">
+          {/* Hero Section */}
+          <section
+            className="container mx-auto px-6 py-16 md:py-32 relative z-10"
+            aria-labelledby="hero-heading"
+          >
+            <article className="flex flex-col items-center text-center max-w-4xl mx-auto">
+              <div className="mb-12">
+                <h1
+                  id="hero-heading"
+                  className="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-light tracking-tighter mb-6 leading-tight"
+                >
+                  <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-emerald-400">
+                    Digital
+                  </span>{" "}
+                  Marketing Excellence
+                </h1>
+                <p className="text-gray-300 text-base sm:text-lg md:text-3xl mb-8 max-w-2xl mx-auto font-extralight tracking-wide">
+                  Strategic campaigns that drive growth, engagement, and
+                  measurable results for your business.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <button className="shiny-cta">
+                    <span>Start Project</span>
+                    <Rocket className="w-4 h-4" />
+                  </button>
                 </div>
-              </ElectricBorder>
-            ))}
-          </div>
-        </div>
-      </main>
+              </div>
+              <div className="h-px bg-linear-to-r from-transparent via-indigo-500/30 to-transparent my-16"></div>
+            </article>
+          </section>
 
-      <Footer />
+          {/* Service Cards Grid */}
+          <section
+            className="max-w-7xl mx-auto w-full"
+            aria-labelledby="services-heading"
+          >
+            <h2
+              id="services-heading"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-white"
+            >
+              Our Marketing Services
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+              {[
+                {
+                  icon: Search,
+                  title: "SEO Optimization",
+                  description:
+                    "Improving your website's visibility on search engines to drive organic traffic and increase rankings.",
+                },
+                {
+                  icon: Share2,
+                  title: "Social Media Marketing",
+                  description:
+                    "Building your brand presence across social platforms to engage with your audience and grow your community.",
+                },
+                {
+                  icon: Mail,
+                  title: "Email Marketing",
+                  description:
+                    "Personalized email campaigns to nurture leads, retain customers, and drive conversions.",
+                },
+                {
+                  icon: Users,
+                  title: "Content Marketing",
+                  description:
+                    "Creating valuable and relevant content to attract, acquire, and engage a clearly defined audience.",
+                },
+                {
+                  icon: TrendingUp,
+                  title: "PPC Advertising",
+                  description:
+                    "Targeted pay-per-click campaigns to drive immediate traffic and generate high-quality leads.",
+                },
+                {
+                  icon: BarChart,
+                  title: "Analytics & Reporting",
+                  description:
+                    "In-depth analysis of marketing performance to measure ROI and optimize strategies for better results.",
+                },
+              ].map((service, index) => (
+                <ElectricBorder
+                  key={index}
+                  color="#818cf8"
+                  speed={0.1}
+                  chaos={0.01}
+                  borderRadius={18}
+                  className="h-full"
+                >
+                  <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
+                    <div className="absolute inset-0 bg-linear-to-br from-indigo-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="relative z-10">
+                      <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-indigo-500/30 flex items-center justify-center">
+                        <div
+                          className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                          style={{
+                            borderTopColor: "#818cf8",
+                            borderLeftColor: "#818cf8",
+                          }}
+                        ></div>
+                        <div
+                          className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                          style={{
+                            borderBottomColor: "#c084fc",
+                            borderRightColor: "#c084fc",
+                          }}
+                        ></div>
+                        <service.icon className="w-8 h-8 text-indigo-400" />
+                      </div>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-3 text-white">
+                        {service.title}
+                      </h3>
+                      <p className="text-white text-sm sm:text-base leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+                </ElectricBorder>
+              ))}
+            </div>
+          </section>
+        </main>
 
-      <style>{`
+        <footer>
+          <Footer />
+        </footer>
+
+        <style>{`
         @property --gradient-angle {
           syntax: "<angle>";
           initial-value: 0deg;
@@ -235,7 +258,8 @@ const DigitalMarketing = () => {
           pointer-events: none;
         }
       `}</style>
-    </div>
+      </div>
+    </>
   );
 };
 

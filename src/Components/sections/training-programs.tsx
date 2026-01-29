@@ -16,7 +16,7 @@ const TrainingPrograms = () => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
       >
-        <h2 style={{ fontFamily: 'Poppins, sans-serif', fontSize: '76px', fontWeight: 500, color: '#000000', letterSpacing: '-0.04em' }} className="uppercase inline-block w-full leading-[0.9] border-b-[1.5px] border-black pb-2">
+        <h2 style={{ fontFamily: 'Poppins, sans-serif', fontSize: '76px', fontWeight: 500, color: '#000000 !important', letterSpacing: '-0.04em' }} className="uppercase inline-block w-full leading-[0.9] border-b-[1.5px] border-black pb-2">
           PRIMARY PRODUCTS
         </h2>
       </motion.div>

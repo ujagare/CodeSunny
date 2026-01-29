@@ -1,146 +1,151 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/images/1.png";
 import { X } from "lucide-react";
-import logoImage from "../assets/images/1.png";
-import LightRays from "./LightRays";
 
 const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isOpen]);
 
   const links = [
     { title: "Home", href: "/" },
-    { title: "Services", href: "/services" },
-    { title: "Projects", href: "/projects" },
     { title: "About", href: "/about" },
+    { title: "Services", href: "/services" },
     { title: "Contact", href: "/contact" },
   ];
 
   return (
     <>
-      {/* Mobile Logo */}
-      <div className="fixed top-8 left-8 z-[90]">
-        <img
-          src={logoImage}
-          alt="CodeSunny Logo"
-          className="w-12 h-12 object-contain"
-        />
-      </div>
-
-      {/* Menu Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className={`fixed top-8 right-8 z-[90] w-14 h-14 rounded-full flex items-center justify-center transition-all duration-500 group ${
-          scrolled
-            ? "bg-black text-white"
-            : "bg-[#050515] text-white border border-white/20"
-        }`}
+      {/* Logo - Fixed on left side */}
+      <Link
+        to="/"
+        className="fixed top-6 left-6 z-[1001] md:hidden"
+        aria-label="CodeSunny Home"
       >
-        <div className="relative w-6 h-4 flex flex-col justify-between items-end">
-          <span className="w-full h-[2px] bg-current transition-all duration-300 group-hover:w-1/2" />
-          <span className="w-3/4 h-[2px] bg-current transition-all duration-300 group-hover:w-full" />
+        <img
+          src={logo}
+          alt="CodeSunny Logo"
+          className="w-10 h-10 object-contain rounded-lg"
+        />
+      </Link>
+
+      {/* Menu Button - Animated Hamburger to Cross */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center md:hidden z-[1001] transition-all duration-300"
+        style={{
+          background: "linear-gradient(135deg, #000000 0%, #1a1a3e 100%)",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
+        }}
+        aria-label={isOpen ? "Close menu" : "Open menu"}
+      >
+        <div className="w-5 h-4 flex flex-col justify-center items-center relative">
+          {/* Top line */}
+          <span
+            className={`w-full h-[2px] bg-white absolute transition-all duration-300 ease-in-out ${
+              isOpen ? "rotate-45 top-1/2 -translate-y-1/2" : "top-0"
+            }`}
+          />
+          {/* Bottom line */}
+          <span
+            className={`h-[2px] bg-white absolute transition-all duration-300 ease-in-out ${
+              isOpen
+                ? "w-full -rotate-45 top-1/2 -translate-y-1/2"
+                : "w-3/4 top-full -translate-y-full right-0"
+            }`}
+          />
         </div>
       </button>
 
       {/* Fullscreen Menu */}
       <div
-        className={`fixed inset-0 z-[100] bg-[#050515] text-white transition-all duration-700 ${
-          isOpen ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className="fixed inset-0 text-white z-[1000]"
+        style={{
+          background:
+            "linear-gradient(135deg, #000000 0%, #0a0a2e 50%, #1a1a3e 100%)",
+          transform: isOpen ? "translateY(0)" : "translateY(-100%)",
+          opacity: isOpen ? 1 : 0,
+          transition:
+            "transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-out",
+        }}
       >
-        {/* LightRays Background Effect */}
-        <div className="absolute inset-0 w-full h-full">
-          <LightRays
-            raysOrigin="top-center"
-            raysColor="#667fff"
-            raysSpeed={1}
-            lightSpread={1.1}
-            rayLength={2.3}
-            followMouse={true}
-            mouseInfluence={0.1}
-            noiseAmount={0.02}
-            distortion={0}
-            className="custom-rays"
-            pulsating={false}
-            fadeDistance={2}
-            saturation={1}
-          />
-        </div>
+        {/* Animated Background Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/5 to-transparent opacity-50"></div>
 
-        <button
-          onClick={() => setIsOpen(false)}
-          className="absolute top-8 right-8 w-14 h-14 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-300 z-50"
-        >
-          <X size={24} />
-        </button>
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
 
-        {/* Logo in fullscreen menu */}
-        <div className="absolute top-8 left-8 z-50">
-          <img
-            src={logoImage}
-            alt="CodeSunny Logo"
-            className="w-12 h-12 object-contain"
-          />
-        </div>
-
-        <div className="h-full flex flex-col justify-center px-8 md:px-[120px] max-w-[1440px] mx-auto relative z-20">
-          <nav className="flex flex-col gap-4">
-            {links.map((link, idx) => (
+        {/* Menu Content */}
+        <div className="h-full flex flex-col justify-center px-8 relative z-10 -mt-16">
+          <nav className="flex flex-col gap-6">
+            {links.map((link, index) => (
               <Link
                 key={link.title}
                 to={link.href}
                 onClick={() => setIsOpen(false)}
-                className="group w-fit"
+                className="text-5xl font-medium hover:text-blue-400 transition-all duration-300 transform hover:translate-x-2"
+                style={{
+                  animation: isOpen
+                    ? `slideInRight 0.5s ease-out ${index * 0.1}s both`
+                    : "none",
+                }}
               >
-                <span
-                  className="block text-[clamp(3rem,10vw,8rem)] font-medium leading-none tracking-tighter transition-transform duration-500 group-hover:translate-x-4"
-                  style={{ transitionDelay: `${idx * 50}ms` }}
-                >
-                  {link.title}
-                </span>
+                {link.title}
               </Link>
             ))}
           </nav>
 
-          <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-white/10 pt-12">
-            <div>
-              <p className="text-white/40 text-sm uppercase tracking-widest mb-4">
-                Contact
-              </p>
-              <a
-                href="mailto:info@codesunny.in"
-                className="text-2xl hover:text-white/60 transition-colors block mb-4"
-              >
-                info@codesunny.in
-              </a>
-              <a
-                href="tel:+918975805789"
-                className="text-xl hover:text-white/60 transition-colors block"
-              >
-                +91 8975805789
-              </a>
-            </div>
-            <div className="flex gap-8 items-end justify-end">
-              {["Instagram", "Twitter", "LinkedIn"].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="text-white/40 hover:text-white transition-colors"
-                >
-                  {social}
-                </a>
-              ))}
-            </div>
+          {/* Contact Info */}
+          <div
+            className="mt-16 pt-8 border-t border-white/20"
+            style={{
+              animation: isOpen
+                ? "slideInRight 0.5s ease-out 0.4s both"
+                : "none",
+            }}
+          >
+            <p className="text-white/50 text-xs uppercase mb-3 tracking-wider">
+              Contact
+            </p>
+            <a
+              href="mailto:info@codesunny.com"
+              className="text-lg hover:text-blue-400 transition-colors block mb-2"
+            >
+              info@codesunny.com
+            </a>
+            <a
+              href="tel:+919876543210"
+              className="text-lg hover:text-blue-400 transition-colors block"
+            >
+              +91 98765 43210
+            </a>
           </div>
         </div>
+
+        {/* CSS Animations */}
+        <style jsx>{`
+          @keyframes slideInRight {
+            from {
+              opacity: 0;
+              transform: translateX(50px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        `}</style>
       </div>
     </>
   );

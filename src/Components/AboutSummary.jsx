@@ -13,6 +13,7 @@ const AboutSummary = () => {
             style={{
               fontFamily: "Poppins, sans-serif",
               fontWeight: "500",
+              color: "#fff",
             }}
           >
             About Us
@@ -29,6 +30,7 @@ const AboutSummary = () => {
                   loop
                   muted
                   playsInline
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 >
                   <source
@@ -43,7 +45,7 @@ const AboutSummary = () => {
           {/* Right Column: Text Content */}
           <div className="w-full md:w-full flex flex-col items-start text-left md:pl-8">
             <div className="mb-8 space-y-6">
-              <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed tracking-tight text-white font-medium">
+              <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed tracking-tight text-zinc-400 font-medium">
                 At CodeSunny, we don't believe in cookie-cutter solutions or
                 shortcuts. Every project receives our full attention and
                 expertise. We build products exactly as envisioned during the

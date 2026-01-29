@@ -30,13 +30,7 @@ const SocialContact = () => {
                 fontFamily: "Poppins",
                 fontSize: "clamp(24px, 6vw, 95px)",
                 fontWeight: 600,
-                background:
-                  "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "gradient 3s linear infinite",
+                color: "#0071BC",
                 letterSpacing: "-0.02em",
               }}
               className="uppercase inline-flex items-start"
@@ -81,13 +75,7 @@ const SocialContact = () => {
                 fontFamily: "Poppins",
                 fontSize: "clamp(24px, 6vw, 95px)",
                 fontWeight: 600,
-                background:
-                  "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "gradient 3s linear infinite",
+                color: "#0071BC",
                 letterSpacing: "-0.02em",
               }}
               className="uppercase inline-flex items-start"

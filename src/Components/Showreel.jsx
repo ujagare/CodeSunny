@@ -64,6 +64,7 @@ const Showreel = () => {
                   loop
                   muted
                   playsInline
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 >
                   <source src={previewVideo} type="video/mp4" />
@@ -105,6 +106,7 @@ const Showreel = () => {
                   autoPlay
                   controls
                   playsInline
+                  loading="lazy"
                   className="aspect-video w-full object-contain"
                 >
                   <source src={fullVideo} type="video/mp4" />

@@ -69,10 +69,10 @@ export default function RadialOrbitalTimeline({ timelineData }) {
     if (autoRotate) {
       rotationTimer = setInterval(() => {
         setRotationAngle((prev) => {
-          const newAngle = (prev + 0.3) % 360;
+          const newAngle = (prev + 0.15) % 360;
           return Number(newAngle.toFixed(3));
         });
-      }, 50);
+      }, 100);
     }
 
     return () => {
@@ -169,7 +169,7 @@ export default function RadialOrbitalTimeline({ timelineData }) {
           </div>
 
           <div className="absolute w-48 h-48 sm:w-72 md:w-96 sm:h-72 md:h-96 rounded-full border-2 border-cyan-400/25"></div>
-          <div className="absolute w-72 h-72 sm:w-[420px] md:w-[560px] sm:h-[420px] md:h-[560px] rounded-full border-2 border-cyan-400/25 animate-[spin_60s_linear_infinite_reverse]">
+          <div className="absolute w-72 h-72 sm:w-[420px] md:w-[560px] sm:h-[420px] md:h-[560px] rounded-full border-2 border-cyan-400/25" style={{ willChange: 'auto' }}>
             {logos.map((logo, index) => {
               const pos = calculateOuterLogoPosition(
                 index,
@@ -184,6 +184,7 @@ export default function RadialOrbitalTimeline({ timelineData }) {
                     transform: `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) rotate(-${rotationAngle}deg)`,
                     left: "50%",
                     top: "50%",
+                    willChange: 'auto',
                   }}
                 >
                   <img
@@ -219,7 +220,10 @@ export default function RadialOrbitalTimeline({ timelineData }) {
                 key={item.id}
                 ref={(el) => (nodeRefs.current[item.id] = el)}
                 className="absolute cursor-pointer"
-                style={nodeStyle}
+                style={{
+                  ...nodeStyle,
+                  willChange: 'auto',
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleItem(item.id);

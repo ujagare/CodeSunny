@@ -23,13 +23,7 @@ const TrainingPrograms = () => {
             fontFamily: "Poppins",
             fontSize: "clamp(24px, 5vw, 76px)",
             fontWeight: 500,
-            background:
-              "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-            backgroundSize: "200% auto",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            animation: "gradient 3s linear infinite",
+            color: "#FFFFFF",
             letterSpacing: "-0.04em",
           }}
           className="uppercase inline-block leading-[0.9] border-b-[1.5px] border-cyan-400 pb-2"
@@ -47,13 +41,7 @@ const TrainingPrograms = () => {
                 fontFamily: "Poppins",
                 fontSize: "clamp(18px, 4vw, 38px)",
                 fontWeight: 500,
-                background:
-                  "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "gradient 3s linear infinite",
+                color: "#FFFFFF",
               }}
               className="uppercase leading-tight"
             >
@@ -83,13 +71,7 @@ const TrainingPrograms = () => {
                   fontFamily: "Poppins",
                   fontSize: "clamp(18px, 4vw, 38px)",
                   fontWeight: 500,
-                  background:
-                    "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-                  backgroundSize: "200% auto",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "gradient 3s linear infinite",
+                  color: "#FFFFFF",
                 }}
                 className="uppercase leading-tight"
               >
@@ -114,13 +96,7 @@ const TrainingPrograms = () => {
               fontFamily: "Poppins",
               fontSize: "clamp(24px, 4vw, 38px)",
               fontWeight: 600,
-              background:
-                "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "gradient 3s linear infinite",
+              color: "#0071BC",
             }}
             className="leading-tight"
           >
@@ -157,13 +133,7 @@ const TrainingPrograms = () => {
               fontFamily: "Poppins",
               fontSize: "clamp(24px, 4vw, 38px)",
               fontWeight: 600,
-              background:
-                "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "gradient 3s linear infinite",
+              color: "#0071BC",
             }}
             className="leading-tight"
           >

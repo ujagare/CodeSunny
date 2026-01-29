@@ -39,13 +39,7 @@ const Leaders = () => {
               fontFamily: "Poppins",
               fontSize: "clamp(32px, 8vw, 133px)",
               fontWeight: 500,
-              background:
-                "linear-gradient(90deg, #00CED1, #1E90FF, #00CED1, #1E90FF)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "gradient 3s linear infinite",
+              color: "#0071BC",
               paddingBottom: "16px",
             }}
             className="uppercase tracking-tighter leading-[0.9] border-b border-cyan-400 inline-block w-full"
@@ -63,7 +57,8 @@ const Leaders = () => {
               <div className="relative aspect-[3/4] w-full border border-white/20 mb-4 md:mb-6">
                 <img
                   src={leaders[0].image}
-                  alt={leaders[0].name}
+                  alt={`${leaders[0].name} - ${leaders[0].role}`}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -100,7 +95,8 @@ const Leaders = () => {
               <div className="relative aspect-[4/5] w-full border border-white/20 mb-4 md:mb-6 mt-12 md:mt-48">
                 <img
                   src={leaders[1].image}
-                  alt={leaders[1].name}
+                  alt={`${leaders[1].name} - ${leaders[1].role}`}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -140,7 +136,8 @@ const Leaders = () => {
               <div className="relative aspect-[3/4] w-full border border-white/20 mb-4 md:mb-6">
                 <img
                   src={leaders[2].image}
-                  alt={leaders[2].name}
+                  alt={`${leaders[2].name} - ${leaders[2].role}`}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
