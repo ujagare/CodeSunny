@@ -11,7 +11,7 @@ import {
 import GradientText from "./GradientText";
 
 // Import images
-import n8nLogo from "../assets/images/n8n_logo_3d.png";
+import n8nLogo from "../assets/images/n8n svg/n8n.svg";
 import socialMediaImg from "../assets/images/social_media_automation_workflow.png";
 import crmSyncImg from "../assets/images/crm_sync_workflow.png";
 
