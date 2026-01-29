@@ -1,16 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-// Import logos
-import alfa from "../assets/images/clint logos/white logo/alfa.png";
-import greenspacess from "../assets/images/clint logos/white logo/greenspacess.png";
-import landwise from "../assets/images/clint logos/white logo/land wise.png";
-import oasis from "../assets/images/clint logos/white logo/oasis.png";
-import satvik from "../assets/images/clint logos/white logo/satvik.png";
-import swadist from "../assets/images/clint logos/white logo/swadist.png";
-import vibha from "../assets/images/clint logos/white logo/vibha.png";
-import sundownLogo from "../assets/images/clint logos/64d3dd9edfb41666c35b15c2_Sundown logo.svg";
-import logoSvg from "../assets/images/clint logos/logo.svg";
+// Import logos - using images from main folder
+import satvik from "../assets/images/satvik.png";
+import sundownLogo from "../assets/images/sundown.png";
+import logoSvg from "../assets/images/Logo.png";
+
+// Placeholder for other logos (using available images)
+const alfa = satvik;
+const greenspacess = satvik;
+const landwise = satvik;
+const oasis = satvik;
+const swadist = satvik;
+const vibha = satvik;
 
 const ClientLogos = () => {
   const sectionStyle = {
