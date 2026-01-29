@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { FooterBackgroundGradient, TextHoverEffect } from "./HoverFooter";
 import GradientText from "./GradientText";
+import logo from "../assets/images/Logo.png";
 
 function Footer() {
   const [isVisible, setIsVisible] = useState(false);
@@ -104,7 +105,7 @@ function Footer() {
           {/* Brand section */}
           <div className="flex flex-col -mt-2 md:-mt-6">
             <img
-              src="/src/assets/images/Logo.png"
+              src={logo}
               alt="CodeSunny Logo"
               className="w-24 h-24 md:w-32 md:h-32 object-contain mb-0"
             />
