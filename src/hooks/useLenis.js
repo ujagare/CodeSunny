@@ -3,7 +3,7 @@ import Lenis from "lenis";
 
 export const useLenis = () => {
   useEffect(() => {
-    // Initialize Lenis
+    // Initialize Lenis with optimized settings
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -16,16 +16,18 @@ export const useLenis = () => {
       infinite: false,
     });
 
-    // Animation frame function
+    let rafId;
+    // Animation frame function with proper cleanup
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     // Cleanup
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);

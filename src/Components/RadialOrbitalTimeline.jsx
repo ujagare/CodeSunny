@@ -19,6 +19,7 @@ export default function RadialOrbitalTimeline({ timelineData }) {
   const [pulseEffect, setPulseEffect] = useState({});
   const [centerOffset] = useState({ x: 0, y: 0 });
   const [activeNodeId, setActiveNodeId] = useState(null);
+  const [viewportSize, setViewportSize] = useState({ width: typeof window !== 'undefined' ? window.innerWidth : 1024 });
   const containerRef = useRef(null);
   const orbitRef = useRef(null);
   const nodeRefs = useRef({});
@@ -64,6 +65,15 @@ export default function RadialOrbitalTimeline({ timelineData }) {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setViewportSize({ width: window.innerWidth });
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     let rotationTimer;
 
     if (autoRotate) {
@@ -84,8 +94,8 @@ export default function RadialOrbitalTimeline({ timelineData }) {
 
   const calculateOuterLogoPosition = (index, total, rotationOffset) => {
     const angle = ((index / total) * 360 - rotationOffset) % 360;
-    const isMobile = window.innerWidth < 640;
-    const isTablet = window.innerWidth >= 640 && window.innerWidth < 768;
+    const isMobile = viewportSize.width < 640;
+    const isTablet = viewportSize.width >= 640 && viewportSize.width < 768;
     const radius = isMobile ? 140 : isTablet ? 210 : 280;
     const radian = (angle * Math.PI) / 180;
     const x = radius * Math.cos(radian);
@@ -104,8 +114,8 @@ export default function RadialOrbitalTimeline({ timelineData }) {
 
   const calculateNodePosition = (index, total) => {
     const angle = ((index / total) * 360 + rotationAngle) % 360;
-    const isMobile = window.innerWidth < 640;
-    const isTablet = window.innerWidth >= 640 && window.innerWidth < 768;
+    const isMobile = viewportSize.width < 640;
+    const isTablet = viewportSize.width >= 640 && viewportSize.width < 768;
     const radius = isMobile ? 100 : isTablet ? 150 : 200;
     const radian = (angle * Math.PI) / 180;
 
@@ -165,6 +175,9 @@ export default function RadialOrbitalTimeline({ timelineData }) {
               src={circleLogo}
               alt="Circle Logo"
               className="w-20 h-20 sm:w-24 md:w-32 sm:h-24 md:h-32 object-contain z-20"
+              width="128"
+              height="128"
+              loading="eager"
             />
           </div>
 
@@ -191,6 +204,9 @@ export default function RadialOrbitalTimeline({ timelineData }) {
                     src={logo.img}
                     alt={logo.name}
                     className="w-full h-full object-contain"
+                    width="36"
+                    height="36"
+                    loading="lazy"
                     style={{
                       filter:
                         "brightness(0) saturate(100%) invert(70%) sepia(98%) saturate(1352%) hue-rotate(150deg) brightness(91%) contrast(101%)",

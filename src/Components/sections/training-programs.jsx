@@ -1,7 +1,63 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Clock, Award, Phone } from "lucide-react";
 import LogoLoopDemo from "./logo-loop-demo";
+
+const FeatureBadge = ({ icon, value, label }) => (
+  <div className="flex items-center gap-2">
+    <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+      <span className="text-orange-500">{icon}</span>
+    </div>
+    <div className="flex flex-col">
+      <span className="font-bold text-gray-900">{value}</span>
+      <span className="text-sm text-gray-600">{label}</span>
+    </div>
+  </div>
+);
+
+const CourseCard = ({ image, title, description, hours, price, originalPrice }) => (
+  <motion.div
+    className="w-full bg-white rounded-2xl shadow-xl overflow-hidden"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+  >
+    <div className="flex flex-col md:flex-row">
+      <div className="relative md:w-[45%] bg-gradient-to-br from-gray-700 to-gray-900 p-6 flex items-center justify-center">
+        <div className="relative w-full aspect-square md:aspect-auto">
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover rounded-xl shadow-2xl"
+          />
+        </div>
+      </div>
+      <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+          {title}
+        </h2>
+        <p className="text-gray-600 mb-6">{description}</p>
+        <div className="flex flex-wrap gap-4 md:gap-6 mb-6">
+          <FeatureBadge icon={<Clock className="w-5 h-5" />} value={hours} label="Hours" />
+          <FeatureBadge icon={<Award className="w-5 h-5" />} value="Yes" label="Certified" />
+          <FeatureBadge icon={<Phone className="w-5 h-5" />} value="24/7" label="Mentor Support" />
+        </div>
+        <div className="mb-6">
+          <span className="text-lg text-gray-900">Price </span>
+          <span className="text-3xl font-bold text-orange-500">{price}</span>
+          <span className="ml-2 text-gray-500 line-through">{originalPrice}</span>
+          <span className="text-gray-600 text-sm">(+GST)</span>
+        </div>
+        <button className="w-fit px-8 py-3.5 bg-black text-white font-semibold rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 group">
+          Check Course
+          <span className="transition-transform group-hover:translate-x-1">→</span>
+        </button>
+      </div>
+    </div>
+  </motion.div>
+);
 
 const TrainingPrograms = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -161,6 +217,26 @@ const TrainingPrograms = () => {
 
       {/* Logo Loop Section */}
       <LogoLoopDemo />
+
+      {/* Course Cards Section */}
+      <div className="mt-[80px] md:mt-[120px] flex flex-col gap-8">
+        <CourseCard
+          image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"
+          title="Data Science & Analytics with Gen AI"
+          description="Gain hands-on experience in data analysis, visualization, and AI integration."
+          hours="250+"
+          price="Rs.6999"
+          originalPrice="Rs.14891"
+        />
+        <CourseCard
+          image="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
+          title="Full Stack Web Development"
+          description="Master modern web technologies from frontend to backend development."
+          hours="300+"
+          price="Rs.7999"
+          originalPrice="Rs.16891"
+        />
+      </div>
     </section>
   );
 };

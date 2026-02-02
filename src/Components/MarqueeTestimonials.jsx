@@ -68,34 +68,22 @@ export function MarqueeTestimonials({
         </div>
 
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
-          <div
-            className="group flex overflow-hidden p-2 gap-4 flex-row"
-            style={{ "--duration": "400s", "--gap": "1rem" }}
-          >
-            <div className="flex shrink-0 justify-around gap-4 animate-marquee flex-row group-hover:[animation-play-state:paused]">
-              {[...Array(20)].map((_, setIndex) =>
-                firstRow.map((testimonial, i) => (
-                  <TestimonialCard key={`${setIndex}-${i}`} {...testimonial} />
-                )),
+          <div className="group flex overflow-hidden p-2 gap-4 flex-row">
+            <div className="flex shrink-0 gap-4 animate-marquee flex-row">
+              {[...firstRow, ...firstRow, ...firstRow, ...firstRow].map(
+                (testimonial, i) => (
+                  <TestimonialCard key={`first-${i}`} {...testimonial} />
+                ),
               )}
             </div>
           </div>
 
-          <div
-            className="group flex overflow-hidden p-2 gap-4 flex-row mt-6"
-            style={{ "--duration": "400s", "--gap": "1rem" }}
-          >
-            <div
-              className="flex shrink-0 justify-around gap-4 flex-row group-hover:[animation-play-state:paused]"
-              style={{ animation: "marquee 400s linear infinite reverse" }}
-            >
-              {[...Array(20)].map((_, setIndex) =>
-                secondRow.map((testimonial, i) => (
-                  <TestimonialCard
-                    key={`reverse-${setIndex}-${i}`}
-                    {...testimonial}
-                  />
-                )),
+          <div className="group flex overflow-hidden p-2 gap-4 flex-row mt-6">
+            <div className="flex shrink-0 gap-4 animate-marquee-reverse flex-row">
+              {[...secondRow, ...secondRow, ...secondRow, ...secondRow].map(
+                (testimonial, i) => (
+                  <TestimonialCard key={`second-${i}`} {...testimonial} />
+                ),
               )}
             </div>
           </div>

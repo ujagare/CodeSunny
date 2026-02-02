@@ -108,6 +108,8 @@ function Footer() {
               src={logo}
               alt="CodeSunny Logo"
               className="w-24 h-24 md:w-32 md:h-32 object-contain mb-0"
+              loading="eager"
+              style={{ minHeight: '96px', minWidth: '96px' }}
             />
             <p className="text-sm leading-relaxed text-white mb-4">
               Innovative solutions for digital growth.

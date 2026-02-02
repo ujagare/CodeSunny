@@ -89,11 +89,12 @@ const ClientLogos = () => {
                 src={logo.src}
                 alt={`${logo.alt} - CodeSunny client logo`}
                 loading="lazy"
-                className={`max-h-full max-w-full object-contain transition-all duration-300 bg-transparent ${
+                className={`max-h-full w-auto object-contain transition-all duration-300 bg-transparent ${
                   logo.isSvg
                     ? "brightness-0 invert"
                     : "filter grayscale hover:grayscale-0"
                 }`}
+                style={{ minHeight: '60px', minWidth: '80px' }}
               />
             </motion.div>
           ))}

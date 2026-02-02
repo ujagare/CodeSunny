@@ -7,104 +7,93 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const useGsapAnimations = () => {
   useEffect(() => {
-    // Fade in elements on scroll
+    // Batch DOM reads to avoid forced reflows
     const fadeElements = document.querySelectorAll("[data-gsap-fade]");
-    fadeElements.forEach((element) => {
-      gsap.fromTo(
-        element,
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            end: "top 50%",
-            scrub: false,
-            markers: false,
-          },
-        },
-      );
-    });
-
-    // Scale animations on scroll
     const scaleElements = document.querySelectorAll("[data-gsap-scale]");
-    scaleElements.forEach((element) => {
-      gsap.fromTo(
-        element,
-        {
-          scale: 0.8,
-          opacity: 0,
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 85%",
-            end: "top 55%",
-            scrub: false,
-            markers: false,
-          },
-        },
-      );
-    });
+    const slideLeftElements = document.querySelectorAll("[data-gsap-slide-left]");
+    const slideRightElements = document.querySelectorAll("[data-gsap-slide-right]");
 
-    // Slide in from left
-    const slideLeftElements = document.querySelectorAll(
-      "[data-gsap-slide-left]",
-    );
-    slideLeftElements.forEach((element) => {
-      gsap.fromTo(
-        element,
-        {
-          x: -50,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            end: "top 50%",
-            scrub: false,
-            markers: false,
+    // Use requestAnimationFrame to batch animations
+    requestAnimationFrame(() => {
+      // Fade in elements on scroll
+      fadeElements.forEach((element) => {
+        gsap.fromTo(
+          element,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 80%",
+              end: "top 50%",
+              scrub: false,
+              markers: false,
+            },
           },
-        },
-      );
-    });
+        );
+      });
 
-    // Slide in from right
-    const slideRightElements = document.querySelectorAll(
-      "[data-gsap-slide-right]",
-    );
-    slideRightElements.forEach((element) => {
-      gsap.fromTo(
-        element,
-        {
-          x: 50,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: element,
-            start: "top 80%",
-            end: "top 50%",
-            scrub: false,
-            markers: false,
+      // Scale animations on scroll
+      scaleElements.forEach((element) => {
+        gsap.fromTo(
+          element,
+          { scale: 0.8, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 85%",
+              end: "top 55%",
+              scrub: false,
+              markers: false,
+            },
           },
-        },
-      );
+        );
+      });
+
+      // Slide in from left
+      slideLeftElements.forEach((element) => {
+        gsap.fromTo(
+          element,
+          { x: -50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 80%",
+              end: "top 50%",
+              scrub: false,
+              markers: false,
+            },
+          },
+        );
+      });
+
+      // Slide in from right
+      slideRightElements.forEach((element) => {
+        gsap.fromTo(
+          element,
+          { x: 50, opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: element,
+              start: "top 80%",
+              end: "top 50%",
+              scrub: false,
+              markers: false,
+            },
+          },
+        );
+      });
     });
 
     // Cleanup

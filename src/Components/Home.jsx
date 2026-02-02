@@ -1,9 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Spline from "@splinetool/react-spline";
+import {
+  Palette,
+  Code,
+  Zap,
+  Rocket,
+  Globe,
+  Users,
+  Clock,
+  Award,
+} from "lucide-react";
+const Spline = lazy(() => import("@splinetool/react-spline"));
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import MagicBento from "./MagicBento";
@@ -18,11 +28,14 @@ import FramerEmbed from "./FramerEmbed";
 import ElectricBorder from "./ElectricBorder";
 import FeaturedProjects from "./FeaturedProjects";
 import { MarqueeTestimonials } from "./MarqueeTestimonials";
+import webDevImg from "@/assets/images/web-development.jpg";
+import cloudImg from "@/assets/images/cloud.jpg";
+import seoImg from "@/assets/images/seo-optimization.png";
 import AboutSummary from "./AboutSummary";
 import ClientLogos from "./ClientLogos";
 import LightRays from "./LightRays";
-import { Palette, Code, Zap, Rocket, Globe, Users } from "lucide-react";
 import MetaTags from "./MetaTags";
+import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 
 const testimonials = [
   {
@@ -270,10 +283,14 @@ export default function Home() {
           {/* Desktop Spline */}
           <div className="hidden md:flex w-full h-[calc(100vh-5rem)] min-h-[500px] items-center justify-center spline-wrapper">
             <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
-              <Spline
-                scene="https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode"
-                className="w-full h-full"
-              />
+              <Suspense
+                fallback={<div className="w-full h-full bg-transparent" />}
+              >
+                <Spline
+                  scene="https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode"
+                  className="w-full h-full"
+                />
+              </Suspense>
             </div>
           </div>
 
@@ -296,16 +313,16 @@ export default function Home() {
                     .map((word, index) => (
                       <span
                         key={index}
-                        className="inline-block overflow-hidden"
+                        className="inline-block"
                         style={{ marginRight: "0.3em" }}
                       >
                         <motion.span
-                          initial={{ opacity: 0, y: "100%" }}
-                          animate={{ opacity: 1, y: 0 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
                           transition={{
-                            duration: 0.8,
-                            delay: index * 0.1,
-                            ease: [0.33, 1, 0.68, 1],
+                            duration: 0.3,
+                            delay: index * 0.02,
+                            ease: "easeOut",
                           }}
                           style={{
                             display: "inline-block",
@@ -328,16 +345,16 @@ export default function Home() {
                     .map((word, index) => (
                       <span
                         key={index}
-                        className="inline-block overflow-hidden"
+                        className="inline-block"
                         style={{ marginRight: "0.3em" }}
                       >
                         <motion.span
-                          initial={{ opacity: 0, y: "100%" }}
-                          animate={{ opacity: 1, y: 0 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
                           transition={{
-                            duration: 0.8,
-                            delay: index * 0.1,
-                            ease: [0.33, 1, 0.68, 1],
+                            duration: 0.3,
+                            delay: index * 0.02,
+                            ease: "easeOut",
                           }}
                           style={{
                             display: "inline-block",
@@ -823,6 +840,284 @@ export default function Home() {
               Featured Projects
             </h2>
             <FeaturedProjects />
+          </section>
+
+          <section aria-labelledby="stack-cards" className="py-10">
+            <div className="scroll-stack-container">
+              <div className="scroll-stack-item">
+                <div className="w-full min-h-[500px] md:min-h-[650px] bg-black rounded-3xl shadow-2xl overflow-hidden">
+                  <div className="flex flex-col md:flex-row gap-0 md:gap-8 p-6 md:p-8 h-full">
+                    {/* Image Section */}
+                    <div className="md:w-[45%] mb-0">
+                      <div className="relative w-full h-[250px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
+                        <img
+                          src={webDevImg}
+                          alt="Web Development"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    {/* Content Section */}
+                    <div className="flex-1 flex flex-col justify-center -mt-2 md:mt-0">
+                      <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-2 md:mb-4">
+                        Web Development
+                        <br />
+                        <span className="text-xl md:text-4xl lg:text-5xl">
+                          Full-Stack Solutions
+                        </span>
+                      </h2>
+                      <p className="text-gray-600 mb-8 text-lg md:text-xl">
+                        Build scalable, high-performance web applications using
+                        React, Node.js, and modern frameworks.
+                      </p>
+
+                      {/* Feature Badges */}
+                      <div className="flex flex-wrap gap-6 mb-6">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Clock className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              250+
+                            </span>
+                            <span className="text-xs text-gray-500">Hours</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Award className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              Yes
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              Certified
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Users className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              24/7
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              Mentor Support
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Price Section */}
+                      <div className="mb-6">
+                        <span className="text-lg text-black">Price </span>
+                        <span className="text-4xl font-bold text-orange-500">
+                          Rs.6999
+                        </span>
+                        <span className="ml-2 text-gray-400 line-through text-sm">
+                          Rs14891
+                        </span>
+                        <span className="text-gray-500 text-xs">(+GST)</span>
+                      </div>
+
+                      {/* CTA Button */}
+                      <button className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm">
+                        Check Course
+                        <span className="transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="scroll-stack-item">
+                <div className="w-full min-h-[500px] md:min-h-[650px] bg-white rounded-3xl shadow-2xl overflow-hidden">
+                  <div className="flex flex-col md:flex-row-reverse gap-0 md:gap-8 p-6 md:p-8 h-full">
+                    {/* Image Section */}
+                    <div className="md:w-[45%] mb-0">
+                      <div className="relative w-full h-[250px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
+                        <img
+                          src={seoImg}
+                          alt="Digital Marketing"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    {/* Content Section */}
+                    <div className="flex-1 flex flex-col justify-center -mt-2 md:mt-0">
+                      <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-2 md:mb-4">
+                        Digital Marketing
+                        <br />
+                        <span className="text-xl md:text-4xl lg:text-5xl">
+                          SEO & Social Media
+                        </span>
+                      </h2>
+                      <p className="text-gray-600 mb-8 text-lg md:text-xl">
+                        Boost your online presence with SEO, social media
+                        marketing, and targeted campaigns.
+                      </p>
+
+                      {/* Feature Badges */}
+                      <div className="flex flex-wrap gap-6 mb-6">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Clock className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              180+
+                            </span>
+                            <span className="text-xs text-gray-500">Hours</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Award className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              Yes
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              Certified
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Users className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              24/7
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              Mentor Support
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Price Section */}
+                      <div className="mb-6">
+                        <span className="text-lg text-black">Price </span>
+                        <span className="text-4xl font-bold text-orange-500">
+                          Rs.5999
+                        </span>
+                        <span className="ml-2 text-gray-400 line-through text-sm">
+                          Rs12891
+                        </span>
+                        <span className="text-gray-500 text-xs">(+GST)</span>
+                      </div>
+
+                      {/* CTA Button */}
+                      <button className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm">
+                        Check Course
+                        <span className="transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="scroll-stack-item">
+                <div className="w-full min-h-[500px] md:min-h-[650px] bg-white rounded-3xl shadow-2xl overflow-hidden">
+                  <div className="flex flex-col md:flex-row gap-0 md:gap-8 p-6 md:p-8 h-full">
+                    {/* Image Section */}
+                    <div className="md:w-[45%] mb-0">
+                      <div className="relative w-full h-[250px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
+                        <img
+                          src={cloudImg}
+                          alt="Cloud Solutions"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    {/* Content Section */}
+                    <div className="flex-1 flex flex-col justify-center -mt-2 md:mt-0">
+                      <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-2 md:mb-4">
+                        Cloud Solutions
+                        <br />
+                        <span className="text-xl md:text-4xl lg:text-5xl">
+                          AWS & Azure Hosting
+                        </span>
+                      </h2>
+                      <p className="text-gray-600 mb-8 text-lg md:text-xl">
+                        Reliable cloud hosting and deployment with scalable
+                        infrastructure for your applications.
+                      </p>
+
+                      {/* Feature Badges */}
+                      <div className="flex flex-wrap gap-6 mb-6">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Clock className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              200+
+                            </span>
+                            <span className="text-xs text-gray-500">Hours</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Award className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              Yes
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              Certified
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                            <Users className="w-4 h-4 text-orange-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm">
+                              24/7
+                            </span>
+                            <span className="text-xs text-gray-500">
+                              Mentor Support
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Price Section */}
+                      <div className="mb-6">
+                        <span className="text-lg text-black">Price </span>
+                        <span className="text-4xl font-bold text-orange-500">
+                          Rs.7999
+                        </span>
+                        <span className="ml-2 text-gray-400 line-through text-sm">
+                          Rs16891
+                        </span>
+                        <span className="text-gray-500 text-xs">(+GST)</span>
+                      </div>
+
+                      {/* CTA Button */}
+                      <button className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm">
+                        Check Course
+                        <span className="transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
 
           <section aria-labelledby="clients-heading">

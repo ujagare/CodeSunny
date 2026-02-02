@@ -12,6 +12,9 @@ const Navbar = () => {
           className="w-fit h-8 md:h-10 flex-shrink-0"
           src={logo}
           alt="Company Logo"
+          width="122"
+          height="40"
+          loading="eager"
         />
         <DesktopMenu />
         <MenuToggle />
