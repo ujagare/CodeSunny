@@ -285,6 +285,8 @@ export default function Home() {
       />
       <div className="w-full bg-[#050515] relative">
         <div className="absolute inset-0 bg-linear-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 hero-glow pointer-events-none"></div>
+        <div className="absolute inset-0 hero-grid pointer-events-none"></div>
 
         {/* Fixed Navbar */}
         <header className="fixed top-0 left-0 right-0 z-[1000]">
@@ -361,9 +363,8 @@ export default function Home() {
           >
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
-                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black md:font-bold text-center neue-machina overflow-hidden"
+                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black md:font-bold text-center hero-serif overflow-hidden"
                 style={{
-                  fontFamily: "NeueMachina",
                   fontWeight: "900",
                 }}
               >
