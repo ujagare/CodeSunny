@@ -13,7 +13,7 @@ import {
   Clock,
   Award,
 } from "lucide-react";
-const Spline = lazy(() => import("@splinetool/react-spline"));
+// const Spline = lazy(() => import("@splinetool/react-spline"));
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import MagicBento from "./MagicBento";
@@ -225,7 +225,7 @@ const serviceCards = [
 
 export default function Home() {
   const [isDesktop, setIsDesktop] = useState(false);
-  const [splineAvailable, setSplineAvailable] = useState(true);
+  const [splineAvailable, setSplineAvailable] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -247,6 +247,8 @@ export default function Home() {
 
   useEffect(() => {
     if (!isDesktop) return;
+    // Temporarily disable Spline canvas rendering.
+    return;
     let cancelled = false;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => {
@@ -322,8 +324,8 @@ export default function Home() {
             />
           </div>
 
-          {/* Desktop Spline */}
-          {isDesktop && (
+          {/* Desktop Spline (disabled for now) */}
+          {false && isDesktop && (
             <div className="w-full h-[calc(100vh-5rem)] min-h-[500px] flex items-center justify-center spline-wrapper">
               <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
                 {splineAvailable ? (
@@ -343,6 +345,19 @@ export default function Home() {
                     loading="lazy"
                   />
                 )}
+              </div>
+            </div>
+          )}
+
+          {isDesktop && (
+            <div className="w-full h-[calc(100vh-5rem)] min-h-[500px] flex items-center justify-center spline-wrapper">
+              <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
+                <img
+                  src={heroImg}
+                  alt="CodeSunny hero"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             </div>
           )}
