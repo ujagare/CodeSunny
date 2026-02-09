@@ -351,14 +351,7 @@ export default function Home() {
 
           {isDesktop && (
             <div className="w-full h-[calc(100vh-5rem)] min-h-[500px] flex items-center justify-center spline-wrapper">
-              <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
-                <img
-                  src={heroImg}
-                  alt="CodeSunny hero"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
+              <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0"></div>
             </div>
           )}
 
