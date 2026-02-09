@@ -1,6 +1,6 @@
 import React from "react";
 
-export function OrbitingCircles({ children, iconSize = 40, radius = 150, reverse = false, speed = 4 }) {
+export function OrbitingCircles({ children, iconSize = 40, radius = 150, reverse = false, speed = 2 }) {
   const icons = React.Children.toArray(children);
   
   return (

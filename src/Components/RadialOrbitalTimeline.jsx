@@ -14,7 +14,6 @@ import grokLogo from "../assets/images/ai logo/icons8-grok-50.png";
 
 export default function RadialOrbitalTimeline({ timelineData }) {
   const [expandedItems, setExpandedItems] = useState({});
-  const [rotationAngle, setRotationAngle] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
   const [pulseEffect, setPulseEffect] = useState({});
   const [centerOffset] = useState({ x: 0, y: 0 });
@@ -23,6 +22,8 @@ export default function RadialOrbitalTimeline({ timelineData }) {
   const containerRef = useRef(null);
   const orbitRef = useRef(null);
   const nodeRefs = useRef({});
+  const logoRefs = useRef([]);
+  const rotationAngleRef = useRef(0);
 
   const handleContainerClick = (e) => {
     if (e.target === containerRef.current || e.target === orbitRef.current) {
@@ -73,24 +74,7 @@ export default function RadialOrbitalTimeline({ timelineData }) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    let rotationTimer;
-
-    if (autoRotate) {
-      rotationTimer = setInterval(() => {
-        setRotationAngle((prev) => {
-          const newAngle = (prev + 0.15) % 360;
-          return Number(newAngle.toFixed(3));
-        });
-      }, 100);
-    }
-
-    return () => {
-      if (rotationTimer) {
-        clearInterval(rotationTimer);
-      }
-    };
-  }, [autoRotate]);
+  const speedDegPerSec = 18; // 20s per full rotation
 
   const calculateOuterLogoPosition = (index, total, rotationOffset) => {
     const angle = ((index / total) * 360 - rotationOffset) % 360;
@@ -103,17 +87,8 @@ export default function RadialOrbitalTimeline({ timelineData }) {
     return { x, y };
   };
 
-  const logos = [
-    { name: "ChatGPT", img: chatgptLogo },
-    { name: "Claude", img: claudeLogo },
-    { name: "Bard", img: bardLogo },
-    { name: "OpenAI", img: openaiLogo },
-    { name: "Replit", img: replitLogo },
-    { name: "Grok", img: grokLogo },
-  ];
-
-  const calculateNodePosition = (index, total) => {
-    const angle = ((index / total) * 360 + rotationAngle) % 360;
+  const calculateNodePosition = (index, total, rotationOffset) => {
+    const angle = ((index / total) * 360 + rotationOffset) % 360;
     const isMobile = viewportSize.width < 640;
     const isTablet = viewportSize.width >= 640 && viewportSize.width < 768;
     const radius = isMobile ? 100 : isTablet ? 150 : 200;
@@ -130,6 +105,66 @@ export default function RadialOrbitalTimeline({ timelineData }) {
 
     return { x, y, angle, zIndex, opacity };
   };
+
+  const updatePositions = (rotationOffset) => {
+    logos.forEach((_, index) => {
+      const el = logoRefs.current[index];
+      if (!el) return;
+      const pos = calculateOuterLogoPosition(index, logos.length, rotationOffset);
+      el.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%) rotate(-${rotationOffset}deg)`;
+    });
+
+    timelineData.forEach((item, index) => {
+      const el = nodeRefs.current[item.id];
+      if (!el) return;
+      const position = calculateNodePosition(index, timelineData.length, rotationOffset);
+      el.style.transform = `translate3d(${position.x}px, ${position.y}px, 0)`;
+      if (expandedItems[item.id]) {
+        el.style.zIndex = 200;
+        el.style.opacity = 1;
+      } else {
+        el.style.zIndex = position.zIndex;
+        el.style.opacity = position.opacity;
+      }
+    });
+  };
+
+  useEffect(() => {
+    let rafId;
+    let lastTime = performance.now();
+
+    const tick = (now) => {
+      const deltaMs = now - lastTime;
+      lastTime = now;
+      rotationAngleRef.current =
+        (rotationAngleRef.current + (speedDegPerSec * deltaMs) / 1000) % 360;
+      updatePositions(rotationAngleRef.current);
+      rafId = requestAnimationFrame(tick);
+    };
+
+    if (autoRotate) {
+      rafId = requestAnimationFrame(tick);
+    }
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [autoRotate, speedDegPerSec, timelineData, viewportSize.width, expandedItems]);
+
+  useEffect(() => {
+    updatePositions(rotationAngleRef.current);
+  }, [timelineData, viewportSize.width, expandedItems]);
+
+  const logos = [
+    { name: "ChatGPT", img: chatgptLogo },
+    { name: "Claude", img: claudeLogo },
+    { name: "Bard", img: bardLogo },
+    { name: "OpenAI", img: openaiLogo },
+    { name: "Replit", img: replitLogo },
+    { name: "Grok", img: grokLogo },
+  ];
+
+  
 
   const getRelatedItems = (itemId) => {
     const currentItem = timelineData.find((item) => item.id === itemId);
@@ -170,11 +205,11 @@ export default function RadialOrbitalTimeline({ timelineData }) {
             transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
           }}
         >
-          <div className="absolute w-24 h-24 sm:w-32 md:w-40 sm:h-32 md:h-40 rounded-full bg-gradient-to-br from-blue-400 to-emerald-400 border-2 border-cyan-400/60 flex items-center justify-center z-10">
+          <div className="absolute w-16 h-16 sm:w-20 md:w-24 sm:h-20 md:h-24 rounded-full bg-white flex items-center justify-center z-10">
             <img
               src={circleLogo}
               alt="Circle Logo"
-              className="w-20 h-20 sm:w-24 md:w-32 sm:h-24 md:h-32 object-contain z-20"
+              className="absolute w-28 h-28 sm:w-32 md:w-40 sm:h-32 md:h-40 object-contain z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
               width="128"
               height="128"
               loading="eager"
@@ -184,17 +219,14 @@ export default function RadialOrbitalTimeline({ timelineData }) {
           <div className="absolute w-48 h-48 sm:w-72 md:w-96 sm:h-72 md:h-96 rounded-full border-2 border-cyan-400/25"></div>
           <div className="absolute w-72 h-72 sm:w-[420px] md:w-[560px] sm:h-[420px] md:h-[560px] rounded-full border-2 border-cyan-400/25" style={{ willChange: 'auto' }}>
             {logos.map((logo, index) => {
-              const pos = calculateOuterLogoPosition(
-                index,
-                logos.length,
-                rotationAngle,
-              );
+              const pos = calculateOuterLogoPosition(index, logos.length, 0);
               return (
                 <div
                   key={index}
+                  ref={(el) => (logoRefs.current[index] = el)}
                   className="absolute w-10 h-10 sm:w-12 md:w-14 sm:h-12 md:h-14 rounded-full border-2 border-cyan-400/60 bg-black flex items-center justify-center p-1.5 sm:p-2"
                   style={{
-                    transform: `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) rotate(-${rotationAngle}deg)`,
+                    transform: `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%)`,
                     left: "50%",
                     top: "50%",
                     willChange: 'auto',
@@ -218,14 +250,14 @@ export default function RadialOrbitalTimeline({ timelineData }) {
           </div>
 
           {timelineData.map((item, index) => {
-            const position = calculateNodePosition(index, timelineData.length);
+            const position = calculateNodePosition(index, timelineData.length, 0);
             const isExpanded = expandedItems[item.id];
             const isRelated = isRelatedToActive(item.id);
             const isPulsing = pulseEffect[item.id];
             const Icon = item.icon;
 
             const nodeStyle = {
-              transform: `translate(${position.x}px, ${position.y}px)`,
+              transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
               zIndex: isExpanded ? 200 : position.zIndex,
               opacity: isExpanded ? 1 : position.opacity,
               willChange: "transform",

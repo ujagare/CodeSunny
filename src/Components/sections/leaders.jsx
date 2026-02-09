@@ -48,13 +48,13 @@ const Leaders = () => {
           </h2>
         </div>
 
-        {/* Leaders Grid - Manual layout to match the asymmetrical design */}
+        {/* Leaders Grid - Sheryians Style Layout */}
         <div className="flex flex-col gap-12 md:gap-24">
           {/* First Row: Harsh (Left) and Adarsh (Right offset) */}
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-0">
             {/* Harsh Sharma */}
             <div className="w-full md:w-[48%]">
-              <div className="relative aspect-[3/4] w-full border border-white/20 mb-4 md:mb-6">
+              <div className="relative aspect-[3/4] w-full border-2 border-white mb-4 md:mb-6">
                 <img
                   src={leaders[0].image}
                   alt={`${leaders[0].name} - ${leaders[0].role}`}
@@ -92,7 +92,7 @@ const Leaders = () => {
 
             {/* Adarsh Gupta - Offset down */}
             <div className="w-full md:w-[45%] md:mt-40">
-              <div className="relative aspect-[4/5] w-full border border-white/20 mb-4 md:mb-6 mt-12 md:mt-48">
+              <div className="relative aspect-[4/5] w-full border-2 border-white mb-4 md:mb-6 mt-12 md:mt-48">
                 <img
                   src={leaders[1].image}
                   alt={`${leaders[1].name} - ${leaders[1].role}`}
@@ -130,10 +130,10 @@ const Leaders = () => {
             </div>
           </div>
 
-          {/* Second Row: Dhanesh (Left-aligned) */}
+          {/* Second Row: Kumar (Left-aligned) */}
           <div className="flex flex-col md:flex-row justify-start">
             <div className="w-full md:w-[48%]">
-              <div className="relative aspect-[3/4] w-full border border-white/20 mb-4 md:mb-6">
+              <div className="relative aspect-[3/4] w-full border-2 border-white mb-4 md:mb-6">
                 <img
                   src={leaders[2].image}
                   alt={`${leaders[2].name} - ${leaders[2].role}`}

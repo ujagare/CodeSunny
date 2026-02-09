@@ -25,6 +25,10 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  background: #050515;
+}
+
 @layer utilities {
   @keyframes star-movement-bottom {
     0% {
@@ -61,7 +65,7 @@ body,
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-25%);
+      transform: translateX(-50%);
     }
   }
 
@@ -84,11 +88,11 @@ body,
   }
 
   .animate-marquee {
-    animation: marquee 40s linear infinite;
+    animation: marquee 20s linear infinite;
   }
 
   .animate-marquee-reverse {
-    animation: marquee-reverse 40s linear infinite;
+    animation: marquee-reverse 20s linear infinite;
   }
 
   .animate-marquee-vertical {
@@ -125,4 +129,10 @@ spline-viewer {
 canvas[data-engine] {
   background: transparent !important;
   background-color: transparent !important;
+}
+
+/* Improve scroll performance by skipping offscreen rendering */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
 }

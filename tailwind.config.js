@@ -8,8 +8,8 @@ export default {
         poppins: ["Poppins", "sans-serif"],
       },
       animation: {
-        marquee: "marquee 40s linear infinite",
-        "marquee-reverse": "marquee-reverse 40s linear infinite",
+        marquee: "marquee 30s linear infinite",
+        "marquee-reverse": "marquee-reverse 30s linear infinite",
       },
       keyframes: {
         marquee: {

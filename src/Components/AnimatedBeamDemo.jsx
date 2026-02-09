@@ -372,7 +372,7 @@ export function AnimatedBeamDemo({ className }) {
                 z-index: 2;
               }
             `}</style>
-            <button className="shiny-cta-beam focus:outline-none">
+            <button className="shiny-cta-beam focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050515]">
               <span>Get Started</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,46 +1,48 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
+import alfanioLogo from "@/assets/images/Alfanio.png";
+import satvikLogo from "@/assets/images/savik.png";
+import visaLogo from "@/assets/images/whitewings.png";
+import oasisLogo from "@/assets/images/Oasis.png";
+
+import alfanioVideo from "@/assets/video/ALFANIO video.mp4";
+import satvikVideo from "@/assets/video/satvikvilla.mp4";
+import whitewingsVideo from "@/assets/video/whitewings.mp4";
+import oasisVideo from "@/assets/video/Oasis tours and tavel .mp4";
+
 const projects = [
   {
-    id: "puntopago",
-    title: "Punto Pago",
-    description: "The First Super-App in Latin America",
-    imageUrl:
-      "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/5a18055b-361a-4f0d-a52c-8382a9793952-cuberto-com/assets/images/cover-1.jpg",
-    videoUrl: "https://cuberto.com/assets/projects/puntopago/cover.mp4",
-    link: "#",
-    size: "lg",
+    id: "alfanio",
+    title: "Alfanio",
+    description: "Corporate brand website with a clean service-led layout.",
+    imageUrl: alfanioLogo,
+    videoUrl: alfanioVideo,
+    link: "https://alfanio.com/",
   },
   {
-    id: "kzero",
-    title: "Kelvin Zero",
-    description: "A digital product for passwordless authentication",
-    imageUrl:
-      "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/5a18055b-361a-4f0d-a52c-8382a9793952-cuberto-com/assets/images/cover-7.jpg",
-    videoUrl: "https://cuberto.com/assets/projects/kzero/cover.mp4",
-    link: "#",
-    size: "lg",
+    id: "satvik-villa-baner",
+    title: "Satvik Villa Baner",
+    description: "Luxury real-estate website focused on premium property views.",
+    imageUrl: satvikLogo,
+    videoUrl: satvikVideo,
+    link: "https://www.satvikvillabaner.com/",
   },
   {
-    id: "daoway",
-    title: "DaoWay",
-    description: "Astrology planner app: plan, achieve, thrive",
-    imageUrl:
-      "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/5a18055b-361a-4f0d-a52c-8382a9793952-cuberto-com/assets/images/cover-2.jpg",
-    videoUrl: "https://cuberto.com/assets/projects/daoway/cover.mp4",
-    link: "#",
-    size: "sm",
+    id: "white-wings-visa",
+    title: "White Wings Visa",
+    description: "Lead-focused visa services site with clear conversion CTAs.",
+    imageUrl: visaLogo,
+    videoUrl: whitewingsVideo,
+    link: "https://whitewingsvisa.com/",
   },
   {
-    id: "magma",
-    title: "Magma",
-    description: "The ultimate tool for building in the Web3 era",
-    imageUrl:
-      "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/5a18055b-361a-4f0d-a52c-8382a9793952-cuberto-com/assets/images/cover-8.jpg",
-    videoUrl: "https://cuberto.com/assets/projects/magma/cover.mp4",
-    link: "#",
-    size: "lg",
+    id: "oasis-tours",
+    title: "Oasis Tours & Travels",
+    description: "Travel services website with a clean booking-first structure.",
+    imageUrl: oasisLogo,
+    videoUrl: oasisVideo,
+    link: "https://ujagare.github.io/Oasis-Tours-Travels/",
   },
 ];
 
@@ -72,7 +74,7 @@ const ProjectCard = ({ project }) => {
         onMouseLeave={handleMouseLeave}
       >
         <div
-          className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-gray-900 transition-transform duration-700"
+          className="relative w-full max-w-[480px] aspect-[3/4] overflow-hidden rounded-3xl bg-gray-900 transition-transform duration-700 mx-auto md:mx-0"
           style={{ willChange: "auto" }}
         >
           <div className="absolute inset-0 h-full w-full transition-opacity duration-500">
@@ -80,7 +82,10 @@ const ProjectCard = ({ project }) => {
               src={project.imageUrl}
               alt={`${project.title} - ${project.description}`}
               loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              style={{ objectPosition: "center bottom" }}
+              data-no-parallax="true"
             />
           </div>
 
@@ -89,6 +94,7 @@ const ProjectCard = ({ project }) => {
               isHovered ? "opacity-100" : "opacity-0"
             }`}
             data-parallax-video
+            data-no-parallax="true"
           >
             <video
               ref={videoRef}
@@ -96,15 +102,20 @@ const ProjectCard = ({ project }) => {
               loop
               muted
               playsInline
-              loading="lazy"
-              className="h-full w-full object-cover"
+              preload="metadata"
+              className="absolute inset-0 h-full w-full object-cover block"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center top",
+                transform: "scale(1.08)",
+              }}
               aria-label={`${project.title} project video - ${project.description}`}
             />
           </div>
         </div>
 
         <div className="mt-6 text-lg text-white">
-          <b className="font-medium">{project.title}</b> – {project.description}
+          <b className="font-medium">{project.title}</b> - {project.description}
         </div>
       </a>
     </div>
@@ -119,7 +130,7 @@ export default function FeaturedProjects() {
     <section className="text-white py-20" style={{ willChange: "auto" }}>
       <div className="container mx-auto max-w-6xl px-8">
         <div className="mb-20">
-          <h1
+          <h2
             className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-left text-white overflow-hidden"
             style={{
               fontFamily: "Poppins, sans-serif",
@@ -150,7 +161,7 @@ export default function FeaturedProjects() {
                 </motion.span>
               </span>
             ))}
-          </h1>
+          </h2>
         </div>
 
         <div
@@ -172,11 +183,12 @@ export default function FeaturedProjects() {
 
         <div className="mt-20 flex justify-center">
           <a
-            href="#"
-            className="inline-flex h-32 w-32 md:h-44 md:w-44 items-center justify-center rounded-full border border-gray-600 hover:bg-white transition-all duration-300 group"
+            href="/contact"
+            className="inline-flex h-32 w-32 md:h-44 md:w-44 items-center justify-center rounded-full border border-gray-600 hover:bg-white transition-all duration-300 group hover:scale-105 hover:shadow-[0_0_26px_rgba(34,211,238,0.6)]"
+            aria-label="Start a project with CodeSunny"
           >
             <span className="text-sm uppercase tracking-widest text-white group-hover:text-black transition-colors">
-              View all
+              Start a project
             </span>
           </a>
         </div>

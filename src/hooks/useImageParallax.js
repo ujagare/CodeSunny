@@ -12,6 +12,7 @@ export const useImageParallax = () => {
       const parallaxImages = document.querySelectorAll("[data-parallax-img]");
 
       parallaxImages.forEach((img) => {
+        if (img.hasAttribute("data-no-parallax")) return;
         gsap.to(img, {
           yPercent: -20,
           ease: "none",
@@ -29,6 +30,7 @@ export const useImageParallax = () => {
       );
 
       parallaxVideoContainers.forEach((container) => {
+        if (container.hasAttribute("data-no-parallax")) return;
         gsap.to(container, {
           yPercent: -15,
           ease: "none",
@@ -44,7 +46,11 @@ export const useImageParallax = () => {
       const allImages = document.querySelectorAll("img");
       allImages.forEach((img) => {
         // Skip if already has parallax attribute
-        if (img.hasAttribute("data-parallax-img")) return;
+        if (
+          img.hasAttribute("data-parallax-img") ||
+          img.hasAttribute("data-no-parallax")
+        )
+          return;
 
         // Skip small images (like logos, icons)
         if (img.width < 100 || img.height < 100) return;

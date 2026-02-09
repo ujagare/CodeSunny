@@ -52,7 +52,7 @@
 ### Method 3: HTML File Upload
 1. Download verification file from Google
 2. Upload to your `public` folder
-3. File will be accessible at: `https://codesunny.com/google[random-string].html` (use exact filename from Google)
+3. File will be accessible at: `https://codesunny.com/googleXXXXXXXXXXXX.html` (use the exact filename Google provides)
 4. Click "Verify" in Google Search Console
 
 ---

@@ -5,6 +5,7 @@ const MenuToggle = () => {
 
   return (
     <button
+      type="button"
       onClick={toggleMenu}
       className={`flex flex-col gap-1 cursor-pointer p-2 z-[9999] ${isOpen ? '' : 'md:hidden'}`}
       aria-expanded={isOpen}

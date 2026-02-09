@@ -39,7 +39,7 @@ const ClientLogos = () => {
       <div className="max-w-7xl mx-auto bg-transparent">
         {/* Heading */}
         <div className="mb-16 md:mb-20">
-          <h1
+          <h2
             className="text-4xl sm:text-5xl md:text-4xl lg:text-6xl font-medium text-white leading-tight capitalize overflow-hidden"
             style={{
               fontFamily: "Poppins, sans-serif",
@@ -69,7 +69,7 @@ const ClientLogos = () => {
                 </motion.span>
               </span>
             ))}
-          </h1>
+          </h2>
         </div>
 
         {/* Logos Grid */}

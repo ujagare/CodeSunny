@@ -41,6 +41,7 @@ const MobileNavbar = () => {
 
       {/* Menu Button - Animated Hamburger to Cross */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center md:hidden z-[1001] transition-all duration-300"
         style={{
@@ -134,7 +135,7 @@ const MobileNavbar = () => {
         </div>
 
         {/* CSS Animations */}
-        <style jsx>{`
+        <style>{`
           @keyframes slideInRight {
             from {
               opacity: 0;

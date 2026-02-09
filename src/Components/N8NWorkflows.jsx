@@ -40,7 +40,7 @@ const WorkflowCard = ({ title, description, image, icon: Icon, tags }) => {
       <p className="text-slate-400 text-sm mb-6 leading-relaxed">
         {description}
       </p>
-      <button className="w-full py-3 rounded-xl bg-linear-to-r from-blue-600 to-emerald-600 text-white font-medium flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all">
+      <button type="button" className="w-full py-3 rounded-xl bg-linear-to-r from-blue-600 to-emerald-600 text-white font-medium flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all">
         Get Workflow <ArrowRight className="w-4 h-4" />
       </button>
     </div>
@@ -121,10 +121,10 @@ const N8NWorkflows = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-emerald-400 transition-colors flex items-center gap-2">
+            <button type="button" className="px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-emerald-400 transition-colors flex items-center gap-2">
               Explore Workflows <Zap className="w-4 h-4" />
             </button>
-            <button className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-colors">
+            <button type="button" className="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-colors">
               Custom Automation
             </button>
           </div>

@@ -1,22 +1,45 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
+import Lenis from "lenis";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import Footer from "./Footer";
-import GradientText from "./GradientText";
-import { ScrollBasedVelocityDemo } from "./ScrollBasedVelocityDemo";
 import geairImage from "../assets/images/geair.jpg";
-import earthImage from "../assets/images/earth.png";
-import webDevImage from "../assets/images/web-development.png";
-import uiUxImage from "../assets/images/ui-ux-design.png";
-import digitalMarketingImage from "../assets/images/digital-marketing.png";
 import ElectricBorder from "./ElectricBorder";
-import AnimatedBeamDemo from "./AnimatedBeamDemo";
 import MetaTags from "./MetaTags";
+import SpotlightCard from "./SpotlightCard";
+
+const AnimatedBeamDemo = lazy(() => import("./AnimatedBeamDemo"));
+const ScrollBasedVelocityDemo = lazy(() =>
+  import("./ScrollBasedVelocityDemo").then((module) => ({
+    default: module.ScrollBasedVelocityDemo,
+  }))
+);
 
 const Services = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+
+    let rafId = 0;
+    const raf = (time) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    };
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
   }, []);
 
   return (
@@ -226,6 +249,7 @@ const Services = () => {
                   src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4aa0ba0f-cf6d-4050-bf33-824539eb56e0_1600w.png"
                   alt="CodeSunny digital solutions product interface mockup"
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-auto block"
                 />
               </aside>
@@ -410,16 +434,22 @@ const Services = () => {
                         src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=80&auto=format&fit=crop"
                         alt="Client testimonial - professional headshot"
                         className="h-8 w-8 rounded-full ring-2 ring-[#0b0f1a] object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <img
                         src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=80&auto=format&fit=crop"
                         alt="Client testimonial - professional headshot"
                         className="h-8 w-8 rounded-full ring-2 ring-[#0b0f1a] object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                       <img
                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=80&auto=format&fit=crop"
                         alt="Client testimonial - professional headshot"
                         className="h-8 w-8 rounded-full ring-2 ring-[#0b0f1a] object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     <div className="text-xs text-slate-400">
@@ -547,6 +577,7 @@ const Services = () => {
                         src={geairImage}
                         alt="CodeSunny web development dashboard and analytics interface"
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-56 sm:h-64 object-cover"
                       />
                     </div>
@@ -599,9 +630,18 @@ const Services = () => {
             aria-labelledby="services-list-heading"
           >
             <div className="max-w-6xl mx-auto">
-              <div className="mb-20">
-                <AnimatedBeamDemo />
-              </div>
+                <div className="mb-20">
+                  <Suspense
+                    fallback={
+                      <div
+                        className="min-h-[280px]"
+                        aria-hidden="true"
+                      />
+                    }
+                  >
+                    <AnimatedBeamDemo />
+                  </Suspense>
+                </div>
               <h2
                 id="services-list-heading"
                 className="text-4xl lg:text-6xl font-medium tracking-tight leading-tight text-center mb-4 text-white"
@@ -616,160 +656,174 @@ const Services = () => {
                 Comprehensive digital solutions tailored to elevate your
                 business and drive measurable results.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <Link to="/services/web-development" className="block h-full">
-                  <ElectricBorder
-                    color="#60a5fa"
-                    speed={0.1}
-                    chaos={0.01}
-                    borderRadius={18}
-                    className="h-full"
-                  >
-                    <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      <div className="relative z-10">
-                        <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
-                          <div
-                            className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                            style={{
-                              borderTopColor: "#60a5fa",
-                              borderLeftColor: "#60a5fa",
-                            }}
-                          ></div>
-                          <div
-                            className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                            style={{
-                              borderBottomColor: "#34d399",
-                              borderRightColor: "#34d399",
-                            }}
-                          ></div>
-                          <svg
-                            className="w-8 h-8"
-                            fill="none"
-                            stroke="url(#gradient1)"
-                            viewBox="0 0 24 24"
-                          >
-                            <defs>
-                              <linearGradient
-                                id="gradient1"
-                                x1="0%"
-                                y1="0%"
-                                x2="100%"
-                                y2="100%"
-                              >
-                                <stop
-                                  offset="0%"
-                                  style={{
-                                    stopColor: "#60a5fa",
-                                    stopOpacity: 1,
-                                  }}
-                                />
-                                <stop
-                                  offset="100%"
-                                  style={{
-                                    stopColor: "#34d399",
-                                    stopOpacity: 1,
-                                  }}
-                                />
-                              </linearGradient>
-                            </defs>
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                            />
-                          </svg>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr gap-8">
+                <SpotlightCard
+                  className="block h-full"
+                  spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
+                >
+                  <Link to="/services/web-development" className="block h-full">
+                    <ElectricBorder
+                      color="#60a5fa"
+                      speed={0.1}
+                      chaos={0.01}
+                      borderRadius={18}
+                      className="h-full"
+                    >
+                      <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
+                            <div
+                              className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                              style={{
+                                borderTopColor: "#60a5fa",
+                                borderLeftColor: "#60a5fa",
+                              }}
+                            ></div>
+                            <div
+                              className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                              style={{
+                                borderBottomColor: "#34d399",
+                                borderRightColor: "#34d399",
+                              }}
+                            ></div>
+                            <svg
+                              className="w-8 h-8"
+                              fill="none"
+                              stroke="url(#gradient1)"
+                              viewBox="0 0 24 24"
+                            >
+                              <defs>
+                                <linearGradient
+                                  id="gradient1"
+                                  x1="0%"
+                                  y1="0%"
+                                  x2="100%"
+                                  y2="100%"
+                                >
+                                  <stop
+                                    offset="0%"
+                                    style={{
+                                      stopColor: "#60a5fa",
+                                      stopOpacity: 1,
+                                    }}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    style={{
+                                      stopColor: "#34d399",
+                                      stopOpacity: 1,
+                                    }}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                              />
+                            </svg>
+                          </div>
+                          <h3 className="text-2xl font-semibold mb-3 text-white">
+                            Web Development
+                          </h3>
+                          <p className="text-white text-base leading-relaxed">
+                            Frontend, Backend, and Full Stack solutions built with
+                            modern technologies for scalable and high-performance
+                            websites.
+                          </p>
                         </div>
-                        <h3 className="text-2xl font-semibold mb-3 text-white">
-                          Web Development
-                        </h3>
-                        <p className="text-white text-base leading-relaxed">
-                          Frontend, Backend, and Full Stack solutions built with
-                          modern technologies for scalable and high-performance
-                          websites.
-                        </p>
                       </div>
-                    </div>
-                  </ElectricBorder>
-                </Link>
-                <Link to="/services/ui-ux-design" className="block h-full">
-                  <ElectricBorder
-                    color="#60a5fa"
-                    speed={0.1}
-                    chaos={0.01}
-                    borderRadius={18}
-                    className="h-full"
-                  >
-                    <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      <div className="relative z-10">
-                        <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
-                          <div
-                            className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                            style={{
-                              borderTopColor: "#60a5fa",
-                              borderLeftColor: "#60a5fa",
-                            }}
-                          ></div>
-                          <div
-                            className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                            style={{
-                              borderBottomColor: "#34d399",
-                              borderRightColor: "#34d399",
-                            }}
-                          ></div>
-                          <svg
-                            className="w-8 h-8"
-                            fill="none"
-                            stroke="url(#gradient2)"
-                            viewBox="0 0 24 24"
-                          >
-                            <defs>
-                              <linearGradient
-                                id="gradient2"
-                                x1="0%"
-                                y1="0%"
-                                x2="100%"
-                                y2="100%"
-                              >
-                                <stop
-                                  offset="0%"
-                                  style={{
-                                    stopColor: "#60a5fa",
-                                    stopOpacity: 1,
-                                  }}
-                                />
-                                <stop
-                                  offset="100%"
-                                  style={{
-                                    stopColor: "#34d399",
-                                    stopOpacity: 1,
-                                  }}
-                                />
-                              </linearGradient>
-                            </defs>
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
-                            />
-                          </svg>
+                    </ElectricBorder>
+                  </Link>
+                </SpotlightCard>
+                <SpotlightCard
+                  className="block h-full"
+                  spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
+                >
+                  <Link to="/services/ui-ux-design" className="block h-full">
+                    <ElectricBorder
+                      color="#60a5fa"
+                      speed={0.1}
+                      chaos={0.01}
+                      borderRadius={18}
+                      className="h-full"
+                    >
+                      <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="relative z-10">
+                          <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
+                            <div
+                              className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                              style={{
+                                borderTopColor: "#60a5fa",
+                                borderLeftColor: "#60a5fa",
+                              }}
+                            ></div>
+                            <div
+                              className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                              style={{
+                                borderBottomColor: "#34d399",
+                                borderRightColor: "#34d399",
+                              }}
+                            ></div>
+                            <svg
+                              className="w-8 h-8"
+                              fill="none"
+                              stroke="url(#gradient2)"
+                              viewBox="0 0 24 24"
+                            >
+                              <defs>
+                                <linearGradient
+                                  id="gradient2"
+                                  x1="0%"
+                                  y1="0%"
+                                  x2="100%"
+                                  y2="100%"
+                                >
+                                  <stop
+                                    offset="0%"
+                                    style={{
+                                      stopColor: "#60a5fa",
+                                      stopOpacity: 1,
+                                    }}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    style={{
+                                      stopColor: "#34d399",
+                                      stopOpacity: 1,
+                                    }}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                              />
+                            </svg>
+                          </div>
+                          <h3 className="text-2xl font-semibold mb-3 text-white">
+                            UI/UX Design
+                          </h3>
+                          <p className="text-white text-base leading-relaxed">
+                            Modern and responsive design that creates intuitive
+                            user experiences and beautiful interfaces for your
+                            brand.
+                          </p>
                         </div>
-                        <h3 className="text-2xl font-semibold mb-3 text-white">
-                          UI/UX Design
-                        </h3>
-                        <p className="text-white text-base leading-relaxed">
-                          Modern and responsive design that creates intuitive
-                          user experiences and beautiful interfaces for your
-                          brand.
-                        </p>
                       </div>
-                    </div>
-                  </ElectricBorder>
-                </Link>
-                <Link to="/services/digital-marketing" className="block h-full">
+                    </ElectricBorder>
+                  </Link>
+                </SpotlightCard>
+                <SpotlightCard
+                  className="block h-full"
+                  spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
+                >
+                  <Link to="/services/digital-marketing" className="block h-full">
                   <ElectricBorder
                     color="#60a5fa"
                     speed={0.1}
@@ -844,11 +898,16 @@ const Services = () => {
                       </div>
                     </div>
                   </ElectricBorder>
-                </Link>
-                <Link
-                  to="/services/ecommerce-solutions"
+                  </Link>
+                </SpotlightCard>
+                <SpotlightCard
                   className="block h-full"
+                  spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
                 >
+                  <Link
+                    to="/services/ecommerce-solutions"
+                    className="block h-full"
+                  >
                   <ElectricBorder
                     color="#60a5fa"
                     speed={0.1}
@@ -923,8 +982,13 @@ const Services = () => {
                       </div>
                     </div>
                   </ElectricBorder>
-                </Link>
-                <Link to="/services/seo-optimization" className="block h-full">
+                  </Link>
+                </SpotlightCard>
+                <SpotlightCard
+                  className="block h-full"
+                  spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
+                >
+                  <Link to="/services/seo-optimization" className="block h-full">
                   <ElectricBorder
                     color="#60a5fa"
                     speed={0.1}
@@ -999,8 +1063,13 @@ const Services = () => {
                       </div>
                     </div>
                   </ElectricBorder>
-                </Link>
-                <Link to="/services/cloud-solutions" className="block h-full">
+                  </Link>
+                </SpotlightCard>
+                <SpotlightCard
+                  className="block h-full"
+                  spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
+                >
+                  <Link to="/services/cloud-solutions" className="block h-full">
                   <ElectricBorder
                     color="#60a5fa"
                     speed={0.1}
@@ -1074,7 +1143,8 @@ const Services = () => {
                       </div>
                     </div>
                   </ElectricBorder>
-                </Link>
+                  </Link>
+                </SpotlightCard>
               </div>
             </div>
           </section>
@@ -1084,7 +1154,16 @@ const Services = () => {
               Scroll Animation
             </h2>
             <div className="bg-transparent">
-              <ScrollBasedVelocityDemo />
+              <Suspense
+                fallback={
+                  <div
+                    className="min-h-[200px]"
+                    aria-hidden="true"
+                  />
+                }
+              >
+                <ScrollBasedVelocityDemo />
+              </Suspense>
             </div>
           </section>
 

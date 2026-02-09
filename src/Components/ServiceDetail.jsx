@@ -50,7 +50,7 @@ const ServiceDetail = ({
                 {description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="shiny-cta">
+                <button type="button" className="shiny-cta">
                   <span>Start Project</span>
                   <Rocket className="w-4 h-4" />
                 </button>

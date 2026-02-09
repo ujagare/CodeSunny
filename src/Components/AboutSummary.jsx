@@ -178,7 +178,7 @@ const AboutSummary = () => {
                 }
               `}</style>
               <a href="/services/" className="inline-block">
-                <button className="shiny-cta focus:outline-none">
+                <button className="shiny-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050515]">
                   <span>What we do</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

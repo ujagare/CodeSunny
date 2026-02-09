@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 import Navbar from "./Navbar";
 import MobileNavbar from "./MobileNavbar";
 import Footer from "./Footer";
@@ -6,9 +7,88 @@ import GradientText from "./GradientText";
 import MetaTags from "./MetaTags";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    budget: "$5k - $10k",
+    message: "",
+    company: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const supabase = useMemo(() => {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    if (!url || !anonKey) return null;
+    return createClient(url, anonKey);
+  }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setSubmitError("");
+    setSubmitSuccess(false);
+
+    if (!supabase) {
+      setSubmitError(
+        "Backend configuration pending. Add Supabase keys to enable submissions."
+      );
+      return;
+    }
+
+    if (!formData.name.trim() || !formData.email.trim()) {
+      setSubmitError("Please enter your name and email.");
+      return;
+    }
+
+    if (formData.company.trim()) {
+      setSubmitSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        budget: "$5k - $10k",
+        message: "",
+        company: "",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from("leads").insert([
+        {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          budget: formData.budget,
+          message: formData.message.trim(),
+          source: "contact-form",
+        },
+      ]);
+      if (error) throw error;
+      setSubmitSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        budget: "$5k - $10k",
+        message: "",
+        company: "",
+      });
+    } catch (err) {
+      setSubmitError("Something went wrong. Please try again in a moment.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <>
       <MetaTags
@@ -63,7 +143,7 @@ const Contact = () => {
                 your vision into reality.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <button className="shiny-cta">
+                <button type="button" className="shiny-cta">
                   <span>Send Message</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +165,7 @@ const Contact = () => {
             </article>
 
             {/* 3D Cards Wrapper */}
-            <aside className="relative hidden lg:flex flex-col items-center space-y-8 perspective-1000">
+            <aside className="relative hidden lg:flex lg:flex-col items-center space-y-8 perspective-1000">
               {/* Feature Card */}
               <section
                 aria-label="Feature card"
@@ -291,7 +371,7 @@ const Contact = () => {
                   <h3 className="text-xl font-semibold text-white mb-6">
                     Send a Message
                   </h3>
-                  <form className="space-y-6">
+                  <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-neutral-300 mb-2">
@@ -299,8 +379,12 @@ const Contact = () => {
                         </label>
                         <input
                           type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-neutral-100 placeholder-neutral-400 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20"
                           placeholder="Your name"
+                          required
                         />
                       </div>
                       <div>
@@ -309,8 +393,12 @@ const Contact = () => {
                         </label>
                         <input
                           type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
                           className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-neutral-100 placeholder-neutral-400 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20"
                           placeholder="your@email.com"
+                          required
                         />
                       </div>
                     </div>
@@ -318,7 +406,12 @@ const Contact = () => {
                       <label className="block text-sm font-medium text-neutral-300 mb-2">
                         Project Budget
                       </label>
-                      <select className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-neutral-100 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20">
+                      <select
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleChange}
+                        className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-neutral-100 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20"
+                      >
                         <option>$5k - $10k</option>
                         <option>$10k - $25k</option>
                         <option>$25k - $50k</option>
@@ -330,16 +423,43 @@ const Contact = () => {
                         Message
                       </label>
                       <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         rows="4"
                         className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-neutral-100 placeholder-neutral-400 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20"
                         placeholder="Tell me about your project..."
                       ></textarea>
                     </div>
+                    <div className="sr-only" aria-hidden="true">
+                      <label htmlFor="company">Company</label>
+                      <input
+                        id="company"
+                        name="company"
+                        type="text"
+                        value={formData.company}
+                        onChange={handleChange}
+                        tabIndex={-1}
+                        autoComplete="off"
+                      />
+                    </div>
+                    {submitError ? (
+                      <p className="text-sm text-red-300">{submitError}</p>
+                    ) : null}
+                    {submitSuccess ? (
+                      <p className="text-sm text-emerald-300">
+                        Thanks! We received your message and will reply within
+                        24 hours.
+                      </p>
+                    ) : null}
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-white/10 border border-white/20 px-6 py-3 text-neutral-100 hover:bg-white/15 transition"
                     >
-                      <span className="font-medium">Send Message</span>
+                      <span className="font-medium">
+                        {isSubmitting ? "Sending..." : "Send Message"}
+                      </span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"

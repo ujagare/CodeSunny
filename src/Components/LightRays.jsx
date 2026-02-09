@@ -239,11 +239,19 @@ const LightRays = ({
       const mesh = new Mesh(gl, { geometry, program });
       meshRef.current = mesh;
 
+      let hasSize = false;
+      let resizeObserver;
+
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return;
 
         renderer.dpr = Math.min(window.devicePixelRatio, 2);
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
+        if (wCSS === 0 || hCSS === 0) {
+          hasSize = false;
+          return;
+        }
+        hasSize = true;
         renderer.setSize(wCSS, hCSS);
 
         const dpr = renderer.dpr;
@@ -259,6 +267,11 @@ const LightRays = ({
 
       const loop = (t) => {
         if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
+          return;
+        }
+
+        if (!hasSize) {
+          animationIdRef.current = requestAnimationFrame(loop);
           return;
         }
 
@@ -288,6 +301,10 @@ const LightRays = ({
       };
 
       window.addEventListener("resize", updatePlacement);
+      if (typeof ResizeObserver !== "undefined") {
+        resizeObserver = new ResizeObserver(() => updatePlacement());
+        resizeObserver.observe(containerRef.current);
+      }
       updatePlacement();
       animationIdRef.current = requestAnimationFrame(loop);
 
@@ -298,6 +315,10 @@ const LightRays = ({
         }
 
         window.removeEventListener("resize", updatePlacement);
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+          resizeObserver = null;
+        }
 
         if (renderer) {
           try {

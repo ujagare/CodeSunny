@@ -209,11 +209,17 @@ export default function Orb({
 
     const mesh = new Mesh(gl, { geometry, program });
 
+    let hasSize = false;
     function resize() {
       if (!container) return;
       const dpr = window.devicePixelRatio || 1;
       const width = container.clientWidth;
       const height = container.clientHeight;
+      if (width === 0 || height === 0) {
+        hasSize = false;
+        return;
+      }
+      hasSize = true;
       renderer.setSize(width * dpr, height * dpr);
       gl.canvas.style.width = width + 'px';
       gl.canvas.style.height = height + 'px';
@@ -256,6 +262,7 @@ export default function Orb({
     let rafId;
     const update = t => {
       rafId = requestAnimationFrame(update);
+      if (!hasSize) return;
       const dt = (t - lastTime) * 0.001;
       lastTime = t;
       program.uniforms.iTime.value = t * 0.001;

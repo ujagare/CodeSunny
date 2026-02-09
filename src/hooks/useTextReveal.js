@@ -9,8 +9,7 @@ export const useTextReveal = () => {
     // Add a small delay to ensure DOM is ready
     const timer = setTimeout(() => {
       const revealElements = document.querySelectorAll("[data-reveal-text]");
-
-      console.log("Text reveal elements found:", revealElements.length);
+      if (!revealElements.length) return;
 
       revealElements.forEach((element) => {
         // Skip if already processed

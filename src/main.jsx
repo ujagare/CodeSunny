@@ -4,17 +4,17 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 
-// Register PWA Service Worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('PWA Service Worker registered:', registration);
-      })
-      .catch(error => {
-        console.log('PWA Service Worker registration failed:', error);
-      });
-  });
+const GTM_ID = import.meta.env.VITE_GTM_ID;
+const isValidGtmId =
+  typeof GTM_ID === "string" && /^GTM-[A-Z0-9]+$/.test(GTM_ID);
+
+if (isValidGtmId) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+  const gtmScript = document.createElement("script");
+  gtmScript.async = true;
+  gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+  document.head.appendChild(gtmScript);
 }
 
 createRoot(document.getElementById("root")).render(

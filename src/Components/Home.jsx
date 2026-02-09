@@ -19,23 +19,32 @@ import MobileNavbar from "./MobileNavbar";
 import MagicBento from "./MagicBento";
 import GradientText from "./GradientText";
 import StarBorder from "./StarBorder";
-import Loader from "./Loader";
+
 import Footer from "./Footer";
 import Orb from "./Orb";
 import { ThreeDMarquee } from "./ThreeDMarquee";
 import RadialOrbitalTimeline from "./RadialOrbitalTimeline";
 import FramerEmbed from "./FramerEmbed";
 import ElectricBorder from "./ElectricBorder";
-import FeaturedProjects from "./FeaturedProjects";
-import { MarqueeTestimonials } from "./MarqueeTestimonials";
+const FeaturedProjects = lazy(() => import("./FeaturedProjects"));
+const CaseStudies = lazy(() => import("./CaseStudies"));
+const MarqueeTestimonials = lazy(() =>
+  import("./MarqueeTestimonials").then((module) => ({
+    default: module.MarqueeTestimonials,
+  }))
+);
+import SpotlightCard from "./SpotlightCard";
 import webDevImg from "@/assets/images/web-development.jpg";
+import heroImg from "@/assets/images/hero.png";
 import cloudImg from "@/assets/images/cloud.jpg";
 import seoImg from "@/assets/images/seo-optimization.png";
 import AboutSummary from "./AboutSummary";
-import ClientLogos from "./ClientLogos";
+const ClientLogos = lazy(() => import("./ClientLogos"));
 import LightRays from "./LightRays";
 import MetaTags from "./MetaTags";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
+const FAQ = lazy(() => import("./FAQ"));
+const TutorialMarquee = lazy(() => import("./TutorialMarquee"));
 
 const testimonials = [
   {
@@ -215,21 +224,54 @@ const serviceCards = [
 ];
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [splineAvailable, setSplineAvailable] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const handleChange = () => setIsDesktop(mediaQuery.matches);
+    handleChange();
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleChange);
+    } else {
+      mediaQuery.addListener(handleChange);
+    }
     return () => {
-      clearTimeout(timer);
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", handleChange);
+      } else {
+        mediaQuery.removeListener(handleChange);
+      }
     };
   }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
+  useEffect(() => {
+    if (!isDesktop) return;
+    let cancelled = false;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      if (!cancelled) setSplineAvailable(false);
+      controller.abort();
+    }, 8000);
+
+    fetch("https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode", {
+      signal: controller.signal,
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Spline fetch failed");
+        if (!cancelled) setSplineAvailable(true);
+      })
+      .catch(() => {
+        if (!cancelled) setSplineAvailable(false);
+      })
+      .finally(() => clearTimeout(timeoutId));
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
+  }, [isDesktop]);
 
   return (
     <>
@@ -281,18 +323,29 @@ export default function Home() {
           </div>
 
           {/* Desktop Spline */}
-          <div className="hidden md:flex w-full h-[calc(100vh-5rem)] min-h-[500px] items-center justify-center spline-wrapper">
-            <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
-              <Suspense
-                fallback={<div className="w-full h-full bg-transparent" />}
-              >
-                <Spline
-                  scene="https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode"
-                  className="w-full h-full"
-                />
-              </Suspense>
+          {isDesktop && (
+            <div className="w-full h-[calc(100vh-5rem)] min-h-[500px] flex items-center justify-center spline-wrapper">
+              <div className="w-full h-full scale-75 md:scale-100 origin-center md:mr-0">
+                {splineAvailable ? (
+                  <Suspense
+                    fallback={<div className="w-full h-full bg-transparent" />}
+                  >
+                    <Spline
+                      scene="https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode"
+                      className="w-full h-full"
+                    />
+                  </Suspense>
+                ) : (
+                  <img
+                    src={heroImg}
+                    alt="CodeSunny hero"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           <div
             className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none"
@@ -313,16 +366,16 @@ export default function Home() {
                     .map((word, index) => (
                       <span
                         key={index}
-                        className="inline-block"
+                        className="inline-block overflow-hidden"
                         style={{ marginRight: "0.3em" }}
                       >
                         <motion.span
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
+                          initial={{ opacity: 0, y: 100 }}
+                          animate={{ opacity: 1, y: 0 }}
                           transition={{
-                            duration: 0.3,
-                            delay: index * 0.02,
-                            ease: "easeOut",
+                            duration: 0.75,
+                            delay: index * 0.2,
+                            ease: "easeInOut",
                           }}
                           style={{
                             display: "inline-block",
@@ -345,16 +398,16 @@ export default function Home() {
                     .map((word, index) => (
                       <span
                         key={index}
-                        className="inline-block"
+                        className="inline-block overflow-hidden"
                         style={{ marginRight: "0.3em" }}
                       >
                         <motion.span
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
+                          initial={{ opacity: 0, y: 100 }}
+                          animate={{ opacity: 1, y: 0 }}
                           transition={{
-                            duration: 0.3,
-                            delay: index * 0.02,
-                            ease: "easeOut",
+                            duration: 0.75,
+                            delay: index * 0.2,
+                            ease: "easeInOut",
                           }}
                           style={{
                             display: "inline-block",
@@ -373,10 +426,13 @@ export default function Home() {
             </div>
             <div className="pointer-events-auto pb-[8vh]">
               <StarBorder
+                as={Link}
+                to="/contact"
                 thickness={1.5}
                 speed="2.5s"
                 color="cyan"
                 className="cursor-pointer hover:scale-105 transition-transform min-w-[200px] md:min-w-[250px]"
+                aria-label="Get started - contact CodeSunny"
               >
                 Get Started
               </StarBorder>
@@ -412,14 +468,14 @@ export default function Home() {
                 <article className="text-left max-w-4xl lg:w-1/2 px-4 md:px-8 lg:px-16 w-full">
                   <h2
                     id="about-heading"
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 md:mb-8 text-white capitalize overflow-hidden"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6 md:mb-8 text-white capitalize"
                     style={{
                       fontFamily: "Poppins, sans-serif",
                       lineHeight: "0.95",
                     }}
                   >
-                    <div className="whitespace-nowrap">
-                      {"We build the solutions that"
+                    <div>
+                      {"Building solutions that"
                         .split(" ")
                         .map((word, index) => (
                           <span
@@ -438,6 +494,7 @@ export default function Home() {
                               }}
                               style={{
                                 display: "inline-block",
+                                color: word === "that" ? "#FFFFFF" : "#0071BC",
                               }}
                             >
                               {word}
@@ -446,10 +503,9 @@ export default function Home() {
                         ))}
                     </div>
                     <div
-                      className="whitespace-nowrap"
                       style={{ color: "#FFFFFF" }}
                     >
-                      {"drive digital business growth."
+                      {"drive business growth."
                         .split(" ")
                         .map((word, index) => (
                           <span
@@ -463,7 +519,7 @@ export default function Home() {
                               viewport={{ once: true }}
                               transition={{
                                 duration: 0.8,
-                                delay: (5 + index) * 0.1,
+                                delay: (3 + index) * 0.1,
                                 ease: [0.33, 1, 0.68, 1],
                               }}
                               style={{
@@ -546,6 +602,9 @@ export default function Home() {
                         justify-content: center;
                         gap: 0.5rem;
                         width: 100%;
+                        transition: transform 200ms ease, box-shadow 200ms ease;
+                        transform-origin: center;
+                        will-change: transform, box-shadow, filter;
                       }
 
                       @media (min-width: 640px) {
@@ -564,6 +623,14 @@ export default function Home() {
 
                       .shiny-cta:active {
                         transform: translateY(1px);
+                      }
+
+                      .shiny-cta:hover {
+                        transform: translateY(-2px) scale(1.03);
+                        box-shadow:
+                          0 16px 40px rgba(29, 78, 216, 0.4),
+                          0 0 26px rgba(34, 211, 238, 0.6);
+                        filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.5));
                       }
 
                       .shiny-cta::before {
@@ -664,7 +731,10 @@ export default function Home() {
                         }
                       }
                     `}</style>
-                      <button className="shiny-cta focus:outline-none">
+                      <button
+                        type="button"
+                        className="shiny-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050515]"
+                      >
                         <span>Start Your Project</span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -752,97 +822,112 @@ export default function Home() {
                   </span>
                 ))}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr gap-8">
                 {serviceCards.map((card, index) => (
-                  <article key={index} className="block h-full">
-                    <Link to={card.link} className="block h-full">
-                      <ElectricBorder
-                        color="#60a5fa"
-                        speed={0.1}
-                        chaos={0.01}
-                        borderRadius={18}
-                      >
-                        <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
-                          <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                          <div className="relative z-10">
-                            <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
-                              <div
-                                className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
-                                style={{
-                                  borderTopColor: "#60a5fa",
-                                  borderLeftColor: "#60a5fa",
-                                }}
-                              ></div>
-                              <div
-                                className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
-                                style={{
-                                  borderBottomColor: "#34d399",
-                                  borderRightColor: "#34d399",
-                                }}
-                              ></div>
-                              <svg
-                                className="w-8 h-8"
-                                fill="none"
-                                stroke={`url(#${card.gradientId})`}
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                              >
-                                <defs>
-                                  <linearGradient
-                                    id={card.gradientId}
-                                    x1="0%"
-                                    y1="0%"
-                                    x2="100%"
-                                    y2="100%"
-                                  >
-                                    <stop
-                                      offset="0%"
-                                      style={{
-                                        stopColor: "#60a5fa",
-                                        stopOpacity: 1,
-                                      }}
-                                    />
-                                    <stop
-                                      offset="100%"
-                                      style={{
-                                        stopColor: "#34d399",
-                                        stopOpacity: 1,
-                                      }}
-                                    />
-                                  </linearGradient>
-                                </defs>
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d={card.svgPath}
-                                />
-                              </svg>
+                  <SpotlightCard
+                    key={index}
+                    className="block h-full"
+                    spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
+                  >
+                    <article className="block h-full">
+                      <Link to={card.link} className="block h-full">
+                        <ElectricBorder
+                          color="#60a5fa"
+                          speed={0.1}
+                          chaos={0.01}
+                          borderRadius={18}
+                          className="h-full"
+                        >
+                          <div className="relative bg-transparent p-8 rounded-[18px] overflow-hidden group h-full">
+                            <div className="absolute inset-0 bg-linear-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div className="relative z-10">
+                              <div className="relative w-16 h-16 mb-6 rounded-lg bg-black border border-blue-500/30 flex items-center justify-center">
+                                <div
+                                  className="absolute top-0 left-0 w-4 h-4 border-t border-l border-transparent rounded-tl-lg"
+                                  style={{
+                                    borderTopColor: "#60a5fa",
+                                    borderLeftColor: "#60a5fa",
+                                  }}
+                                ></div>
+                                <div
+                                  className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-transparent rounded-br-lg"
+                                  style={{
+                                    borderBottomColor: "#34d399",
+                                    borderRightColor: "#34d399",
+                                  }}
+                                ></div>
+                                <svg
+                                  className="w-8 h-8"
+                                  fill="none"
+                                  stroke={`url(#${card.gradientId})`}
+                                  viewBox="0 0 24 24"
+                                  aria-hidden="true"
+                                >
+                                  <defs>
+                                    <linearGradient
+                                      id={card.gradientId}
+                                      x1="0%"
+                                      y1="0%"
+                                      x2="100%"
+                                      y2="100%"
+                                    >
+                                      <stop
+                                        offset="0%"
+                                        style={{
+                                          stopColor: "#60a5fa",
+                                          stopOpacity: 1,
+                                        }}
+                                      />
+                                      <stop
+                                        offset="100%"
+                                        style={{
+                                          stopColor: "#34d399",
+                                          stopOpacity: 1,
+                                        }}
+                                      />
+                                    </linearGradient>
+                                  </defs>
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d={card.svgPath}
+                                  />
+                                </svg>
+                              </div>
+                              <h3 className="text-2xl font-semibold mb-3 text-white">
+                                {card.title}
+                              </h3>
+                              <p className="text-white text-base leading-relaxed">
+                                {card.description}
+                              </p>
                             </div>
-                            <h3 className="text-2xl font-semibold mb-3 text-white">
-                              {card.title}
-                            </h3>
-                            <p className="text-white text-base leading-relaxed">
-                              {card.description}
-                            </p>
                           </div>
-                        </div>
-                      </ElectricBorder>
-                    </Link>
-                  </article>
+                        </ElectricBorder>
+                      </Link>
+                    </article>
+                  </SpotlightCard>
                 ))}
               </div>
             </div>
           </section>
 
-          <section aria-labelledby="projects-heading">
+          <section aria-labelledby="projects-heading" className="cv-auto">
             <h2 id="projects-heading" className="sr-only">
               Featured Projects
             </h2>
-            <FeaturedProjects />
+            <Suspense fallback={<div className="min-h-[600px]" aria-hidden="true" />}>
+              <FeaturedProjects />
+            </Suspense>
           </section>
 
-          <section aria-labelledby="stack-cards" className="py-10">
+          <section aria-labelledby="case-studies-heading" className="cv-auto">
+            <Suspense fallback={<div className="min-h-[600px]" aria-hidden="true" />}>
+              <CaseStudies />
+            </Suspense>
+          </section>
+
+          <section aria-labelledby="stack-cards" className="py-10 cv-auto">
             <div className="scroll-stack-container">
               <div className="scroll-stack-item">
                 <div className="w-full min-h-[500px] md:min-h-[650px] bg-black rounded-3xl shadow-2xl overflow-hidden">
@@ -854,6 +939,8 @@ export default function Home() {
                           src={webDevImg}
                           alt="Web Development"
                           className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     </div>
@@ -925,12 +1012,15 @@ export default function Home() {
                       </div>
 
                       {/* CTA Button */}
-                      <button className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm">
+                      <Link
+                        to="/contact"
+                        className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm"
+                      >
                         Check Course
                         <span className="transition-transform group-hover:translate-x-1">
                           →
                         </span>
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -945,6 +1035,8 @@ export default function Home() {
                           src={seoImg}
                           alt="Digital Marketing"
                           className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     </div>
@@ -1016,12 +1108,15 @@ export default function Home() {
                       </div>
 
                       {/* CTA Button */}
-                      <button className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm">
+                      <Link
+                        to="/contact"
+                        className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm"
+                      >
                         Check Course
                         <span className="transition-transform group-hover:translate-x-1">
                           →
                         </span>
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -1036,6 +1131,8 @@ export default function Home() {
                           src={cloudImg}
                           alt="Cloud Solutions"
                           className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     </div>
@@ -1107,12 +1204,15 @@ export default function Home() {
                       </div>
 
                       {/* CTA Button */}
-                      <button className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm">
+                      <Link
+                        to="/contact"
+                        className="w-fit px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 group text-sm"
+                      >
                         Check Course
                         <span className="transition-transform group-hover:translate-x-1">
                           →
                         </span>
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -1120,22 +1220,44 @@ export default function Home() {
             </div>
           </section>
 
-          <section aria-labelledby="clients-heading">
+          <section aria-labelledby="tutorials-heading" className="cv-auto">
+            <h2 id="tutorials-heading" className="sr-only">
+              YouTube Tutorials
+            </h2>
+            <Suspense fallback={<div className="min-h-[320px]" aria-hidden="true" />}>
+              <TutorialMarquee />
+            </Suspense>
+          </section>
+
+          <section aria-labelledby="clients-heading" className="cv-auto">
             <h2 id="clients-heading" className="sr-only">
               Our Clients
             </h2>
-            <ClientLogos />
+            <Suspense fallback={<div className="min-h-[180px]" aria-hidden="true" />}>
+              <ClientLogos />
+            </Suspense>
           </section>
 
-          <section aria-labelledby="testimonials-heading">
+          <section aria-labelledby="testimonials-heading" className="cv-auto">
             <h2 id="testimonials-heading" className="sr-only">
               Testimonials
             </h2>
-            <MarqueeTestimonials
-              title="Trusted by Industry Leaders"
-              description="Join hundreds of companies that have transformed their business with CodeSunny"
-              testimonials={testimonials}
-            />
+            <Suspense fallback={<div className="min-h-[360px]" aria-hidden="true" />}>
+              <MarqueeTestimonials
+                title="Trusted by Industry Leaders"
+                description="Join hundreds of companies that have transformed their business with CodeSunny"
+                testimonials={testimonials}
+              />
+            </Suspense>
+          </section>
+
+          <section aria-labelledby="faq-heading" className="cv-auto">
+            <h2 id="faq-heading" className="sr-only">
+              Frequently Asked Questions
+            </h2>
+            <Suspense fallback={<div className="min-h-[360px]" aria-hidden="true" />}>
+              <FAQ />
+            </Suspense>
           </section>
 
           <footer>

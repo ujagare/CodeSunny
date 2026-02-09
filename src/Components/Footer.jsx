@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import {
   Mail,
   Phone,
@@ -14,29 +14,6 @@ import GradientText from "./GradientText";
 import logo from "../assets/images/Logo.png";
 
 function Footer() {
-  const [isVisible, setIsVisible] = useState(false);
-  const footerRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 },
-    );
-
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
-    }
-
-    return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current);
-      }
-    };
-  }, []);
   const footerLinks = [
     {
       title: "About Us",
@@ -97,7 +74,6 @@ function Footer() {
 
   return (
     <footer
-      ref={footerRef}
       className="relative h-fit rounded-3xl m-4 md:m-8 mb-0 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto p-6 md:p-14 z-40 relative">

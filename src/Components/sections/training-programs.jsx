@@ -218,25 +218,6 @@ const TrainingPrograms = () => {
       {/* Logo Loop Section */}
       <LogoLoopDemo />
 
-      {/* Course Cards Section */}
-      <div className="mt-[80px] md:mt-[120px] flex flex-col gap-8">
-        <CourseCard
-          image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop"
-          title="Data Science & Analytics with Gen AI"
-          description="Gain hands-on experience in data analysis, visualization, and AI integration."
-          hours="250+"
-          price="Rs.6999"
-          originalPrice="Rs.14891"
-        />
-        <CourseCard
-          image="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
-          title="Full Stack Web Development"
-          description="Master modern web technologies from frontend to backend development."
-          hours="300+"
-          price="Rs.7999"
-          originalPrice="Rs.16891"
-        />
-      </div>
     </section>
   );
 };
