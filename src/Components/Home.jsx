@@ -361,7 +361,7 @@ export default function Home() {
           >
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
-                className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black md:font-bold text-center neue-machina overflow-hidden"
+                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black md:font-bold text-center neue-machina overflow-hidden"
                 style={{
                   fontFamily: "NeueMachina",
                   fontWeight: "900",
