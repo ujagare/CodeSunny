@@ -363,9 +363,9 @@ export default function Home() {
           >
             <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
               <h1
-                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black md:font-bold text-center hero-serif overflow-hidden"
+                className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-center hero-serif overflow-hidden"
                 style={{
-                  fontWeight: "900",
+                  fontWeight: "600",
                 }}
               >
                 {/* Mobile: Mixed color text with animation */}
