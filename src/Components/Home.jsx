@@ -361,7 +361,7 @@ export default function Home() {
               >
                 {/* Mobile: Mixed color text with animation */}
                 <span className="block md:hidden">
-                  {"Creative Solutions That Drive Real Business Growth"
+                  {"I build fast, secure websites & backend systems for growing businesses."
                     .split(" ")
                     .map((word, index) => (
                       <span
@@ -393,7 +393,7 @@ export default function Home() {
 
                 {/* Desktop: Mixed color text with animation */}
                 <span className="hidden md:block">
-                  {"Creative Solutions That Drive Real Business Growth"
+                  {"I build fast, secure websites & backend systems for growing businesses."
                     .split(" ")
                     .map((word, index) => (
                       <span
@@ -423,18 +423,36 @@ export default function Home() {
                     ))}
                 </span>
               </h1>
+              <p
+                className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl text-zinc-300 text-center max-w-3xl px-6 md:px-10"
+                style={{ fontFamily: "Poppins, sans-serif" }}
+              >
+                Custom web development using React, Node.js & MongoDB, focused
+                on performance, security, and real business results — not just
+                good looks.
+              </p>
+              <p className="mt-3 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] text-cyan-300/90">
+                React • Node.js • Express • MongoDB • VPS Deployment
+              </p>
             </div>
-            <div className="pointer-events-auto pb-[8vh]">
+            <div className="pointer-events-auto pb-[8vh] flex flex-col sm:flex-row items-center gap-4">
+              <a
+                href="https://wa.me/918975805789"
+                className="shiny-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050515]"
+                aria-label="Discuss your project on WhatsApp"
+              >
+                <span>Discuss Your Project on WhatsApp</span>
+              </a>
               <StarBorder
                 as={Link}
-                to="/contact"
+                to="/#projects"
                 thickness={1.5}
                 speed="2.5s"
                 color="cyan"
                 className="cursor-pointer hover:scale-105 transition-transform min-w-[200px] md:min-w-[250px]"
-                aria-label="Get started - contact CodeSunny"
+                aria-label="View my work"
               >
-                Get Started
+                View My Work
               </StarBorder>
             </div>
           </div>
@@ -912,7 +930,11 @@ export default function Home() {
             </div>
           </section>
 
-          <section aria-labelledby="projects-heading" className="cv-auto">
+          <section
+            id="projects"
+            aria-labelledby="projects-heading"
+            className="cv-auto"
+          >
             <h2 id="projects-heading" className="sr-only">
               Featured Projects
             </h2>
