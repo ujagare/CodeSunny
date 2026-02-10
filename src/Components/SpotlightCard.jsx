@@ -1,28 +1,70 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const SpotlightCard = ({
   children,
   className = "",
   spotlightColor = "rgba(255, 255, 255, 0.25)",
+  staticOnMobile = false,
+  staticOpacity = 0.6,
 }) => {
   const divRef = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
+  const [isStatic, setIsStatic] = useState(false);
+
+  useEffect(() => {
+    if (!staticOnMobile || typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const apply = () => {
+      if (mediaQuery.matches) {
+        setIsStatic(true);
+        setOpacity(staticOpacity);
+        if (divRef.current) {
+          const rect = divRef.current.getBoundingClientRect();
+          setPosition({ x: rect.width / 2, y: rect.height / 2 });
+        }
+      } else {
+        setIsStatic(false);
+        setOpacity(0);
+      }
+    };
+    apply();
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", apply);
+    } else {
+      mediaQuery.addListener(apply);
+    }
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", apply);
+      } else {
+        mediaQuery.removeListener(apply);
+      }
+    };
+  }, [staticOnMobile, staticOpacity]);
 
   const handleMouseMove = (e) => {
-    if (!divRef.current || isFocused) return;
+    if (!divRef.current || isFocused || isStatic) return;
     const rect = divRef.current.getBoundingClientRect();
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
-  const handleMouseEnter = () => setOpacity(0.6);
-  const handleMouseLeave = () => setOpacity(0);
+  const handleMouseEnter = () => {
+    if (isStatic) return;
+    setOpacity(0.6);
+  };
+  const handleMouseLeave = () => {
+    if (isStatic) return;
+    setOpacity(0);
+  };
   const handleFocus = () => {
+    if (isStatic) return;
     setIsFocused(true);
     setOpacity(0.6);
   };
   const handleBlur = () => {
+    if (isStatic) return;
     setIsFocused(false);
     setOpacity(0);
   };

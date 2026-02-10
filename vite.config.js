@@ -99,6 +99,9 @@ export default defineConfig({
       host: 'localhost',
     },
   },
+  preview: {
+    allowedHosts: ["codesunny.onrender.com"],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

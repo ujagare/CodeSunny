@@ -401,41 +401,43 @@ export default function Home() {
               >
                 {/* Mobile: Mixed color text with animation */}
                 <span className="block md:hidden">
-                  {"I build fast, secure websites & backend systems for Growing businesses."
-                    .split(" ")
-                    .map((word, index) => (
-                      <span
-                        key={index}
-                        className="inline-block overflow-hidden"
-                        style={{ marginRight: "0.3em" }}
-                      >
-                        <motion.span
-                          initial={{ opacity: 0, y: 100 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.75,
-                            delay: index * 0.2,
-                            ease: "easeInOut",
-                          }}
-                          className={
-                            word.replace(/[^\w]/g, "") === "Growing"
-                              ? "hero-highlight"
-                              : undefined
-                          }
-                          style={{
-                            display: "inline-block",
-                            color: "#E6E6E6",
-                          }}
-                        >
-                          {word}
-                        </motion.span>
+                  {["Building Solutions That", "Drive Business Growth."].map(
+                    (line, lineIndex) => (
+                      <span key={line} className="block">
+                        {line.split(" ").map((word, index) => {
+                          const wordIndex = lineIndex * 10 + index;
+                          return (
+                            <span
+                              key={`${lineIndex}-${index}`}
+                              className="inline-block overflow-hidden"
+                              style={{ marginRight: "0.3em" }}
+                            >
+                              <motion.span
+                                initial={{ opacity: 0, y: 100 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                  duration: 0.75,
+                                  delay: wordIndex * 0.2,
+                                  ease: "easeInOut",
+                                }}
+                                style={{
+                                  display: "inline-block",
+                                  color: "#E6E6E6",
+                                }}
+                              >
+                                {word}
+                              </motion.span>
+                            </span>
+                          );
+                        })}
                       </span>
-                    ))}
+                    )
+                  )}
                 </span>
 
                 {/* Desktop: Mixed color text with animation */}
                 <span className="hidden md:block">
-                  {"I build fast, secure websites & backend systems for Growing businesses."
+                  {"Building Solutions That Drive Business Growth."
                     .split(" ")
                     .map((word, index) => (
                       <span
@@ -451,11 +453,6 @@ export default function Home() {
                             delay: index * 0.2,
                             ease: "easeInOut",
                           }}
-                          className={
-                            word.replace(/[^\w]/g, "") === "Growing"
-                              ? "hero-highlight"
-                              : undefined
-                          }
                           style={{
                             display: "inline-block",
                             color: "#E6E6E6",
@@ -843,7 +840,7 @@ export default function Home() {
                 </article>
 
                 <aside
-                  className="lg:w-1/2 w-full h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center"
+                  className="lg:w-1/2 w-full h-[280px] sm:h-[420px] lg:h-[600px] flex items-center justify-center"
                   style={{ willChange: "auto" }}
                 >
                   <RadialOrbitalTimeline timelineData={timelineData} />
@@ -1000,14 +997,22 @@ export default function Home() {
             </Suspense>
           </section>
 
-          <section aria-labelledby="stack-cards" className="py-10 cv-auto">
+          <section aria-labelledby="stack-cards" className="py-3 md:py-4 cv-auto">
+            <div className="w-full px-4 md:px-6 mb-2 md:mb-3">
+              <h2
+                id="stack-cards"
+                className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white text-center"
+              >
+                Featured Offers
+              </h2>
+            </div>
             <div className="scroll-stack-container">
               <div className="scroll-stack-item">
                 <div className="w-full min-h-[500px] md:min-h-[650px] bg-black rounded-3xl shadow-2xl overflow-hidden">
-                  <div className="flex flex-col md:flex-row gap-0 md:gap-8 p-6 md:p-8 h-full">
+                    <div className="flex flex-col md:flex-row gap-0 md:gap-8 p-4 md:p-8 h-full">
                     {/* Image Section */}
                     <div className="md:w-[45%] mb-0">
-                      <div className="relative w-full h-[250px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
+                    <div className="relative w-full h-[220px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
                         <img
                           src={webDevImg}
                           alt="Web Development"
@@ -1018,7 +1023,7 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Content Section */}
-                    <div className="flex-1 flex flex-col justify-center -mt-2 md:mt-0">
+                    <div className="flex-1 flex flex-col justify-center -mt-6 md:mt-0">
                       <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-2 md:mb-4">
                         Web Development
                         <br />
@@ -1100,10 +1105,10 @@ export default function Home() {
               </div>
               <div className="scroll-stack-item">
                 <div className="w-full min-h-[500px] md:min-h-[650px] bg-white rounded-3xl shadow-2xl overflow-hidden">
-                  <div className="flex flex-col md:flex-row-reverse gap-0 md:gap-8 p-6 md:p-8 h-full">
+                    <div className="flex flex-col md:flex-row-reverse gap-0 md:gap-8 p-4 md:p-8 h-full">
                     {/* Image Section */}
                     <div className="md:w-[45%] mb-0">
-                      <div className="relative w-full h-[250px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
+                    <div className="relative w-full h-[220px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
                         <img
                           src={seoImg}
                           alt="Digital Marketing"
@@ -1114,7 +1119,7 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Content Section */}
-                    <div className="flex-1 flex flex-col justify-center -mt-2 md:mt-0">
+                    <div className="flex-1 flex flex-col justify-center -mt-6 md:mt-0">
                       <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-2 md:mb-4">
                         Digital Marketing
                         <br />
@@ -1196,10 +1201,10 @@ export default function Home() {
               </div>
               <div className="scroll-stack-item">
                 <div className="w-full min-h-[500px] md:min-h-[650px] bg-white rounded-3xl shadow-2xl overflow-hidden">
-                  <div className="flex flex-col md:flex-row gap-0 md:gap-8 p-6 md:p-8 h-full">
+                    <div className="flex flex-col md:flex-row gap-0 md:gap-8 p-4 md:p-8 h-full">
                     {/* Image Section */}
                     <div className="md:w-[45%] mb-0">
-                      <div className="relative w-full h-[250px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
+                    <div className="relative w-full h-[220px] md:h-[500px] rounded-2xl md:rounded-2xl rounded-b-none overflow-hidden">
                         <img
                           src={cloudImg}
                           alt="Cloud Solutions"
@@ -1210,7 +1215,7 @@ export default function Home() {
                       </div>
                     </div>
                     {/* Content Section */}
-                    <div className="flex-1 flex flex-col justify-center -mt-2 md:mt-0">
+                    <div className="flex-1 flex flex-col justify-center -mt-6 md:mt-0">
                       <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-black leading-tight mb-2 md:mb-4">
                         Cloud Solutions
                         <br />

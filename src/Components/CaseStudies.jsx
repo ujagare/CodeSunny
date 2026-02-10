@@ -106,12 +106,14 @@ export default function CaseStudies() {
               key={project.id}
               className="bg-transparent border border-white/10 rounded-3xl p-4"
               spotlightColor="rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35)"
+              staticOnMobile
+              staticOpacity={0.6}
             >
               <article
-                className="card-top w-full h-fit overflow-hidden relative transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] bg-transparent rounded-[1.2em] group"
+                className="case-card card-top w-full h-fit overflow-hidden relative transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] bg-transparent rounded-[1.2em] group"
                 style={{ backdropFilter: "blur(16px)" }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="case-overlay absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div
                   className="absolute inset-0 border-white/20 border rounded-[1.2em]"
                   style={{

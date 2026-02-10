@@ -184,6 +184,12 @@ body {
   border-radius: 0;
 }
 
+@media (max-width: 768px) {
+  .case-card .case-overlay {
+    opacity: 1;
+  }
+}
+
 .hero-serif {
   font-family: "Playfair Display", serif !important;
   letter-spacing: 0.01em;

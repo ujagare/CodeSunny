@@ -184,10 +184,10 @@ export default function FeaturedProjects() {
         <div className="mt-20 flex justify-center">
           <a
             href="/contact"
-            className="inline-flex h-32 w-32 md:h-44 md:w-44 items-center justify-center rounded-full border border-gray-600 hover:bg-white transition-all duration-300 group hover:scale-105 hover:shadow-[0_0_26px_rgba(34,211,238,0.6)]"
+            className="inline-flex h-12 w-auto px-6 sm:h-32 sm:w-32 sm:px-0 md:h-44 md:w-44 items-center justify-center rounded-md sm:rounded-full border border-gray-600 hover:bg-white transition-all duration-300 group hover:scale-105 hover:shadow-[0_0_26px_rgba(34,211,238,0.6)]"
             aria-label="Start a project with CodeSunny"
           >
-            <span className="text-sm uppercase tracking-widest text-white group-hover:text-black transition-colors">
+            <span className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-widest text-white group-hover:text-black transition-colors">
               Start a project
             </span>
           </a>

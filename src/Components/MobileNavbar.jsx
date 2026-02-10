@@ -29,7 +29,7 @@ const MobileNavbar = () => {
       {/* Logo - Fixed on left side */}
       <Link
         to="/"
-        className="fixed top-6 left-6 z-[1001] md:hidden"
+        className="fixed top-4 left-4 z-[1001] md:hidden"
         aria-label="CodeSunny Home"
       >
         <img
@@ -43,7 +43,7 @@ const MobileNavbar = () => {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-6 right-6 w-12 h-12 rounded-full flex items-center justify-center md:hidden z-[1001] transition-all duration-300"
+        className="fixed top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center md:hidden z-[1001] transition-all duration-300"
         style={{
           background: "linear-gradient(135deg, #000000 0%, #1a1a3e 100%)",
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",

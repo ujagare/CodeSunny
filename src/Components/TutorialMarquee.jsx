@@ -121,8 +121,8 @@ const TutorialMarquee = () => {
   const bottomRow = tutorials.slice(mid);
 
   return (
-    <section className="py-20 overflow-hidden">
-      <div className="container mx-auto px-4 mb-12">
+    <section className="py-10 md:py-12 overflow-hidden">
+      <div className="container mx-auto px-4 mb-6">
         <div className="text-center space-y-2">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white">
             Client Projects
