@@ -401,43 +401,7 @@ export default function Home() {
               >
                 {/* Mobile: Mixed color text with animation */}
                 <span className="block md:hidden">
-                  {["Building Solutions That", "Drive Business Growth."].map(
-                    (line, lineIndex) => (
-                      <span key={line} className="block">
-                        {line.split(" ").map((word, index) => {
-                          const wordIndex = lineIndex * 10 + index;
-                          return (
-                            <span
-                              key={`${lineIndex}-${index}`}
-                              className="inline-block overflow-hidden"
-                              style={{ marginRight: "0.3em" }}
-                            >
-                              <motion.span
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{
-                                  duration: 0.75,
-                                  delay: wordIndex * 0.2,
-                                  ease: "easeInOut",
-                                }}
-                                style={{
-                                  display: "inline-block",
-                                  color: "#E6E6E6",
-                                }}
-                              >
-                                {word}
-                              </motion.span>
-                            </span>
-                          );
-                        })}
-                      </span>
-                    )
-                  )}
-                </span>
-
-                {/* Desktop: Mixed color text with animation */}
-                <span className="hidden md:block">
-                  {"Building Solutions That Drive Business Growth."
+                  {"I build fast, secure websites & backend systems for Growing businesses."
                     .split(" ")
                     .map((word, index) => (
                       <span
@@ -453,6 +417,45 @@ export default function Home() {
                             delay: index * 0.2,
                             ease: "easeInOut",
                           }}
+                          className={
+                            word.replace(/[^\w]/g, "") === "Growing"
+                              ? "hero-highlight"
+                              : undefined
+                          }
+                          style={{
+                            display: "inline-block",
+                            color: "#E6E6E6",
+                          }}
+                        >
+                          {word}
+                        </motion.span>
+                      </span>
+                    ))}
+                </span>
+
+                {/* Desktop: Mixed color text with animation */}
+                <span className="hidden md:block">
+                  {"I build fast, secure websites & backend systems for Growing businesses."
+                    .split(" ")
+                    .map((word, index) => (
+                      <span
+                        key={index}
+                        className="inline-block overflow-hidden"
+                        style={{ marginRight: "0.3em" }}
+                      >
+                        <motion.span
+                          initial={{ opacity: 0, y: 100 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.75,
+                            delay: index * 0.2,
+                            ease: "easeInOut",
+                          }}
+                          className={
+                            word.replace(/[^\w]/g, "") === "Growing"
+                              ? "hero-highlight"
+                              : undefined
+                          }
                           style={{
                             display: "inline-block",
                             color: "#E6E6E6",
