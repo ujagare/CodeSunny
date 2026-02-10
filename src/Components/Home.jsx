@@ -302,7 +302,7 @@ export default function Home() {
         <div className="absolute inset-0 hero-grid pointer-events-none"></div>
 
         {/* Fixed Navbar */}
-        <header className="fixed top-0 left-0 right-0 z-[1000] h-20 bg-[#050515]">
+        <header className="fixed top-0 left-0 right-0 z-[1000] h-20 bg-transparent">
           <nav className="hidden md:block">
             <Navbar />
           </nav>
@@ -1349,4 +1349,5 @@ export default function Home() {
     </>
   );
 }
+
 

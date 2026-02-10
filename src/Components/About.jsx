@@ -23,7 +23,7 @@ const About = () => {
       />
       <div className="w-full bg-[#050515] relative">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>
-        <header className="fixed top-0 left-0 right-0 z-[1000] h-20 bg-[#050515]">
+        <header className="fixed top-0 left-0 right-0 z-[1000] h-20 bg-transparent">
           {/* Desktop Navbar */}
           <nav className="hidden md:block">
             <Navbar />
@@ -79,4 +79,5 @@ const About = () => {
 };
 
 export default About;
+
 
