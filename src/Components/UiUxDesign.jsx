@@ -43,7 +43,7 @@ const UiUxDesign = () => {
           ></iframe>
         </div>
 
-        <header className="fixed top-0 left-0 right-0 z-[1000]">
+        <header className="fixed top-0 left-0 right-0 z-[1000] h-20 bg-[#050515]">
           <nav className="hidden md:block">
             <Navbar />
           </nav>
@@ -265,3 +265,4 @@ const UiUxDesign = () => {
 };
 
 export default UiUxDesign;
+
