@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "./assets/fonts/fonts.css";
 
@@ -123,14 +124,73 @@ body {
 
 /* NeueMachina Font */
 .neue-machina {
-  font-family: "NeueMachina" !important;
+  font-family: "Neue Machina", "NeueMachina", sans-serif !important;
   font-display: swap;
   font-weight: normal !important;
+}
+
+.home-page h1,
+.home-page h2 {
+  font-family: "NeueMachina-Regular", "NeueMachina", sans-serif !important;
+  font-weight: 400;
+}
+
+.home-page .hero-heading,
+.home-page .hero-heading span {
+  font-family: "NeueMachina-Regular", "Neue Machina", "NeueMachina", sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: capitalize;
+  letter-spacing: 0.005em;
+  line-height: 1.02;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.home-page .hero-highlight {
+  padding: 0.08em 0.18em;
+  border: 1px solid #2f66ff;
+  border-radius: 0;
+  background-color: rgba(14, 0, 214, 0.22);
+  background-image:
+    radial-gradient(circle, #ffffff 0 2px, transparent 3px),
+    radial-gradient(circle, #ffffff 0 2px, transparent 3px),
+    radial-gradient(circle, #ffffff 0 2px, transparent 3px),
+    radial-gradient(circle, #ffffff 0 2px, transparent 3px);
+  background-position:
+    0 0,
+    100% 0,
+    0 100%,
+    100% 100%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+}
+
+.home-page .hero-cta.shiny-cta {
+  background:
+    linear-gradient(#2E3192, #2E3192) padding-box,
+    conic-gradient(
+        from var(--gradient-angle),
+        transparent 0%,
+        #93c5fd 6%,
+        #60a5fa 18%,
+        #93c5fd 32%,
+        transparent 42%,
+        transparent 100%
+      )
+      border-box;
+  border: 2px solid transparent;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .hero-serif {
   font-family: "Playfair Display", serif !important;
   letter-spacing: 0.01em;
+}
+
+.font-manrope {
+  font-family: "Manrope", sans-serif !important;
 }
 
 .hero-grid {

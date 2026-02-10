@@ -74,7 +74,7 @@ function Footer() {
 
   return (
     <footer
-      className="relative h-fit rounded-3xl m-4 md:m-8 mb-0 overflow-hidden bg-[#050515]"
+      className="relative h-fit rounded-3xl m-4 md:m-8 mb-0 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto p-6 md:p-14 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-8 lg:gap-16 pb-8 md:pb-12">

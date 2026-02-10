@@ -44,3 +44,5 @@ google-gemini-effect-demo (1).tsx
 # Next.js artifacts
 home/
 .next/
+
+.vercel

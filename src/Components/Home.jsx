@@ -45,6 +45,11 @@ import MetaTags from "./MetaTags";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 const FAQ = lazy(() => import("./FAQ"));
 const TutorialMarquee = lazy(() => import("./TutorialMarquee"));
+import { DotPattern } from "@/registry/magicui/dot-pattern";
+import Beams from "./Beams";
+import { AvatarCircles } from "@/registry/magicui/avatar-circles";
+import { SiReact, SiExpress, SiMongodb, SiNodedotjs } from "react-icons/si";
+import { FiServer } from "react-icons/fi";
 
 const testimonials = [
   {
@@ -168,6 +173,14 @@ const timelineData = [
   },
 ];
 
+const avatars = [
+  { icon: SiReact, label: "React", iconClassName: "text-cyan-400" },
+  { icon: SiNodedotjs, label: "Node.js", iconClassName: "text-green-400" },
+  { icon: SiExpress, label: "Express", iconClassName: "text-white" },
+  { icon: SiMongodb, label: "MongoDB", iconClassName: "text-emerald-400" },
+  { icon: FiServer, label: "VPS", iconClassName: "text-blue-200" },
+];
+
 const serviceCards = [
   {
     link: "/services/web-development",
@@ -283,7 +296,7 @@ export default function Home() {
         keywords="web development, UI/UX design, digital marketing, e-commerce, SEO, cloud solutions, web agency, React development"
         url="https://codesunny.com"
       />
-      <div className="w-full bg-[#050515] relative">
+      <div className="w-full bg-[#050515] relative home-page">
         <div className="absolute inset-0 bg-linear-to-r from-blue-600/15 via-transparent to-transparent pointer-events-none"></div>
         <div className="absolute inset-0 hero-glow pointer-events-none"></div>
         <div className="absolute inset-0 hero-grid pointer-events-none"></div>
@@ -303,6 +316,21 @@ export default function Home() {
         <main className="w-full relative flex items-center justify-center overflow-hidden bg-[#050515] hero pt-20">
           <div className="absolute inset-0 bg-linear-to-br from-blue-600/20 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute inset-0 pointer-events-none"></div>
+          <div className="absolute inset-0 pointer-events-none">
+            <Beams
+              beamWidth={3}
+              beamHeight={30}
+              beamNumber={20}
+              lightColor="#0e00d6"
+              speed={2}
+              noiseIntensity={1.75}
+              scale={0.2}
+              rotation={30}
+            />
+          </div>
+          <DotPattern
+            className="[mask-image:radial-gradient(520px_circle_at_center,white,transparent)]"
+          />
 
           {/* Mobile LightRays Effect - Only visible on mobile */}
           <div
@@ -358,19 +386,22 @@ export default function Home() {
           )}
 
           <div
-            className="absolute inset-0 flex flex-col items-center justify-between pointer-events-none"
+            className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
             style={{ zIndex: 2 }}
           >
-            <div className="flex flex-col items-center pt-24 md:pt-16 lg:pt-20">
+            <div className="flex flex-col items-center text-center">
+              <p className="mb-3 text-[10px] sm:text-xs uppercase tracking-[0.24em] text-[#0071BC] font-semibold">
+                Web Development
+              </p>
               <h1
-                className="text-3xl md:text-4xl lg:text-[76px] xl:text-[84px] font-normal text-center neue-machina overflow-hidden"
+                className="text-3xl md:text-4xl lg:text-[76.704px] xl:text-[76.704px] font-normal text-center neue-machina hero-heading overflow-hidden"
                 style={{
                   fontWeight: "400",
                 }}
               >
                 {/* Mobile: Mixed color text with animation */}
                 <span className="block md:hidden">
-                  {"I build fast, secure websites & backend systems for growing businesses."
+                  {"I build fast, secure websites & backend systems for Growing businesses."
                     .split(" ")
                     .map((word, index) => (
                       <span
@@ -386,12 +417,14 @@ export default function Home() {
                             delay: index * 0.2,
                             ease: "easeInOut",
                           }}
+                          className={
+                            word.replace(/[^\w]/g, "") === "Growing"
+                              ? "hero-highlight"
+                              : undefined
+                          }
                           style={{
                             display: "inline-block",
-                            color:
-                              word === "Solutions" || word === "Creative"
-                                ? "#FFFFFF"
-                                : "#0071BC",
+                            color: "#E6E6E6",
                           }}
                         >
                           {word}
@@ -402,7 +435,7 @@ export default function Home() {
 
                 {/* Desktop: Mixed color text with animation */}
                 <span className="hidden md:block">
-                  {"I build fast, secure websites & backend systems for growing businesses."
+                  {"I build fast, secure websites & backend systems for Growing businesses."
                     .split(" ")
                     .map((word, index) => (
                       <span
@@ -418,12 +451,14 @@ export default function Home() {
                             delay: index * 0.2,
                             ease: "easeInOut",
                           }}
+                          className={
+                            word.replace(/[^\w]/g, "") === "Growing"
+                              ? "hero-highlight"
+                              : undefined
+                          }
                           style={{
                             display: "inline-block",
-                            color:
-                              word === "Solutions" || word === "Creative"
-                                ? "#FFFFFF"
-                                : "#0071BC",
+                            color: "#E6E6E6",
                           }}
                         >
                           {word}
@@ -433,36 +468,43 @@ export default function Home() {
                 </span>
               </h1>
               <p
-                className="mt-4 text-sm sm:text-base md:text-lg lg:text-xl text-zinc-300 text-center max-w-3xl px-6 md:px-10"
-                style={{ fontFamily: "Poppins, sans-serif" }}
+                className="mt-4 text-[1rem] sm:text-[1.1rem] md:text-[1.9rem] w-[90%] lg:w-[65%] text-center font-manrope font-light text-[#D7D7D7] px-6 md:px-10"
               >
-                Custom web development using React, Node.js & MongoDB, focused
-                on performance, security, and real business results — not just
-                good looks.
+                Custom web development with React, Node.js & MongoDB.
+                Built for performance, security, and real results.
               </p>
-              <p className="mt-3 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] text-cyan-300/90">
-                React • Node.js • Express • MongoDB • VPS Deployment
-              </p>
+              <div className="mt-4 flex flex-col items-center gap-4">
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <div className="flex items-center justify-center gap-3">
+                    <AvatarCircles
+                      numPeople={99}
+                      avatarUrls={avatars}
+                      maxVisible={isDesktop ? 6 : 4}
+                      sizeClass="h-8 w-8 sm:h-11 sm:w-11"
+                      iconSize={18}
+                    />
+                    <p className="text-xs sm:text-base text-[#D7D7D7]/90">
+                      <span className="text-[#0071BC] font-semibold text-[1.05em] whitespace-nowrap">
+                        Engineering
+                      </span>
+                    </p>
+                  </div>
+                  <p className="text-xs sm:text-base text-[#D7D7D7]/90">
+                    scalable web experiences for ambitious brands.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="pointer-events-auto pb-[8vh] flex flex-col sm:flex-row items-center gap-4">
-              <a
-                href="https://wa.me/918975805789"
-                className="shiny-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050515]"
-                aria-label="Discuss your project on WhatsApp"
+            <div className="pointer-events-auto mt-8 md:mt-10 flex items-center">
+              <Link
+                to="/contact"
+                className="shiny-cta hero-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050515]"
+                aria-label="Start your journey"
               >
-                <span>Discuss Your Project on WhatsApp</span>
-              </a>
-              <StarBorder
-                as={Link}
-                to="/#projects"
-                thickness={1.5}
-                speed="2.5s"
-                color="cyan"
-                className="cursor-pointer hover:scale-105 transition-transform min-w-[200px] md:min-w-[250px]"
-                aria-label="View my work"
-              >
-                View My Work
-              </StarBorder>
+                <span className="inline-flex items-center gap-2">
+                  Start Journey <span aria-hidden="true">→</span>
+                </span>
+              </Link>
             </div>
           </div>
         </main>
@@ -1299,3 +1341,4 @@ export default function Home() {
     </>
   );
 }
+
