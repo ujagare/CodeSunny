@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
@@ -39,6 +40,14 @@ app.get("/api/health", (_req, res) => {
 
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/users", require("./routes/user.routes"));
+
+if (process.env.NODE_ENV === "production") {
+  const clientDist = path.resolve(__dirname, "../../dist");
+  app.use(express.static(clientDist));
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(clientDist, "index.html"));
+  });
+}
 
 app.use((_req, _res, next) => {
   next(new ApiError(404, "Route not found"));
