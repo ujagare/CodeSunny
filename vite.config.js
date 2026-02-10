@@ -100,7 +100,7 @@ export default defineConfig({
     },
   },
   preview: {
-    allowedHosts: ["codesunny.onrender.com"],
+    allowedHosts: true,
   },
   resolve: {
     alias: {
