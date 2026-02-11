@@ -204,10 +204,15 @@ def chat(message: str):
 
 
 if __name__ == "__main__":
-    # Render provides PORT; FastMCP reads FASTMCP_HOST/FASTMCP_PORT
-    render_port = os.environ.get("PORT")
-    if render_port:
-        os.environ.setdefault("FASTMCP_PORT", render_port)
-    os.environ.setdefault("FASTMCP_HOST", "0.0.0.0")
-    # Streamable HTTP (recommended for deployments). Endpoint: /mcp
-    mcp.run(transport="streamable-http")
+    # Render provides PORT; bind to 0.0.0.0 so Render can reach it.
+    port = int(os.environ.get("PORT", "8000"))
+
+    # Build an ASGI app explicitly to control host/port across SDK versions.
+    if hasattr(mcp, "streamable_http_app"):
+        app = mcp.streamable_http_app(path="/mcp")
+    else:
+        app = mcp.http_app(path="/mcp")
+
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=port)
