@@ -255,10 +255,17 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
 
     # Build an ASGI app explicitly to control host/port across SDK versions.
+    ts = _get_transport_security()
     if hasattr(mcp, "streamable_http_app"):
-        app = mcp.streamable_http_app()
+        try:
+            app = mcp.streamable_http_app(transport_security=ts) if ts else mcp.streamable_http_app()
+        except TypeError:
+            app = mcp.streamable_http_app()
     else:
-        app = mcp.http_app()
+        try:
+            app = mcp.http_app(transport_security=ts) if ts else mcp.http_app()
+        except TypeError:
+            app = mcp.http_app()
 
     import uvicorn
     try:
