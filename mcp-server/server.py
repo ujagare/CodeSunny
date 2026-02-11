@@ -209,9 +209,9 @@ if __name__ == "__main__":
 
     # Build an ASGI app explicitly to control host/port across SDK versions.
     if hasattr(mcp, "streamable_http_app"):
-        app = mcp.streamable_http_app(path="/mcp")
+        app = mcp.streamable_http_app()
     else:
-        app = mcp.http_app(path="/mcp")
+        app = mcp.http_app()
 
     import uvicorn
 
