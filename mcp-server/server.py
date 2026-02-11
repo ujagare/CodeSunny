@@ -1,4 +1,6 @@
 from mcp.server.fastmcp import FastMCP
+from urllib.parse import urlparse
+import inspect
 from openai import OpenAI
 import json
 import os
@@ -23,7 +25,52 @@ def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text or "").strip().lower()
 
 
-mcp = FastMCP("CodeSunny MCP")
+def _get_transport_security():
+    try:
+        from mcp.server.lowlevel.server import TransportSecuritySettings
+    except Exception:
+        return None
+
+    # Allow explicit disable (useful in managed environments).
+    disable = os.environ.get("MCP_DISABLE_DNS_REBINDING", "").strip().lower()
+    if disable in ("1", "true", "yes"):
+        return TransportSecuritySettings(enable_dns_rebinding_protection=False)
+
+    allowed_hosts = []
+
+    render_host = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+    if render_host:
+        allowed_hosts.extend([render_host, f"{render_host}:*"])
+
+    extra_hosts = os.environ.get("MCP_ALLOWED_HOSTS", "")
+    for h in [x.strip() for x in extra_hosts.split(",") if x.strip()]:
+        allowed_hosts.append(h)
+
+    # If nothing to configure, let FastMCP defaults apply.
+    if not allowed_hosts:
+        return None
+
+    return TransportSecuritySettings(
+        enable_dns_rebinding_protection=True,
+        allowed_hosts=allowed_hosts,
+    )
+
+
+def _build_mcp():
+    kwargs = {}
+    try:
+        params = inspect.signature(FastMCP).parameters
+        if "transport_security" in params:
+            ts = _get_transport_security()
+            if ts is not None:
+                kwargs["transport_security"] = ts
+    except Exception:
+        pass
+
+    return FastMCP("CodeSunny MCP", **kwargs)
+
+
+mcp = _build_mcp()
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
