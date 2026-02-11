@@ -204,6 +204,10 @@ def chat(message: str):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", "8000"))
+    # Render provides PORT; FastMCP reads FASTMCP_HOST/FASTMCP_PORT
+    render_port = os.environ.get("PORT")
+    if render_port:
+        os.environ.setdefault("FASTMCP_PORT", render_port)
+    os.environ.setdefault("FASTMCP_HOST", "0.0.0.0")
     # Streamable HTTP (recommended for deployments). Endpoint: /mcp
-    mcp.run(transport="http", port=port)
+    mcp.run(transport="streamable-http")
