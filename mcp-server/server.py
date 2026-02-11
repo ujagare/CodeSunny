@@ -214,5 +214,12 @@ if __name__ == "__main__":
         app = mcp.http_app()
 
     import uvicorn
+    try:
+        from starlette.middleware.trustedhost import TrustedHostMiddleware
+
+        if hasattr(app, "add_middleware"):
+            app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
+    except Exception:
+        pass
 
     uvicorn.run(app, host="0.0.0.0", port=port)
