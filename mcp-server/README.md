@@ -1,7 +1,7 @@
 # CodeSunny MCP Server
 
-This is a minimal MCP server for CodeSunny with `search` and `fetch` tools
-(plus a placeholder `create_lead` tool).
+This is a minimal MCP server for CodeSunny with `search`, `fetch`, `chat`,
+and `create_lead` tools.
 
 ## Run locally
 
@@ -23,3 +23,17 @@ Create a new Web Service in Render and use:
 
 Render will inject the `PORT` environment variable automatically.
 The MCP endpoint will be `https://<your-service>.onrender.com/mcp`.
+
+## Required env vars (Render)
+
+- `OPENAI_API_KEY` (secret)
+- `OPENAI_MODEL` (example: `gpt-4.1-mini` or your preferred model)
+
+## Optional env vars (lead email automation)
+
+- `SMTP_HOST`
+- `SMTP_PORT` (default 587)
+- `SMTP_USER`
+- `SMTP_PASS`
+- `SMTP_FROM`
+- `LEADS_EMAIL_TO`
