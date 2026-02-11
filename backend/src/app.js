@@ -1,6 +1,4 @@
 const express = require("express");
-const path = require("path");
-const fs = require("fs");
 const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
@@ -8,16 +6,23 @@ const mongoSanitize = require("express-mongo-sanitize");
 const cookieParser = require("cookie-parser");
 const rateLimiter = require("./middlewares/rateLimiter");
 const requestLogger = require("./middlewares/requestLogger");
-const errorHandler = require("./middlewares/error.middleware");
-const ApiError = require("./utils/apiError");
 
 const app = express();
+const useViteDevServer = process.env.USE_VITE_DEV_SERVER === "true";
+const isDev = process.env.NODE_ENV !== "production";
 
 app.set("trust proxy", 1);
 app.use(
-  helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" },
-  })
+  helmet(
+    useViteDevServer && isDev
+      ? {
+          crossOriginResourcePolicy: { policy: "cross-origin" },
+          contentSecurityPolicy: false,
+        }
+      : {
+          crossOriginResourcePolicy: { policy: "cross-origin" },
+        }
+  )
 );
 
 const allowedOrigin = process.env.CORS_ORIGIN || "*";
@@ -41,19 +46,5 @@ app.get("/api/health", (_req, res) => {
 
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/users", require("./routes/user.routes"));
-
-const clientDist = path.resolve(__dirname, "../../dist");
-if (fs.existsSync(clientDist)) {
-  app.use(express.static(clientDist));
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(clientDist, "index.html"));
-  });
-}
-
-app.use((_req, _res, next) => {
-  next(new ApiError(404, "Route not found"));
-});
-
-app.use(errorHandler);
 
 module.exports = app;

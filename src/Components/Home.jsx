@@ -50,6 +50,7 @@ import Beams from "./Beams";
 import { AvatarCircles } from "@/registry/magicui/avatar-circles";
 import { SiReact, SiExpress, SiMongodb, SiNodedotjs } from "react-icons/si";
 import { FiServer } from "react-icons/fi";
+import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 
 const testimonials = [
   {
@@ -314,6 +315,14 @@ export default function Home() {
 
         {/* Main Content with padding-top for fixed navbar */}
         <main className="w-full relative flex items-center justify-center overflow-hidden bg-[#050515] hero pt-20">
+          <div className="absolute inset-0 -z-10">
+            <ShaderGradientCanvas style={{ position: "absolute", inset: 0 }}>
+              <ShaderGradient
+                control="query"
+                urlString="https://www.shadergradient.co/customize?animate=on&cDistance=3.6&cPolarAngle=90&color1=%2352ff89&color2=%23dbba95&color3=%23d0bce1&lightType=3d&shader=defaults&type=plane&uFrequency=5.5&uSpeed=0.4&uStrength=4"
+              />
+            </ShaderGradientCanvas>
+          </div>
           <div className="absolute inset-0 bg-linear-to-br from-blue-600/20 via-transparent to-transparent pointer-events-none"></div>
           <div className="absolute inset-0 pointer-events-none"></div>
           <div className="absolute inset-0 pointer-events-none">

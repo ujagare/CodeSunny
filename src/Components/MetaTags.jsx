@@ -58,6 +58,13 @@ const MetaTags = ({
       document.head.appendChild(canonical);
     }
     canonical.setAttribute("href", url);
+
+    // Signal prerenderer once tags are in place.
+    if (typeof document !== "undefined") {
+      setTimeout(() => {
+        document.dispatchEvent(new Event("prerender-ready"));
+      }, 0);
+    }
   }, [title, description, keywords, image, url, type]);
 
   return null;

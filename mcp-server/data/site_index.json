@@ -1,0 +1,62 @@
+[
+  {
+    "id": "home",
+    "title": "CodeSunny - Web Development & Digital Solutions",
+    "url": "https://codesunny.com/",
+    "text": "CodeSunny is a digital solutions agency offering web development, UI/UX design, digital marketing, e-commerce solutions, SEO optimization, and cloud services."
+  },
+  {
+    "id": "about",
+    "title": "About CodeSunny",
+    "url": "https://codesunny.com/about",
+    "text": "Learn about CodeSunny's mission, team, and expertise in web development, design, and digital marketing."
+  },
+  {
+    "id": "services",
+    "title": "CodeSunny Services",
+    "url": "https://codesunny.com/services",
+    "text": "Explore CodeSunny services: web development, UI/UX design, digital marketing, e-commerce solutions, SEO optimization, and cloud services."
+  },
+  {
+    "id": "web-development",
+    "title": "Web Development Services",
+    "url": "https://codesunny.com/services/web-development",
+    "text": "Frontend, backend, and full-stack web development using React, Node.js, and modern tooling."
+  },
+  {
+    "id": "ui-ux-design",
+    "title": "UI/UX Design Services",
+    "url": "https://codesunny.com/services/ui-ux-design",
+    "text": "Modern and responsive UI/UX design for intuitive user experiences."
+  },
+  {
+    "id": "digital-marketing",
+    "title": "Digital Marketing Services",
+    "url": "https://codesunny.com/services/digital-marketing",
+    "text": "SEO optimization, social media marketing, email marketing, PPC, analytics, and reporting."
+  },
+  {
+    "id": "ecommerce-solutions",
+    "title": "E-commerce Solutions",
+    "url": "https://codesunny.com/services/ecommerce-solutions",
+    "text": "Online store development with payment integration, inventory, and customer management."
+  },
+  {
+    "id": "seo-optimization",
+    "title": "SEO Optimization",
+    "url": "https://codesunny.com/services/seo-optimization",
+    "text": "Keyword research, on-page optimization, link building, technical SEO, and analytics."
+  },
+  {
+    "id": "cloud-solutions",
+    "title": "Cloud Solutions",
+    "url": "https://codesunny.com/services/cloud-solutions",
+    "text": "Cloud infrastructure, monitoring, backups, and performance optimization."
+  },
+  {
+    "id": "contact",
+    "title": "Contact CodeSunny",
+    "url": "https://codesunny.com/contact",
+    "text": "Get in touch with CodeSunny to discuss your project and requirements."
+  }
+]
