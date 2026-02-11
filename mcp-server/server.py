@@ -206,4 +206,4 @@ def chat(message: str):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
     # Streamable HTTP (recommended for deployments). Endpoint: /mcp
-    mcp.run(transport="http", host="0.0.0.0", port=port)
+    mcp.run(transport="http", port=port)
