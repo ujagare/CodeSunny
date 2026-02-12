@@ -11,11 +11,47 @@ const jsonHeaders = {
 };
 
 const buildId = () => `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
-const parseJson = async (res) => {
-  const text = await res.text();
+const parseToolPayload = (text) => {
   try {
-    return JSON.parse(text);
+    return JSON.parse(text || "{}");
+  } catch (_err) {
+    return { error: "Invalid tool payload" };
+  }
+};
+
+const parseMcpResponse = async (res) => {
+  const text = await res.text();
+  const trimmed = text.trim();
+
+  if (!trimmed) return {};
+
+  if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+    try {
+      return JSON.parse(trimmed);
+    } catch (_err) {
+      return { error: { message: "Invalid JSON response", raw: text } };
+    }
+  }
+
+  // Streamable HTTP can return event-stream payloads with "data:" lines.
+  const dataLines = trimmed
+    .split(/\r?\n/)
+    .filter((line) => line.startsWith("data:"))
+    .map((line) => line.slice(5).trim())
+    .filter(Boolean);
+
+  for (let i = dataLines.length - 1; i >= 0; i -= 1) {
+    const chunk = dataLines[i];
+    if (chunk === "[DONE]") continue;
+    try {
+      return JSON.parse(chunk);
+    } catch (_err) {
+      // Continue scanning previous chunks.
+    }
+  }
+
+  try {
+    return JSON.parse(trimmed);
   } catch (_err) {
     return { error: { message: "Invalid JSON response", raw: text } };
   }
@@ -43,15 +79,35 @@ const initializeSession = async () => {
 
   const res = await fetch(MCP_URL, {
     method: "POST",
-    headers: jsonHeaders,
+    headers: {
+      ...jsonHeaders,
+      "MCP-Protocol-Version": MCP_PROTOCOL_VERSION,
+    },
     body: JSON.stringify(payload),
   });
 
   const sessionId = res.headers.get("mcp-session-id");
-  const data = await parseJson(res);
+  const data = await parseMcpResponse(res);
 
   if (!res.ok || data?.error) {
     return { error: data?.error?.message || "MCP initialize failed" };
+  }
+
+  if (sessionId) {
+    const initializedPayload = {
+      jsonrpc: "2.0",
+      method: "notifications/initialized",
+      params: {},
+    };
+    await fetch(MCP_URL, {
+      method: "POST",
+      headers: {
+        ...jsonHeaders,
+        "MCP-Protocol-Version": MCP_PROTOCOL_VERSION,
+        "MCP-Session-Id": sessionId,
+      },
+      body: JSON.stringify(initializedPayload),
+    });
   }
 
   return { sessionId };
@@ -103,7 +159,7 @@ const callTool = async (toolName, args) => {
     });
   }
 
-  const data = await parseJson(res);
+  const data = await parseMcpResponse(res);
   if (!res.ok || data?.error) {
     return { error: data?.error?.message || "MCP tool call failed" };
   }
@@ -122,7 +178,9 @@ router.post("/search", async (req, res) => {
   const out = await callTool("search", { query });
   if (out.error) return res.status(502).json({ error: out.error });
   const text = out.result?.content?.[0]?.text || "{}";
-  return res.json(JSON.parse(text));
+  const payload = parseToolPayload(text);
+  if (payload?.error) return res.status(502).json({ error: payload.error });
+  return res.json(payload);
 });
 
 router.post("/fetch", async (req, res) => {
@@ -132,7 +190,9 @@ router.post("/fetch", async (req, res) => {
   const out = await callTool("fetch", { id });
   if (out.error) return res.status(502).json({ error: out.error });
   const text = out.result?.content?.[0]?.text || "{}";
-  return res.json(JSON.parse(text));
+  const payload = parseToolPayload(text);
+  if (payload?.error) return res.status(502).json({ error: payload.error });
+  return res.json(payload);
 });
 
 router.post("/chat", async (req, res) => {
@@ -142,7 +202,9 @@ router.post("/chat", async (req, res) => {
   const out = await callTool("chat", { message });
   if (out.error) return res.status(502).json({ error: out.error });
   const text = out.result?.content?.[0]?.text || "{}";
-  return res.json(JSON.parse(text));
+  const payload = parseToolPayload(text);
+  if (payload?.error) return res.status(502).json({ error: payload.error });
+  return res.json(payload);
 });
 
 router.post("/lead", async (req, res) => {
@@ -154,7 +216,9 @@ router.post("/lead", async (req, res) => {
   const out = await callTool("create_lead", { name, email, message: message || "" });
   if (out.error) return res.status(502).json({ error: out.error });
   const text = out.result?.content?.[0]?.text || "{}";
-  return res.json(JSON.parse(text));
+  const payload = parseToolPayload(text);
+  if (payload?.error) return res.status(502).json({ error: payload.error });
+  return res.json(payload);
 });
 
 module.exports = router;

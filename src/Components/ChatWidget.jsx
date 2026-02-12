@@ -36,7 +36,12 @@ const ChatWidget = () => {
         body: JSON.stringify({ message: userText }),
       });
       const data = await res.json();
-      const reply = data?.reply || "Sorry, I couldn't respond right now.";
+      const reply =
+        data?.reply ||
+        data?.error ||
+        (res.ok
+          ? "Sorry, I couldn't respond right now."
+          : "Chat service is temporarily unavailable.");
       setMessages((prev) => [...prev, { role: "assistant", text: reply }]);
     } catch (_err) {
       setMessages((prev) => [

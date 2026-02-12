@@ -258,6 +258,34 @@ if __name__ == "__main__":
     # Render provides PORT; bind to 0.0.0.0 so Render can reach it.
     port = int(os.environ.get("PORT", "8000"))
 
+    # Prefer FastMCP's native runner when available, since it auto-configures
+    # HTTP transport behavior across SDK versions.
+    try:
+        run_params = inspect.signature(mcp.run).parameters
+        run_kwargs = {}
+        ts = _get_transport_security()
+        if "transport" in run_params:
+            run_kwargs["transport"] = "http"
+        if "host" in run_params:
+            run_kwargs["host"] = "0.0.0.0"
+        if "port" in run_params:
+            run_kwargs["port"] = port
+        if "path" in run_params:
+            run_kwargs["path"] = "/mcp"
+        if "stateless_http" in run_params:
+            run_kwargs["stateless_http"] = True
+        if ts is not None and "transport_security" in run_params:
+            run_kwargs["transport_security"] = ts
+
+        if run_kwargs:
+            mcp.run(**run_kwargs)
+            raise SystemExit(0)
+    except SystemExit:
+        raise
+    except Exception:
+        # Fall back to explicit ASGI app wiring below.
+        pass
+
     # Build an ASGI app explicitly to control host/port across SDK versions.
     ts = _get_transport_security()
     if hasattr(mcp, "streamable_http_app"):
