@@ -18,7 +18,16 @@ process.on("uncaughtException", (err) => {
 
 const startServer = async () => {
   validateEnv();
-  await connectDB();
+  const allowStartWithoutDb =
+    process.env.ALLOW_START_WITHOUT_DB === "true" ||
+    (process.env.NODE_ENV !== "production" &&
+      process.env.ALLOW_START_WITHOUT_DB !== "false");
+  try {
+    await connectDB();
+  } catch (err) {
+    if (!allowStartWithoutDb) throw err;
+    logger.warn("Starting without DB connection (ALLOW_START_WITHOUT_DB enabled)");
+  }
 
   const clientRoot = path.resolve(__dirname, "../../");
   const clientDist = path.resolve(__dirname, "../../dist");

@@ -1,0 +1,212 @@
+{
+  "name": "CodeSunny Lead Scoring & Routing",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "codesunny-scoring",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-3",
+      "name": "Webhook - Receive Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lead Scoring Logic\nconst lead = $input.item.json;\n\nlet score = 0;\nlet priority = 'Low';\n\n// Score based on message length (shows interest)\nif (lead.message && lead.message.length > 100) score += 30;\nelse if (lead.message && lead.message.length > 50) score += 15;\n\n// Score based on keywords\nconst highValueKeywords = ['enterprise', 'budget', 'urgent', 'asap', 'project', 'hire', 'quote'];\nconst message = (lead.message || '').toLowerCase();\n\nhighValueKeywords.forEach(keyword => {\n  if (message.includes(keyword)) score += 10;\n});\n\n// Score based on email domain\nconst email = lead.email || '';\nif (email.includes('@gmail.com') || email.includes('@yahoo.com')) {\n  score += 5; // Personal email\n} else {\n  score += 20; // Business email\n}\n\n// Determine priority\nif (score >= 50) priority = 'High';\nelse if (score >= 30) priority = 'Medium';\nelse priority = 'Low';\n\nreturn {\n  ...lead,\n  score,\n  priority,\n  scored_at: new Date().toISOString()\n};"
+      },
+      "id": "code-1",
+      "name": "Calculate Lead Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.priority}}",
+              "value2": "High"
+            }
+          ]
+        }
+      },
+      "id": "switch-1",
+      "name": "Route by Priority",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "urgent@codesunny.com",
+        "toEmail": "your-email@gmail.com",
+        "subject": "🔥 HIGH PRIORITY LEAD: {{$json.name}}",
+        "emailType": "html",
+        "message": "<!DOCTYPE html>\n<html>\n<body style=\"font-family: Arial, sans-serif;\">\n  <div style=\"max-width: 600px; margin: 0 auto; padding: 20px; border: 3px solid #ef4444; border-radius: 8px;\">\n    <h2 style=\"color: #ef4444;\">🔥 HIGH PRIORITY LEAD</h2>\n    <p style=\"font-size: 18px; font-weight: bold;\">Score: {{$json.score}}/100</p>\n    <div style=\"background: #fef2f2; padding: 15px; border-radius: 5px; margin: 20px 0;\">\n      <p><strong>👤 Name:</strong> {{$json.name}}</p>\n      <p><strong>📧 Email:</strong> <a href=\"mailto:{{$json.email}}\">{{$json.email}}</a></p>\n      <p><strong>💬 Message:</strong></p>\n      <p>{{$json.message}}</p>\n    </div>\n    <p style=\"color: #ef4444; font-weight: bold;\">⚡ ACTION REQUIRED: Contact this lead within 1 hour!</p>\n  </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "email-high",
+      "name": "High Priority Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [850, 200],
+      "credentials": {
+        "smtp": {
+          "id": "1",
+          "name": "Gmail SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "leads@codesunny.com",
+        "toEmail": "your-email@gmail.com",
+        "subject": "📊 Medium Priority Lead: {{$json.name}}",
+        "emailType": "html",
+        "message": "<!DOCTYPE html>\n<html>\n<body style=\"font-family: Arial, sans-serif;\">\n  <div style=\"max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #f59e0b; border-radius: 8px;\">\n    <h2 style=\"color: #f59e0b;\">📊 Medium Priority Lead</h2>\n    <p>Score: {{$json.score}}/100</p>\n    <div style=\"background: #fffbeb; padding: 15px; border-radius: 5px; margin: 20px 0;\">\n      <p><strong>Name:</strong> {{$json.name}}</p>\n      <p><strong>Email:</strong> {{$json.email}}</p>\n      <p><strong>Message:</strong> {{$json.message}}</p>\n    </div>\n    <p>Follow up within 24 hours.</p>\n  </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "email-medium",
+      "name": "Medium Priority Alert",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [850, 400],
+      "credentials": {
+        "smtp": {
+          "id": "1",
+          "name": "Gmail SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "sheet",
+        "operation": "append",
+        "documentId": "YOUR_GOOGLE_SHEET_ID",
+        "sheetName": "Leads",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{$json.name}}",
+            "Email": "={{$json.email}}",
+            "Message": "={{$json.message}}",
+            "Score": "={{$json.score}}",
+            "Priority": "={{$json.priority}}",
+            "Date": "={{$json.created_at}}"
+          }
+        },
+        "options": {}
+      },
+      "id": "sheets-2",
+      "name": "Save All Leads",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [850, 600],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "2",
+          "name": "Google Sheets OAuth2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true, \"score\": $json.score, \"priority\": $json.priority } }}"
+      },
+      "id": "respond-3",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Receive Lead": {
+      "main": [
+        [
+          {
+            "node": "Calculate Lead Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Lead Score": {
+      "main": [
+        [
+          {
+            "node": "Route by Priority",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Priority": {
+      "main": [
+        [
+          {
+            "node": "High Priority Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Medium Priority Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Save All Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High Priority Alert": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Medium Priority Alert": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save All Leads": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

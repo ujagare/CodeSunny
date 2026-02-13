@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const MCP_URL = process.env.MCP_URL;
+const MCP_URL = process.env.MCP_URL || "http://localhost:8000/mcp";
 const MCP_PROTOCOL_VERSION = "2025-03-26";
 
 const jsonHeaders = {
@@ -77,40 +77,49 @@ const initializeSession = async () => {
     },
   };
 
-  const res = await fetch(MCP_URL, {
-    method: "POST",
-    headers: {
-      ...jsonHeaders,
-      "MCP-Protocol-Version": MCP_PROTOCOL_VERSION,
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const sessionId = res.headers.get("mcp-session-id");
-  const data = await parseMcpResponse(res);
-
-  if (!res.ok || data?.error) {
-    return { error: data?.error?.message || "MCP initialize failed" };
-  }
-
-  if (sessionId) {
-    const initializedPayload = {
-      jsonrpc: "2.0",
-      method: "notifications/initialized",
-      params: {},
-    };
-    await fetch(MCP_URL, {
+  try {
+    console.log("Initializing MCP session at:", MCP_URL);
+    const res = await fetch(MCP_URL, {
       method: "POST",
       headers: {
         ...jsonHeaders,
         "MCP-Protocol-Version": MCP_PROTOCOL_VERSION,
-        "MCP-Session-Id": sessionId,
       },
-      body: JSON.stringify(initializedPayload),
+      body: JSON.stringify(payload),
     });
-  }
 
-  return { sessionId };
+    const sessionId = res.headers.get("mcp-session-id");
+    const data = await parseMcpResponse(res);
+
+    console.log("MCP init response status:", res.status);
+    console.log("MCP init response data:", data);
+
+    if (!res.ok || data?.error) {
+      return { error: data?.error?.message || "MCP initialize failed" };
+    }
+
+    if (sessionId) {
+      const initializedPayload = {
+        jsonrpc: "2.0",
+        method: "notifications/initialized",
+        params: {},
+      };
+      await fetch(MCP_URL, {
+        method: "POST",
+        headers: {
+          ...jsonHeaders,
+          "MCP-Protocol-Version": MCP_PROTOCOL_VERSION,
+          "MCP-Session-Id": sessionId,
+        },
+        body: JSON.stringify(initializedPayload),
+      });
+    }
+
+    return { sessionId };
+  } catch (error) {
+    console.error("MCP initialization error:", error);
+    return { error: `Failed to connect to MCP server: ${error.message}` };
+  }
 };
 
 const callTool = async (toolName, args) => {
@@ -200,10 +209,21 @@ router.post("/chat", async (req, res) => {
   if (!message) return res.status(400).json({ error: "message is required" });
 
   const out = await callTool("chat", { message });
+  console.log("MCP callTool result:", JSON.stringify(out, null, 2)); // Debug
+
   if (out.error) return res.status(502).json({ error: out.error });
+
+  // MCP returns content array with text field containing JSON
   const text = out.result?.content?.[0]?.text || "{}";
+  console.log("Extracted text:", text); // Debug
+
   const payload = parseToolPayload(text);
+  console.log("Parsed payload:", payload); // Debug
+
+  // Check if parsing was successful
   if (payload?.error) return res.status(502).json({ error: payload.error });
+
+  // Return the parsed payload (should have 'reply' field)
   return res.json(payload);
 });
 
@@ -213,7 +233,11 @@ router.post("/lead", async (req, res) => {
     return res.status(400).json({ error: "name and email are required" });
   }
 
-  const out = await callTool("create_lead", { name, email, message: message || "" });
+  const out = await callTool("create_lead", {
+    name,
+    email,
+    message: message || "",
+  });
   if (out.error) return res.status(502).json({ error: out.error });
   const text = out.result?.content?.[0]?.text || "{}";
   const payload = parseToolPayload(text);

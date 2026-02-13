@@ -1,0 +1,131 @@
+{
+  "name": "CodeSunny Slack Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "codesunny-slack",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-2",
+      "name": "Webhook - Receive Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "YOUR_CHANNEL_ID",
+          "mode": "list"
+        },
+        "text": "=🎯 *New Lead from CodeSunny Website*\n\n*Name:* {{$json.name}}\n*Email:* {{$json.email}}\n*Message:* {{$json.message}}\n*Date:* {{$json.created_at}}\n\n_Reply to this lead ASAP!_",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        },
+        "blocksUi": {
+          "blocksValues": [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "=🎯 *New Lead Alert*"
+              }
+            },
+            {
+              "type": "section",
+              "fields": [
+                {
+                  "type": "mrkdwn",
+                  "text": "=*Name:*\n{{$json.name}}"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "=*Email:*\n{{$json.email}}"
+                }
+              ]
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "=*Message:*\n{{$json.message}}"
+              }
+            },
+            {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "📧 Email Lead"
+                  },
+                  "url": "=mailto:{{$json.email}}",
+                  "style": "primary"
+                },
+                {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "📊 View in Sheets"
+                  },
+                  "url": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "id": "slack-1",
+      "name": "Send Slack Message",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.1,
+      "position": [450, 300],
+      "credentials": {
+        "slackApi": {
+          "id": "3",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"success\": true } }}"
+      },
+      "id": "respond-2",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - Receive Lead": {
+      "main": [
+        [
+          {
+            "node": "Send Slack Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Slack Message": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

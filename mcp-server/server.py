@@ -9,6 +9,24 @@ import re
 from datetime import datetime
 import smtplib
 from email.message import EmailMessage
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv(Path(__file__).parent / ".env")
+
+# Try to import Groq as fallback
+try:
+    from groq import Groq
+    GROQ_AVAILABLE = True
+except ImportError:
+    GROQ_AVAILABLE = False
+
+# Try to import Google Gemini
+try:
+    import google.generativeai as genai
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
 
 DATA_PATH = Path(__file__).parent / "data" / "site_index.json"
 LEADS_PATH = Path(__file__).parent / "data" / "leads.json"
@@ -75,7 +93,39 @@ def _build_mcp():
 
 
 mcp = _build_mcp()
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+# Initialize AI clients (try multiple providers)
+openai_key = os.environ.get("OPENAI_API_KEY")
+groq_key = os.environ.get("GROQ_API_KEY")
+gemini_key = os.environ.get("GEMINI_API_KEY")
+
+# Debug: Print what keys are found
+print(f"Environment keys found:")
+print(f"  - OPENAI_API_KEY: {openai_key[:20] if openai_key else 'None'}...")
+print(f"  - GROQ_API_KEY: {groq_key[:20] if groq_key else 'None'}...")
+print(f"  - GEMINI_API_KEY: {gemini_key[:20] if gemini_key else 'None'}...")
+
+openai_client = OpenAI(api_key=openai_key) if openai_key and openai_key != "your_openai_api_key_here" and not openai_key.startswith("#") else None
+groq_client = Groq(api_key=groq_key) if GROQ_AVAILABLE and groq_key and groq_key != "your_groq_api_key_here" else None
+
+# Initialize Gemini
+gemini_client = None
+if GEMINI_AVAILABLE and gemini_key and gemini_key != "your_gemini_api_key_here":
+    genai.configure(api_key=gemini_key)
+    gemini_client = genai.GenerativeModel('gemini-pro')
+
+# Use whichever client is available (priority: Groq > OpenAI > Gemini)
+client = groq_client or openai_client or gemini_client
+client_type = "groq" if groq_client else ("openai" if openai_client else ("gemini" if gemini_client else None))
+
+# Debug: Print which client is being used
+print(f"AI Client initialized: {client_type}")
+if client_type:
+    print(f"  - OpenAI: {'✓' if openai_client else '✗'}")
+    print(f"  - Groq: {'✓' if groq_client else '✗'}")
+    print(f"  - Gemini: {'✓' if gemini_client else '✗'}")
+else:
+    print("  - No AI client available, will use fallback responses")
 
 
 def rank_docs(query: str, limit: int = 5):
@@ -116,17 +166,56 @@ def send_lead_email(lead):
     if not (host and user and password and email_from and email_to):
         return False
 
+    # Create HTML email with better formatting
+    html_content = f"""
+    <html>
+    <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+            <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
+                🎯 New Lead from CodeSunny Website
+            </h2>
+            
+            <div style="background: #f8fafc; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p style="margin: 10px 0;"><strong>👤 Name:</strong> {lead.get('name', 'N/A')}</p>
+                <p style="margin: 10px 0;"><strong>📧 Email:</strong> 
+                    <a href="mailto:{lead.get('email', '')}" style="color: #2563eb;">{lead.get('email', 'N/A')}</a>
+                </p>
+                <p style="margin: 10px 0;"><strong>📅 Date:</strong> {lead.get('created_at', 'N/A')}</p>
+            </div>
+            
+            <div style="margin: 20px 0;">
+                <h3 style="color: #475569;">💬 Message:</h3>
+                <p style="background: #fff; padding: 15px; border-left: 4px solid #2563eb; margin: 10px 0;">
+                    {lead.get('message', 'No message provided')}
+                </p>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #64748b; font-size: 12px;">
+                <p>This lead was captured via the CodeSunny chatbot.</p>
+                <p>Reply directly to this email to contact the lead.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+
     msg = EmailMessage()
-    msg["Subject"] = f"New Lead: {lead.get('name','')}"
+    msg["Subject"] = f"🎯 New Lead: {lead.get('name','')} - CodeSunny"
     msg["From"] = email_from
     msg["To"] = email_to
-    msg.set_content(json.dumps(lead, indent=2))
+    msg["Reply-To"] = lead.get('email', email_from)  # Allow direct reply to lead
+    msg.set_content(f"New lead from {lead.get('name', 'Unknown')}\nEmail: {lead.get('email', 'N/A')}\nMessage: {lead.get('message', 'N/A')}")
+    msg.add_alternative(html_content, subtype='html')
 
-    with smtplib.SMTP(host, port) as server:
-        server.starttls()
-        server.login(user, password)
-        server.send_message(msg)
-    return True
+    try:
+        with smtplib.SMTP(host, port) as server:
+            server.starttls()
+            server.login(user, password)
+            server.send_message(msg)
+        return True
+    except Exception as e:
+        print(f"Email send error: {e}")
+        return False
 
 
 @mcp.tool()
@@ -209,84 +298,127 @@ def create_lead(name: str, email: str, message: str = ""):
 @mcp.tool()
 def chat(message: str):
     """AI chat with CodeSunny context."""
-    model = os.environ.get("OPENAI_MODEL")
-    if not model:
+    docs = rank_docs(message, limit=3)
+    
+    # Build intelligent fallback response based on search results
+    def build_fallback_response():
+        if docs:
+            # Create a helpful response with search results
+            intro = "I found some relevant information for you:\n\n"
+            results = []
+            for i, doc in enumerate(docs, 1):
+                snippet = doc.get('text', '')[:150] + '...' if len(doc.get('text', '')) > 150 else doc.get('text', '')
+                results.append(f"{i}. **{doc['title']}**\n   {snippet}\n   🔗 {doc['url']}")
+            
+            outro = "\n\nWould you like to know more about any of these? Feel free to ask!"
+            return intro + "\n\n".join(results) + outro
+        else:
+            return (
+                "Thanks for reaching out! I'm here to help you learn about CodeSunny's services.\n\n"
+                "We offer:\n"
+                "• Web Development\n"
+                "• UI/UX Design\n"
+                "• Digital Marketing\n"
+                "• E-commerce Solutions\n\n"
+                "Visit https://codesunny.com/services to explore our offerings, or ask me anything!"
+            )
+    
+    # Try OpenAI first, fallback to search-based response
+    if not client:
         return {
             "content": [
                 {
                     "type": "text",
-                    "text": json.dumps(
-                        {"error": "OPENAI_MODEL not set in environment"}
-                    ),
+                    "text": json.dumps({"reply": build_fallback_response()}),
                 }
             ]
         }
-
-    docs = rank_docs(message, limit=3)
+    
+    # Determine which model to use
+    if client_type == "groq":
+        model = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+    elif client_type == "gemini":
+        model = None  # Gemini uses different API
+    else:
+        model = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
+    
     context = "\n".join(
         [f"- {d['title']}: {d['text']} ({d['url']})" for d in docs]
     )
 
     system = (
-        "You are CodeSunny's support assistant. "
-        "Be concise, helpful, and suggest relevant service pages. "
-        "If you are unsure, ask a short clarifying question."
+        "You are CodeSunny's AI assistant - friendly, knowledgeable, and helpful. "
+        "CodeSunny is a web development and digital solutions company. "
+        "\n\nYour role:\n"
+        "- Answer ALL questions about services, technologies, and processes in detail\n"
+        "- Provide specific information and examples from the context\n"
+        "- Be conversational, engaging, and build rapport with the user\n"
+        "- Handle multiple questions in the conversation naturally\n"
+        "- Share technical details, timelines, and general process information\n"
+        "\nWhen to suggest connecting with the team:\n"
+        "ONLY suggest contact when user asks about:\n"
+        "- Specific pricing for their project\n"
+        "- Custom quotes or estimates\n"
+        "- Starting a project or hiring\n"
+        "- Detailed project timeline for their specific needs\n"
+        "\nFor these cases, say: 'I'd love to connect you with our team for a detailed discussion. "
+        "Could you share your name and email so we can reach out?'\n"
+        "\nCodeSunny Services:\n"
+        "- Web Development: React, Node.js, full-stack solutions, custom web apps\n"
+        "- UI/UX Design: Modern interfaces, user research, prototyping, responsive design\n"
+        "- E-commerce: Online stores, payment integration, inventory management\n"
+        "- Cloud Solutions: AWS deployment, scaling, DevOps, CI/CD\n"
+        "- AI Automation: Chatbots, workflow automation, AI integration\n"
+        "- SEO: Search rankings, performance optimization, content strategy\n"
+        "- N8N Workflows: Business process automation, integrations\n"
+        "\nKeep responses informative but concise (3-5 sentences)."
     )
-    user = f"User: {message}\n\nRelevant pages:\n{context}"
+    user = f"User question: {message}\n\nRelevant information:\n{context}"
 
-    response = client.responses.create(
-        model=model,
-        input=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
-        temperature=0.4,
-    )
-
-    text = response.output_text or ""
-    return {
-        "content": [
-            {
-                "type": "text",
-                "text": json.dumps({"reply": text}),
-            }
-        ]
-    }
+    try:
+        if client_type == "gemini":
+            # Gemini API call
+            prompt = f"{system}\n\n{user}"
+            response = client.generate_content(prompt)
+            text = response.text or ""
+        else:
+            # OpenAI/Groq API call
+            response = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                temperature=0.4,
+            )
+            text = response.choices[0].message.content or ""
+        
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": json.dumps({"reply": text}),
+                }
+            ]
+        }
+    except Exception as e:
+        # Log the error for debugging
+        print(f"AI API Error ({client_type}): {type(e).__name__}: {str(e)}")
+        # Fallback to search-based response on any error (rate limit, no credits, etc.)
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": json.dumps({"reply": build_fallback_response()}),
+                }
+            ]
+        }
 
 
 if __name__ == "__main__":
-    # Render provides PORT; bind to 0.0.0.0 so Render can reach it.
     port = int(os.environ.get("PORT", "8000"))
-
-    # Prefer FastMCP's native runner when available, since it auto-configures
-    # HTTP transport behavior across SDK versions.
-    try:
-        run_params = inspect.signature(mcp.run).parameters
-        run_kwargs = {}
-        ts = _get_transport_security()
-        if "transport" in run_params:
-            run_kwargs["transport"] = "http"
-        if "host" in run_params:
-            run_kwargs["host"] = "0.0.0.0"
-        if "port" in run_params:
-            run_kwargs["port"] = port
-        if "path" in run_params:
-            run_kwargs["path"] = "/mcp"
-        if "stateless_http" in run_params:
-            run_kwargs["stateless_http"] = True
-        if ts is not None and "transport_security" in run_params:
-            run_kwargs["transport_security"] = ts
-
-        if run_kwargs:
-            mcp.run(**run_kwargs)
-            raise SystemExit(0)
-    except SystemExit:
-        raise
-    except Exception:
-        # Fall back to explicit ASGI app wiring below.
-        pass
-
-    # Build an ASGI app explicitly to control host/port across SDK versions.
+    
+    # Build ASGI app - try both methods
     ts = _get_transport_security()
     if hasattr(mcp, "streamable_http_app"):
         try:
@@ -298,14 +430,11 @@ if __name__ == "__main__":
             app = mcp.http_app(transport_security=ts) if ts else mcp.http_app()
         except TypeError:
             app = mcp.http_app()
-
+    
     import uvicorn
-    try:
-        from starlette.middleware.trustedhost import TrustedHostMiddleware
-
-        if hasattr(app, "add_middleware"):
-            app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
-    except Exception:
-        pass
-
+    print(f"Starting MCP server on http://0.0.0.0:{port}")
+    print("Available routes:")
+    if hasattr(app, 'routes'):
+        for route in app.routes:
+            print(f"  {route}")
     uvicorn.run(app, host="0.0.0.0", port=port)
