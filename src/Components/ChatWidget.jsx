@@ -30,7 +30,8 @@ const ChatWidget = () => {
     setMessages((prev) => [...prev, { role: "user", text: userText }]);
     setSending(true);
     try {
-      const res = await fetch("/api/mcp/chat", {
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${apiUrl}/api/mcp/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: userText }),
@@ -103,7 +104,8 @@ const ChatWidget = () => {
     if (!q) return;
     setSearching(true);
     try {
-      const res = await fetch("/api/mcp/search", {
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${apiUrl}/api/mcp/search`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: q }),
@@ -125,7 +127,8 @@ const ChatWidget = () => {
       return;
     }
     try {
-      const res = await fetch("/api/mcp/lead", {
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${apiUrl}/api/mcp/lead`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lead),

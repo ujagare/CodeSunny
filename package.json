@@ -8,6 +8,7 @@
     "dev:server": "npm --prefix backend run dev",
     "build": "vite build",
     "build:render": "npm install && npm run build && cd backend && npm install",
+    "build:prod": "vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "vite preview --host 0.0.0.0 --port $PORT",
@@ -15,7 +16,10 @@
     "preview:prod": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "lighthouse:prep": "npm run build && npm run preview:prod",
     "lighthouse:run": "lighthouse http://127.0.0.1:4173 --output html --output json --output-path ./lighthouse-report --only-categories=performance,accessibility,best-practices,seo",
-    "sitemap:update": "node scripts/update-sitemap-lastmod.js"
+    "sitemap:update": "node scripts/update-sitemap-lastmod.js",
+    "verify:config": "node verify-deployment-config.cjs",
+    "test:prod": "node test-production.cjs",
+    "deploy:check": "npm run verify:config && npm run build:prod"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
