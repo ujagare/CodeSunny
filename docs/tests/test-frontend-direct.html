@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Direct Frontend Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #1a1a1a;
+        color: #fff;
+      }
+      .test-section {
+        background: #2a2a2a;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border: 1px solid #444;
+      }
+      button {
+        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+      .result {
+        margin-top: 15px;
+        padding: 15px;
+        background: #1a1a1a;
+        border-radius: 4px;
+        border-left: 4px solid #3b82f6;
+        white-space: pre-wrap;
+        font-family: monospace;
+        font-size: 12px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+      .success {
+        border-left-color: #10b981;
+      }
+      .error {
+        border-left-color: #ef4444;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .metric-card {
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .metric-card.performance {
+        background: rgba(59, 130, 246, 0.2);
+      }
+      .metric-card.seo {
+        background: rgba(16, 185, 129, 0.2);
+      }
+      .metric-card.mobile {
+        background: rgba(139, 92, 246, 0.2);
+      }
+      .metric-card.security {
+        background: rgba(251, 191, 36, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🧪 Direct Frontend Test</h1>
+    <p>Testing chatbot features without React</p>
+
+    <div class="test-section">
+      <h2>🎨 Image Generation Test</h2>
+      <button onclick="testImage()">Generate Sunset Image</button>
+      <button onclick="testImage2()">Generate Business Background</button>
+      <div id="imageResult" class="result" style="display: none"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>🔍 SEO Audit Test</h2>
+      <button onclick="testSEO('https://example.com')">
+        Audit example.com
+      </button>
+      <button onclick="testSEO('https://google.com')">Audit google.com</button>
+      <div id="seoResult" class="result" style="display: none"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>💬 Chat Test</h2>
+      <button onclick="testChat()">What services?</button>
+      <button onclick="testQuote()">Get Quote</button>
+      <div id="chatResult" class="result" style="display: none"></div>
+    </div>
+
+    <script>
+      const API_URL = "http://localhost:5000";
+
+      async function testImage() {
+        const resultDiv = document.getElementById("imageResult");
+        resultDiv.style.display = "block";
+        resultDiv.className = "result";
+        resultDiv.innerHTML = "⏳ Generating image...";
+
+        try {
+          const response = await fetch(`${API_URL}/api/mcp/chat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: "Generate an image of a sunset" }),
+          });
+
+          const data = await response.json();
+          console.log("Image Response:", data);
+
+          if (data.success && data.images && data.images.length > 0) {
+            resultDiv.className = "result success";
+            const img = data.images[0];
+            resultDiv.innerHTML = `
+                        ✅ Image Generated Successfully!
+                        
+                        Style: ${data.style}
+                        Size: ${data.size}
+                        Prompt: ${data.prompt.substring(0, 100)}...
+                        
+                        ${img.base64 ? `<img src="data:image/jpeg;base64,${img.base64}" alt="Generated">` : ""}
+                        ${img.url ? `<img src="${img.url}" alt="Generated">` : ""}
+                    `;
+          } else {
+            resultDiv.className = "result error";
+            resultDiv.innerHTML = `❌ Failed: ${JSON.stringify(data, null, 2)}`;
+          }
+        } catch (error) {
+          resultDiv.className = "result error";
+          resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        }
+      }
+
+      async function testImage2() {
+        const resultDiv = document.getElementById("imageResult");
+        resultDiv.style.display = "block";
+        resultDiv.className = "result";
+        resultDiv.innerHTML = "⏳ Generating image...";
+
+        try {
+          const response = await fetch(`${API_URL}/api/mcp/chat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: "Create a professional business background",
+            }),
+          });
+
+          const data = await response.json();
+          console.log("Image Response:", data);
+
+          if (data.success && data.images && data.images.length > 0) {
+            resultDiv.className = "result success";
+            const img = data.images[0];
+            resultDiv.innerHTML = `
+                        ✅ Image Generated Successfully!
+                        
+                        Style: ${data.style}
+                        Prompt: ${data.prompt.substring(0, 100)}...
+                        
+                        ${img.base64 ? `<img src="data:image/jpeg;base64,${img.base64}" alt="Generated">` : ""}
+                    `;
+          } else {
+            resultDiv.className = "result error";
+            resultDiv.innerHTML = `❌ Failed: ${JSON.stringify(data, null, 2)}`;
+          }
+        } catch (error) {
+          resultDiv.className = "result error";
+          resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        }
+      }
+
+      async function testSEO(url) {
+        const resultDiv = document.getElementById("seoResult");
+        resultDiv.style.display = "block";
+        resultDiv.className = "result";
+        resultDiv.innerHTML = "⏳ Running SEO audit...";
+
+        try {
+          const response = await fetch(`${API_URL}/api/mcp/chat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: `SEO audit for ${url}` }),
+          });
+
+          const data = await response.json();
+          console.log("SEO Response:", data);
+
+          if (data.url && data.overall_score && data.metrics) {
+            resultDiv.className = "result success";
+            resultDiv.innerHTML = `
+                        ✅ SEO Audit Complete!
+                        
+                        URL: ${data.url}
+                        Overall Score: ${data.overall_score}/100
+                        
+                        <div class="metrics">
+                            <div class="metric-card performance">
+                                <div>Performance</div>
+                                <div style="font-size: 24px; font-weight: bold;">${data.metrics.performance.score}</div>
+                            </div>
+                            <div class="metric-card seo">
+                                <div>SEO</div>
+                                <div style="font-size: 24px; font-weight: bold;">${data.metrics.seo.score}</div>
+                            </div>
+                            <div class="metric-card mobile">
+                                <div>Mobile</div>
+                                <div style="font-size: 24px; font-weight: bold;">${data.metrics.mobile.score}</div>
+                            </div>
+                            <div class="metric-card security">
+                                <div>Security</div>
+                                <div style="font-size: 24px; font-weight: bold;">${data.metrics.security.score}</div>
+                            </div>
+                        </div>
+                        
+                        Priority Actions:
+                        ${data.priority_actions.map((a) => `• ${a}`).join("\n")}
+                    `;
+          } else {
+            resultDiv.className = "result error";
+            resultDiv.innerHTML = `❌ Failed: ${JSON.stringify(data, null, 2)}`;
+          }
+        } catch (error) {
+          resultDiv.className = "result error";
+          resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        }
+      }
+
+      async function testChat() {
+        const resultDiv = document.getElementById("chatResult");
+        resultDiv.style.display = "block";
+        resultDiv.className = "result";
+        resultDiv.innerHTML = "⏳ Asking...";
+
+        try {
+          const response = await fetch(`${API_URL}/api/mcp/chat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: "What services do you offer?" }),
+          });
+
+          const data = await response.json();
+          console.log("Chat Response:", data);
+
+          if (data.reply) {
+            resultDiv.className = "result success";
+            resultDiv.innerHTML = `✅ Response:\n\n${data.reply}`;
+          } else {
+            resultDiv.className = "result error";
+            resultDiv.innerHTML = `❌ Failed: ${JSON.stringify(data, null, 2)}`;
+          }
+        } catch (error) {
+          resultDiv.className = "result error";
+          resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        }
+      }
+
+      async function testQuote() {
+        const resultDiv = document.getElementById("chatResult");
+        resultDiv.style.display = "block";
+        resultDiv.className = "result";
+        resultDiv.innerHTML = "⏳ Getting quote...";
+
+        try {
+          const response = await fetch(`${API_URL}/api/mcp/chat`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: "How much for an ecommerce website?",
+            }),
+          });
+
+          const data = await response.json();
+          console.log("Quote Response:", data);
+
+          if (data.reply) {
+            resultDiv.className = "result success";
+            resultDiv.innerHTML = `✅ Response:\n\n${data.reply}`;
+          } else {
+            resultDiv.className = "result error";
+            resultDiv.innerHTML = `❌ Failed: ${JSON.stringify(data, null, 2)}`;
+          }
+        } catch (error) {
+          resultDiv.className = "result error";
+          resultDiv.innerHTML = `❌ Error: ${error.message}`;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,275 @@
+﻿â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+â•‘          TWILIO WHATSAPP - STEP-BY-STEP SETUP GUIDE                 â•‘
+â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+âœ… TWILIO LIBRARY INSTALLED
+âœ… CODE READY
+âšª NEED YOUR CREDENTIALS
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“‹ STEP 1: CREATE TWILIO ACCOUNT (5 minutes)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. Open browser and go to: https://www.twilio.com/try-twilio
+
+2. Click "Sign up" (red button)
+
+3. Fill form:
+   - First Name: Your name
+   - Last Name: Your surname
+   - Email: Your email
+   - Password: Create strong password
+   - Check "I'm not a robot"
+   - Click "Start your free trial"
+
+4. Verify email:
+   - Check your email inbox
+   - Click verification link
+   - Return to Twilio
+
+5. Verify phone number:
+   - Enter your mobile number: +91XXXXXXXXXX
+   - Click "Verify"
+   - Enter OTP received via SMS
+   - Click "Submit"
+
+6. Answer questions (optional):
+   - Which Twilio product? â†’ "WhatsApp"
+   - What do you plan to build? â†’ "Customer notifications"
+   - How do you want to build? â†’ "With code"
+   - What's your preferred language? â†’ "Python"
+   - Click "Get Started"
+
+âœ… Account created! Free $15 credit added.
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“‹ STEP 2: GET WHATSAPP SANDBOX (3 minutes)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. In Twilio Console, left sidebar:
+   - Click "Messaging"
+   - Click "Try it out"
+   - Click "Send a WhatsApp message"
+
+2. You'll see:
+   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚ Join your sandbox                                           â”‚
+   â”‚                                                             â”‚
+   â”‚ To use the Sandbox, send this message to the number below: â”‚
+   â”‚                                                             â”‚
+   â”‚ join happy-tiger                                           â”‚
+   â”‚                                                             â”‚
+   â”‚ To: +1 415 523 8886                                        â”‚
+   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+3. Open WhatsApp on your phone
+
+4. Create new message to: +1 415 523 8886
+
+5. Send message: join happy-tiger
+   (Your code will be different - use the one shown on screen)
+
+6. You'll receive confirmation:
+   "Twilio Sandbox: âœ… You are all set! ..."
+
+âœ… Sandbox activated!
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“‹ STEP 3: GET API CREDENTIALS (2 minutes)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. In Twilio Console, click "Account" (top right)
+   - Or go to: https://console.twilio.com
+
+2. You'll see "Account Info" section:
+   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚ Account Info                                                â”‚
+   â”‚                                                             â”‚
+   â”‚ Account SID                                                 â”‚
+   â”‚ AC_REPLACE_WITH_YOUR_TWILIO_SID                         â”‚
+   â”‚ [Copy]                                                      â”‚
+   â”‚                                                             â”‚
+   â”‚ Auth Token                                                  â”‚
+   â”‚ ******************************** [Show] [Copy]             â”‚
+   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+3. Copy Account SID:
+   - Click "Copy" button next to Account SID
+   - Save it somewhere (Notepad)
+
+4. Copy Auth Token:
+   - Click "Show" to reveal token
+   - Click "Copy" button
+   - Save it somewhere (Notepad)
+
+5. WhatsApp number is: +14155238886 (sandbox number)
+
+âœ… Credentials copied!
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“‹ STEP 4: ADD CREDENTIALS TO .ENV (1 minute)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. Open file: mcp-server/.env
+
+2. Find these lines (at bottom):
+   # TWILIO_ACCOUNT_SID=AC_REPLACE_WITH_YOUR_TWILIO_SID
+   # TWILIO_AUTH_TOKEN=your_auth_token_here
+   # TWILIO_WHATSAPP_FROM=+14155238886
+
+3. Remove # and replace with your values:
+   TWILIO_ACCOUNT_SID=AC_REPLACE_WITH_YOUR_TWILIO_SID
+   TWILIO_AUTH_TOKEN=your_actual_auth_token_here
+   TWILIO_WHATSAPP_FROM=+14155238886
+
+4. Save file (Ctrl+S)
+
+âœ… Configuration complete!
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“‹ STEP 5: TEST IT! (1 minute)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. Open terminal in mcp-server folder
+
+2. Run test command:
+   python whatsapp_automation.py send +919876543210 "Test message from CodeSunny!"
+
+   Replace +919876543210 with YOUR phone number
+   (The one you used to join sandbox)
+
+3. Check your WhatsApp - you should receive the message!
+
+âœ… If message received â†’ SUCCESS! ðŸŽ‰
+âŒ If error â†’ Check credentials in .env
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸŽ¯ WHAT YOU CAN DO NOW
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. Send Individual Messages:
+   python whatsapp_automation.py send +919876543210 "Hello!"
+
+2. Send Quotes:
+   python whatsapp_automation.py quote +919876543210 "web,seo"
+
+3. Broadcast to Multiple:
+   python whatsapp_automation.py broadcast "New offer!" hot-leads
+
+4. Auto-Reply (when integrated with webhook):
+   python whatsapp_automation.py auto-reply enable
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+âš ï¸ SANDBOX LIMITATIONS
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. Can only send to numbers that joined sandbox
+   - Each recipient must send "join <code>" first
+   - Good for testing
+
+2. Messages have Twilio branding
+   - "Sent from your Twilio trial account - "
+
+3. Limited to 500 messages/day
+
+TO REMOVE LIMITATIONS:
+- Upgrade to paid account ($20/month minimum)
+- Get approved WhatsApp Business number
+- No more sandbox restrictions
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ’° PRICING (AFTER FREE TRIAL)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Free Trial:
+- $15 credit (3000 messages)
+- All features available
+- Sandbox mode
+
+Paid Account:
+- $0.005 per message (~â‚¹0.40)
+- No sandbox restrictions
+- No Twilio branding
+- Unlimited recipients
+
+Example Costs:
+- 10 messages/day = â‚¹120/month
+- 20 messages/day = â‚¹240/month
+- 50 messages/day = â‚¹600/month
+- 100 messages/day = â‚¹1,200/month
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ”§ TROUBLESHOOTING
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Error: "Unable to create record: The 'To' number is not a valid phone"
+â†’ Recipient must join sandbox first (send "join <code>")
+
+Error: "Authenticate"
+â†’ Check Account SID and Auth Token in .env
+
+Error: "Module 'twilio' not found"
+â†’ Run: python -m pip install twilio
+
+Error: "The number +919876543210 is unverified"
+â†’ In trial mode, verify number in Twilio Console
+â†’ Or upgrade to paid account
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“ž NEED HELP?
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Twilio Support:
+- Help Center: https://support.twilio.com
+- Documentation: https://www.twilio.com/docs/whatsapp
+- Community: https://www.twilio.com/community
+
+CodeSunny Support:
+- Email: information@codesunny.in
+- Phone: +91 89758075789
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+âœ… QUICK CHECKLIST
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+â–¡ Created Twilio account
+â–¡ Verified email
+â–¡ Verified phone number
+â–¡ Joined WhatsApp sandbox
+â–¡ Copied Account SID
+â–¡ Copied Auth Token
+â–¡ Added credentials to .env
+â–¡ Tested sending message
+â–¡ Received message on WhatsApp
+
+If all checked â†’ You're ready! ðŸš€
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸŽ‰ CONGRATULATIONS!
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Your WhatsApp automation is now LIVE!
+
+Messages will send automatically via Twilio.
+No more manual copy-paste needed!
+
+Time saved: 20-50 hours/month
+Cost: â‚¹240-600/month
+ROI: 100x+
+
+Welcome to automated business! ðŸš€
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+

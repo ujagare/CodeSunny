@@ -1,0 +1,92 @@
+╔══════════════════════════════════════════════════════════════╗
+║           GEMINI CLI - QUICK REFERENCE CARD                  ║
+╚══════════════════════════════════════════════════════════════╝
+
+📦 SETUP (One Time)
+────────────────────────────────────────────────────────────────
+  Windows:     setup-gemini.bat
+  Linux/Mac:   pip install google-generativeai pillow
+
+🔑 API KEY
+────────────────────────────────────────────────────────────────
+  Get:    https://makersuite.google.com/app/apikey
+  Add:    mcp-server/.env → GEMINI_API_KEY=your_key_here
+  Test:   python test-gemini.py
+
+💬 COMMANDS
+────────────────────────────────────────────────────────────────
+  Chat Mode:
+    python gemini_cli.py chat
+    
+  Single Prompt:
+    python gemini_cli.py prompt "your question"
+    
+  Image Analysis:
+    python gemini_cli.py image photo.jpg "describe this"
+    
+  Help:
+    python gemini_cli.py help
+
+🎯 QUICK EXAMPLES
+────────────────────────────────────────────────────────────────
+  # Code help
+  python gemini_cli.py prompt "Explain async/await in JS"
+  
+  # Debug
+  python gemini_cli.py prompt "Fix this error: [error message]"
+  
+  # Content
+  python gemini_cli.py prompt "Write 5 blog titles about AI"
+  
+  # Design
+  python gemini_cli.py image design.png "Review this UI"
+
+⚡ KEYBOARD SHORTCUTS (Chat Mode)
+────────────────────────────────────────────────────────────────
+  Exit:        exit, quit, q
+  Force quit:  Ctrl+C
+  Skip:        Enter (empty input)
+
+📊 LIMITS (Free Tier)
+────────────────────────────────────────────────────────────────
+  Requests:    60 per minute
+  Context:     32K tokens
+  Images:      4MB max size
+  Models:      gemini-2.0-flash-exp (fastest)
+
+🔧 TROUBLESHOOTING
+────────────────────────────────────────────────────────────────
+  API Key Error:
+    → Check .env file
+    → Make sure key is not placeholder
+    
+  Module Error:
+    → pip install google-generativeai pillow
+    
+  Connection Error:
+    → Check internet connection
+    → Verify API key is valid
+
+📚 DOCUMENTATION
+────────────────────────────────────────────────────────────────
+  Full Guide:     mcp-server/README_GEMINI.md
+  Setup Guide:    GEMINI_SETUP.md
+  Test Script:    python test-gemini.py
+
+💡 PRO TIPS
+────────────────────────────────────────────────────────────────
+  ✓ Be specific in prompts
+  ✓ Use chat mode for brainstorming
+  ✓ Use prompt mode for automation
+  ✓ Combine with Groq for speed
+  ✓ Use image mode for UI analysis
+
+🆘 SUPPORT
+────────────────────────────────────────────────────────────────
+  Email:    information@codesunny.in
+  Website:  https://codesunny.com
+  Phone:    +91 89758075789
+
+╔══════════════════════════════════════════════════════════════╗
+║  Made with ❤️ by CodeSunny Team                              ║
+╚══════════════════════════════════════════════════════════════╝

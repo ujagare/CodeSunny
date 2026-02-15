@@ -6,6 +6,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const cookieParser = require("cookie-parser");
 const rateLimiter = require("./middlewares/rateLimiter");
 const requestLogger = require("./middlewares/requestLogger");
+const requestContext = require("./middlewares/requestContext.middleware");
 
 const app = express();
 const useViteDevServer = process.env.USE_VITE_DEV_SERVER === "true";
@@ -35,6 +36,7 @@ app.use(
 
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
+app.use(requestContext);
 app.use(requestLogger);
 app.use(xss());
 app.use(mongoSanitize());

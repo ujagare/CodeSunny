@@ -1,0 +1,403 @@
+﻿â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+â•‘          WHATSAPP AUTOMATION - COMPLETE SETUP GUIDE                  â•‘
+â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“± CURRENT STATUS: Basic automation ready, needs API integration
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸŽ¯ WHAT'S ALREADY WORKING (WITHOUT API)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+âœ… AI-powered message generation
+âœ… Contact management
+âœ… Quote generation
+âœ… Message logging
+âœ… Auto-reply configuration
+âœ… Broadcast message preparation
+
+Commands that work NOW:
+  python whatsapp_automation.py auto-reply enable
+  python whatsapp_automation.py add-contact +919876543210 "John" hot-lead
+  python whatsapp_automation.py quote +919876543210 "web,seo"
+
+Note: Messages are logged to data/whatsapp_messages.json for manual sending
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸš€ OPTION 1: TWILIO (RECOMMENDED - EASIEST)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Cost: $0.005 per message (â‚¹0.40 per message)
+Setup Time: 15 minutes
+Difficulty: Easy
+
+STEP 1: Create Twilio Account
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. Go to: https://www.twilio.com/try-twilio
+2. Sign up (free trial gives $15 credit)
+3. Verify your phone number
+
+STEP 2: Get WhatsApp Sandbox
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. Login to Twilio Console
+2. Go to: Messaging â†’ Try it out â†’ Send a WhatsApp message
+3. You'll see a number like: +1 415 523 8886
+4. Send "join <code>" to that number from your WhatsApp
+5. Example: "join happy-tiger"
+
+STEP 3: Get API Credentials
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. Go to: Console â†’ Account Info
+2. Copy:
+   - Account SID (starts with AC...)
+   - Auth Token (click to reveal)
+3. WhatsApp number: +14155238886 (sandbox number)
+
+STEP 4: Add to .env File
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Add these lines to mcp-server/.env:
+
+TWILIO_ACCOUNT_SID=AC_REPLACE_WITH_YOUR_TWILIO_SID
+TWILIO_AUTH_TOKEN=your_auth_token_here
+TWILIO_WHATSAPP_FROM=+14155238886
+
+STEP 5: Install Twilio Library
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+pip install twilio
+
+STEP 6: Test It!
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+python whatsapp_automation.py send +919876543210 "Test message"
+
+âœ… DONE! Messages will now send automatically via WhatsApp
+
+Limitations (Sandbox):
+- Can only send to numbers that joined sandbox
+- Twilio branding in messages
+- Good for testing
+
+To Remove Limitations:
+- Upgrade to paid account ($20/month)
+- Get approved WhatsApp Business number
+- Remove sandbox restrictions
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸš€ OPTION 2: WHATSAPP BUSINESS API (OFFICIAL)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Cost: Free (but needs Facebook Business verification)
+Setup Time: 2-3 days (verification time)
+Difficulty: Medium
+
+STEP 1: Create Facebook Business Account
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. Go to: https://business.facebook.com
+2. Create Business Account
+3. Add business details
+
+STEP 2: Apply for WhatsApp Business API
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. Go to: https://business.facebook.com/wa/manage/home
+2. Click "Get Started"
+3. Add phone number (must be new, not used on WhatsApp)
+4. Verify phone number
+
+STEP 3: Get API Access
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. Go to: Meta for Developers (developers.facebook.com)
+2. Create App â†’ Business â†’ WhatsApp
+3. Get:
+   - Phone Number ID
+   - WhatsApp Business Account ID
+   - Access Token
+
+STEP 4: Add to .env
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+WHATSAPP_PHONE_ID=your_phone_id
+WHATSAPP_TOKEN=your_access_token
+WHATSAPP_BUSINESS_ID=your_business_id
+
+STEP 5: Update Code (I'll provide if you choose this)
+
+Benefits:
+âœ… Official WhatsApp integration
+âœ… No Twilio branding
+âœ… Free messaging
+âœ… Better delivery rates
+âœ… Rich media support
+
+Drawbacks:
+âŒ Longer setup time
+âŒ Requires business verification
+âŒ More complex API
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸš€ OPTION 3: WATI / AISENSY (INDIAN PROVIDERS)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Cost: â‚¹2,000-5,000/month
+Setup Time: 1 day
+Difficulty: Easy
+
+WATI (Recommended for India)
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Website: https://www.wati.io
+Pricing: â‚¹2,499/month (1000 conversations)
+
+Features:
+âœ… Easy setup
+âœ… Indian support
+âœ… Chatbot builder
+âœ… Broadcast tools
+âœ… Analytics dashboard
+âœ… Team inbox
+
+Setup:
+1. Sign up at wati.io
+2. Connect WhatsApp number
+3. Get API key
+4. Add to .env:
+   WATI_API_KEY=your_key
+   WATI_API_URL=https://live-server-xxxxx.wati.io
+
+AiSensy (Alternative)
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Website: https://www.aisensy.com
+Pricing: â‚¹1,999/month (500 conversations)
+
+Similar features to WATI
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸš€ OPTION 4: MANUAL MODE (NO API - CURRENT)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Cost: FREE
+Setup Time: 0 minutes
+Difficulty: None
+
+How it works:
+1. Run automation commands
+2. Messages logged to data/whatsapp_messages.json
+3. Manually copy-paste to WhatsApp Web
+4. Or use WhatsApp Business app
+
+Commands:
+python whatsapp_automation.py quote +919876543210 "web,seo"
+python whatsapp_automation.py broadcast "New offer!" hot-leads
+
+Then:
+1. Open data/whatsapp_messages.json
+2. Copy messages
+3. Send via WhatsApp Web/App
+
+Benefits:
+âœ… No cost
+âœ… No API needed
+âœ… Full control
+âœ… AI-generated content
+
+Drawbacks:
+âŒ Manual sending
+âŒ Not scalable
+âŒ Time-consuming
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ’¡ MY RECOMMENDATION FOR YOU
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Start with: OPTION 1 (TWILIO)
+
+Why?
+âœ… Easiest to setup (15 minutes)
+âœ… Free trial ($15 credit = 3000 messages)
+âœ… Test automation immediately
+âœ… Upgrade later if needed
+âœ… Good for initial testing
+
+Later upgrade to: OPTION 3 (WATI/AiSensy)
+
+Why?
+âœ… Better for Indian market
+âœ… More features
+âœ… Better support
+âœ… Professional dashboard
+âœ… Team collaboration
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“‹ WHAT I NEED FROM YOU (FOR TWILIO SETUP)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Option A: You do it yourself (15 minutes)
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. Create Twilio account: https://www.twilio.com/try-twilio
+2. Get WhatsApp sandbox number
+3. Get Account SID and Auth Token
+4. Send me these 3 values:
+   - TWILIO_ACCOUNT_SID=AC...
+   - TWILIO_AUTH_TOKEN=...
+   - TWILIO_WHATSAPP_FROM=+14155238886
+
+5. I'll add them to .env and test
+
+Option B: I guide you step-by-step
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Just tell me "guide me through Twilio setup" and I'll give you
+detailed screenshots and instructions for each step.
+
+Option C: Use manual mode for now
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+No setup needed! Just use:
+python whatsapp_automation.py quote +919876543210 "web,seo"
+
+Then copy message from data/whatsapp_messages.json and send manually.
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸŽ¯ CURRENT FEATURES (WORKING NOW)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. AI-Powered Replies
+   - Understands customer queries
+   - Generates professional responses
+   - Includes contact information
+
+2. Quote Generation
+   - Service-based pricing
+   - Professional formatting
+   - Call-to-action included
+
+3. Contact Management
+   - Save customer details
+   - Tag contacts (hot-lead, customer, etc)
+   - Track conversations
+
+4. Broadcast Messages
+   - Send to multiple contacts
+   - Filter by tags
+   - Personalized messages
+
+5. Auto-Reply Configuration
+   - Business hours detection
+   - After-hours messages
+   - Enable/disable easily
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“Š EXAMPLE USAGE (CURRENT - NO API)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+# Add a contact
+python whatsapp_automation.py add-contact +919876543210 "Rahul Kumar" hot-lead
+
+# Generate quote
+python whatsapp_automation.py quote +919876543210 "web,seo,design"
+
+# Output (in data/whatsapp_messages.json):
+{
+  "phone": "+919876543210",
+  "message": "ðŸŽ¯ *CodeSunny Quote*\n\nâœ… Web Development: â‚¹25,000 - â‚¹1,00,000\nâœ… SEO Optimization: â‚¹15,000 - â‚¹50,000/month\nâœ… UI/UX Design: â‚¹10,000 - â‚¹50,000\n\nðŸ“ž *Next Steps:*\n1. Share your requirements\n2. Get detailed proposal\n3. Start your project\n\nðŸ“§ information@codesunny.in\nðŸ“± +91 89758075789\nðŸŒ codesunny.com",
+  "status": "pending_manual",
+  "timestamp": "2026-02-24T12:00:00Z"
+}
+
+# Then copy this message and send via WhatsApp Web
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ”® FUTURE ENHANCEMENTS (AFTER API SETUP)
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+1. Incoming Message Handler
+   - Auto-detect queries
+   - AI-powered responses
+   - Lead capture
+
+2. Rich Media Support
+   - Send images
+   - Send PDFs (quotes, invoices)
+   - Send location
+
+3. Interactive Messages
+   - Quick reply buttons
+   - List messages
+   - Call-to-action buttons
+
+4. Analytics
+   - Message delivery rates
+   - Response times
+   - Conversion tracking
+
+5. Integration with CRM
+   - Auto-create leads
+   - Update contact status
+   - Track conversations
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+â“ FREQUENTLY ASKED QUESTIONS
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Q: Can I use my existing WhatsApp number?
+A: No, you need a new number for Business API. Personal WhatsApp 
+   numbers cannot be used with automation.
+
+Q: Is it legal to automate WhatsApp?
+A: Yes, if you use official WhatsApp Business API or approved 
+   providers like Twilio, WATI, etc.
+
+Q: How much does it cost?
+A: Twilio: â‚¹0.40/message
+   WATI: â‚¹2,499/month (1000 conversations)
+   WhatsApp API: Free (but needs verification)
+
+Q: Can I send bulk messages?
+A: Yes, but follow WhatsApp's policies:
+   - Get user consent
+   - Provide opt-out option
+   - Don't spam
+   - Use approved templates
+
+Q: What's the difference between sandbox and production?
+A: Sandbox: Testing only, limited recipients, Twilio branding
+   Production: Unlimited, no branding, requires approval
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+ðŸ“ž NEXT STEPS
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Tell me which option you want:
+
+Option 1: "Setup Twilio" - I'll guide you step-by-step
+Option 2: "Use manual mode" - Continue with current setup
+Option 3: "Explore WATI" - I'll help with WATI setup
+Option 4: "WhatsApp Business API" - I'll help with official API
+
+Just reply with your choice and I'll proceed!
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+âœ… SUMMARY
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+Current Status:
+âœ… AI message generation working
+âœ… Contact management working
+âœ… Quote generation working
+âœ… Message logging working
+
+To Enable Auto-Sending:
+âšª Need API credentials (Twilio/WATI/WhatsApp)
+âšª 15 minutes setup time
+âšª Free trial available
+
+Your automation is 90% ready - just needs API connection!
+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+

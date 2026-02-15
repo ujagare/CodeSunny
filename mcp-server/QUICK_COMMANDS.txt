@@ -1,0 +1,45 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║              CODESUNNY AUTOMATION - QUICK COMMANDS                   ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📱 SOCIAL MEDIA
+═══════════════════════════════════════════════════════════════════════
+python social_media_automation.py post "Your message"
+python social_media_automation.py times
+python social_media_automation.py schedule "Message" "2026-03-01 10:00"
+
+🧠 LEAD INTELLIGENCE
+═══════════════════════════════════════════════════════════════════════
+python lead_intelligence.py score
+python lead_intelligence.py enrich
+python lead_intelligence.py qualify 70
+
+💬 WHATSAPP
+═══════════════════════════════════════════════════════════════════════
+python whatsapp_automation.py auto-reply enable
+python whatsapp_automation.py quote +919876543210 "web,seo"
+python whatsapp_automation.py add-contact +919876543210 "John" hot-lead
+
+💳 PAYMENT & INVOICE
+═══════════════════════════════════════════════════════════════════════
+python payment_automation.py invoice LEAD123 50000 "Web Development"
+python payment_automation.py remind
+python payment_automation.py paid INV-20260224-120000
+python payment_automation.py stats 2026-02
+
+📧 EMAIL AUTOMATION
+═══════════════════════════════════════════════════════════════════════
+python email_automation.py
+python inbound_email_ai_agent.py
+
+🤖 AUTOMATION HUB
+═══════════════════════════════════════════════════════════════════════
+python automation_hub.py
+
+🚀 MASTER RUNNER
+═══════════════════════════════════════════════════════════════════════
+run-all-automations.bat
+
+✅ TEST ALL
+═══════════════════════════════════════════════════════════════════════
+test-automations.bat

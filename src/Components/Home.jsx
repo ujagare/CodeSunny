@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, lazy, Suspense } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -270,11 +271,15 @@ export default function Home() {
       controller.abort();
     }, 8000);
 
-    fetch("https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode", {
-      signal: controller.signal,
-    })
+    axios
+      .get("https://prod.spline.design/O-UQSVU5QlYbnHEc/scene.splinecode", {
+        signal: controller.signal,
+        validateStatus: () => true,
+      })
       .then((res) => {
-        if (!res.ok) throw new Error("Spline fetch failed");
+        if (res.status < 200 || res.status >= 300) {
+          throw new Error("Spline fetch failed");
+        }
         if (!cancelled) setSplineAvailable(true);
       })
       .catch(() => {

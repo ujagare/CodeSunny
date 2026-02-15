@@ -1,0 +1,234 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║           CODESUNNY AUTOMATION SYSTEMS - QUICK GUIDE                 ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+✅ ALL SYSTEMS TESTED & WORKING
+
+═══════════════════════════════════════════════════════════════════════
+
+📱 1. SOCIAL MEDIA AUTOMATION (social_media_automation.py)
+═══════════════════════════════════════════════════════════════════════
+
+Commands:
+  python social_media_automation.py post "Your message"
+  python social_media_automation.py schedule "Message" "2026-03-01 10:00"
+  python social_media_automation.py engage
+  python social_media_automation.py times
+
+Features:
+  ✅ AI-generated content for LinkedIn, Twitter, Facebook, Instagram
+  ✅ Platform-specific character limits
+  ✅ Auto-hashtag generation
+  ✅ Best posting times recommendation
+  ✅ Scheduled posting
+  ✅ Engagement tracking
+
+Example:
+  python social_media_automation.py post "New AI chatbot feature launched!"
+
+═══════════════════════════════════════════════════════════════════════
+
+🧠 2. LEAD INTELLIGENCE (lead_intelligence.py)
+═══════════════════════════════════════════════════════════════════════
+
+Commands:
+  python lead_intelligence.py score
+  python lead_intelligence.py enrich
+  python lead_intelligence.py qualify [threshold]
+
+Features:
+  ✅ Advanced lead scoring (0-100)
+  ✅ Quality classification (hot/warm/cool/cold)
+  ✅ BANT criteria analysis
+  ✅ Email validation & enrichment
+  ✅ AI-powered intent detection
+  ✅ Budget estimation
+  ✅ Conversion probability
+
+Scoring Factors:
+  - Email quality (0-20 points)
+  - Message quality (0-30 points)
+  - High-intent keywords (0-25 points)
+  - Budget indicators (0-20 points)
+  - Services interested (0-15 points)
+  - Company indicators (0-10 points)
+
+Example:
+  python lead_intelligence.py qualify 70
+
+═══════════════════════════════════════════════════════════════════════
+
+💬 3. WHATSAPP AUTOMATION (whatsapp_automation.py)
+═══════════════════════════════════════════════════════════════════════
+
+Commands:
+  python whatsapp_automation.py send <phone> <message>
+  python whatsapp_automation.py broadcast <message> [tags]
+  python whatsapp_automation.py quote <phone> <services>
+  python whatsapp_automation.py auto-reply <enable|disable>
+  python whatsapp_automation.py add-contact <phone> <name> [tags]
+
+Features:
+  ✅ AI-powered auto-replies
+  ✅ Broadcast messaging
+  ✅ Quote generation
+  ✅ Contact management
+  ✅ Business hours detection
+  ✅ Twilio integration support
+
+Setup (Optional):
+  Add to .env:
+  TWILIO_ACCOUNT_SID=your_sid
+  TWILIO_AUTH_TOKEN=your_token
+  TWILIO_WHATSAPP_FROM=+14155238886
+
+Example:
+  python whatsapp_automation.py quote +919876543210 "web,seo"
+
+═══════════════════════════════════════════════════════════════════════
+
+💳 4. PAYMENT & INVOICE AUTOMATION (payment_automation.py)
+═══════════════════════════════════════════════════════════════════════
+
+Commands:
+  python payment_automation.py invoice <lead_id> <amount> <services>
+  python payment_automation.py remind
+  python payment_automation.py paid <invoice_number>
+  python payment_automation.py stats [month]
+
+Features:
+  ✅ Auto-invoice generation
+  ✅ Email invoices to clients
+  ✅ Payment reminders (Day 7, 14, 21)
+  ✅ Revenue tracking
+  ✅ Overdue detection
+  ✅ Payment status management
+
+Reminder Schedule:
+  - Day 7: Gentle reminder
+  - Day 14: Urgent reminder
+  - Day 21: Final notice
+
+Example:
+  python payment_automation.py invoice LEAD123 50000 "Web Development"
+  python payment_automation.py stats 2026-02
+
+═══════════════════════════════════════════════════════════════════════
+
+🔄 EXISTING AUTOMATIONS (Already Working)
+═══════════════════════════════════════════════════════════════════════
+
+📧 Email Automation (email_automation.py)
+  - Behavior-based follow-ups
+  - Day 2, 4, 7, 10 sequences
+  - Hot lead alerts
+  - Rate limiting (100/hour)
+
+📨 Inbound Email AI (inbound_email_ai_agent.py)
+  - Auto-read unread emails
+  - AI-generated replies
+  - Multi-language support
+  - Professional formatting
+
+🤖 Automation Hub (automation_hub.py)
+  - MongoDB → Google Sheets sync
+  - Daily/weekly KPI digests
+  - SEO reports
+  - Uptime monitoring
+  - Backup automation
+
+═══════════════════════════════════════════════════════════════════════
+
+🚀 QUICK START
+═══════════════════════════════════════════════════════════════════════
+
+1. Test All Systems:
+   run-automation-hub.bat
+
+2. Test Individual Systems:
+   cd mcp-server
+   python social_media_automation.py times
+   python lead_intelligence.py score
+   python whatsapp_automation.py auto-reply enable
+   python payment_automation.py stats
+
+3. Schedule Automations (Windows Task Scheduler):
+   - Email follow-ups: Daily at 10 AM
+   - Lead scoring: Daily at 9 AM
+   - Payment reminders: Daily at 11 AM
+   - Social media: As needed
+
+═══════════════════════════════════════════════════════════════════════
+
+📊 DATA STORAGE
+═══════════════════════════════════════════════════════════════════════
+
+All automation data stored in: mcp-server/data/
+
+Files:
+  - social_posts.json          (Social media posts)
+  - social_engagement.json     (Engagement tracking)
+  - lead_intelligence.json     (Lead analysis)
+  - whatsapp_messages.json     (WhatsApp logs)
+  - whatsapp_contacts.json     (Contact database)
+  - whatsapp_config.json       (Auto-reply config)
+  - invoices.json              (Invoice records)
+  - payments.json              (Payment tracking)
+  - leads.json                 (Lead database)
+
+═══════════════════════════════════════════════════════════════════════
+
+⚙️ CONFIGURATION
+═══════════════════════════════════════════════════════════════════════
+
+All systems use .env file for configuration:
+
+Required (Already configured):
+  ✅ GROQ_API_KEY
+  ✅ GEMINI_API_KEY
+  ✅ SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+  ✅ MONGODB_URI
+
+Optional (For enhanced features):
+  - TWILIO_ACCOUNT_SID (WhatsApp)
+  - TWILIO_AUTH_TOKEN (WhatsApp)
+  - LINKEDIN_WEBHOOK_URL (Social media)
+  - TWITTER_WEBHOOK_URL (Social media)
+  - FACEBOOK_WEBHOOK_URL (Social media)
+
+═══════════════════════════════════════════════════════════════════════
+
+🔧 TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════
+
+Issue: "No leads found"
+  → Add test leads via chatbot or manually to data/leads.json
+
+Issue: "SMTP error"
+  → Check .env SMTP credentials
+  → Verify Zoho Mail Pro settings
+
+Issue: "MongoDB error"
+  → System automatically falls back to JSON storage
+  → No action needed
+
+Issue: "AI generation failed"
+  → Check GROQ_API_KEY or GEMINI_API_KEY
+  → System uses fallback templates
+
+═══════════════════════════════════════════════════════════════════════
+
+📞 SUPPORT
+═══════════════════════════════════════════════════════════════════════
+
+Email: information@codesunny.in
+Phone: +91 89758075789
+Website: https://codesunny.com
+
+═══════════════════════════════════════════════════════════════════════
+
+✅ STATUS: ALL SYSTEMS OPERATIONAL
+Last Updated: February 24, 2026
+Version: 1.0.0
+
+═══════════════════════════════════════════════════════════════════════

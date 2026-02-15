@@ -1,4 +1,5 @@
 // Test MCP endpoint directly
+const axios = require("axios");
 const MCP_URL = "http://localhost:8001";
 
 async function testMCP() {
@@ -17,22 +18,23 @@ async function testMCP() {
   };
 
   try {
-    const initRes = await fetch(MCP_URL, {
-      method: "POST",
+    const initRes = await axios.post(MCP_URL, initPayload, {
       headers: {
         "Content-Type": "application/json",
         "MCP-Protocol-Version": "2025-03-26",
       },
-      body: JSON.stringify(initPayload),
+      responseType: "text",
+      transformResponse: [(v) => v],
+      validateStatus: () => true,
     });
 
     console.log("\n1. Initialize Response:");
     console.log("Status:", initRes.status);
-    console.log("Headers:", Object.fromEntries(initRes.headers.entries()));
-    const initText = await initRes.text();
+    console.log("Headers:", initRes.headers);
+    const initText = initRes.data;
     console.log("Body:", initText);
 
-    const sessionId = initRes.headers.get("mcp-session-id");
+    const sessionId = initRes.headers["mcp-session-id"];
 
     // Test 2: Call chat tool
     const chatPayload = {
@@ -51,15 +53,16 @@ async function testMCP() {
     };
     if (sessionId) headers["MCP-Session-Id"] = sessionId;
 
-    const chatRes = await fetch(MCP_URL, {
-      method: "POST",
+    const chatRes = await axios.post(MCP_URL, chatPayload, {
       headers,
-      body: JSON.stringify(chatPayload),
+      responseType: "text",
+      transformResponse: [(v) => v],
+      validateStatus: () => true,
     });
 
     console.log("\n2. Chat Tool Response:");
     console.log("Status:", chatRes.status);
-    const chatText = await chatRes.text();
+    const chatText = chatRes.data;
     console.log("Body:", chatText);
   } catch (error) {
     console.error("Error:", error.message);

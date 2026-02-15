@@ -1,7 +1,11 @@
 mcp==1.26.0
 openai==2.20.0
 groq==1.0.0
-google-generativeai==0.8.6
+google-genai==1.26.0
 python-dotenv==1.2.1
 uvicorn==0.40.0
 pydantic==2.12.5
+requests==2.31.0
+pymongo==4.10.1
+twilio==9.10.2
+flask==3.1.3

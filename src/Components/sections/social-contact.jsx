@@ -12,7 +12,7 @@ const SocialContact = () => {
 
   const contactInfo = [
     { label: "PHONE", value: "+91 89758075789" },
-    { label: "EMAIL", value: "INFO@CODESUNNY.IN" },
+    { label: "EMAIL", value: "INFORMATIO@CODESUNNY.IN" },
     { label: "ADDRESS", value: "NEAR SB ROAD, PUNE 411016" },
   ];
 
@@ -139,7 +139,7 @@ const SocialContact = () => {
                   }}
                   className="uppercase tracking-tight"
                 >
-                  INFO@CODESUNNY.IN
+                  INFORMATIO@CODESUNNY.IN
                 </span>
               </div>
             </div>

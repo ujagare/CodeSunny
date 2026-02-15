@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationProvider } from "./contexts/NavigationContext";
 import AppRoutes from "./Utils/Routes";
 import { useLenis } from "./hooks/useLenis";
@@ -7,6 +7,7 @@ import { useScrollTrigger } from "./hooks/useScrollTrigger";
 import { useImageParallax } from "./hooks/useImageParallax";
 import { useTextReveal } from "./hooks/useTextReveal";
 import ChatWidget from "./Components/ChatWidget";
+import { initFloodlight, trackPageView } from "./utils/floodlight";
 
 const App = () => {
   // Initialize smooth scrolling
@@ -23,6 +24,12 @@ const App = () => {
 
   // Initialize text reveal effect
   useTextReveal();
+
+  // Initialize Floodlight tracking
+  useEffect(() => {
+    initFloodlight();
+    trackPageView(window.location.pathname);
+  }, []);
 
   return (
     <NavigationProvider>

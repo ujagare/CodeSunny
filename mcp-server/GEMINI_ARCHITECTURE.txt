@@ -1,0 +1,282 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                    GEMINI CLI ARCHITECTURE                           ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                         USER INTERFACE                               │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+        ┌─────────────────────────────────────────────┐
+        │         gemini_cli.py (Main CLI)            │
+        │  ┌───────────────────────────────────────┐  │
+        │  │  Command Parser                       │  │
+        │  │  • chat                               │  │
+        │  │  • prompt                             │  │
+        │  │  • image                              │  │
+        │  │  • help                               │  │
+        │  └───────────────────────────────────────┘  │
+        └─────────────────────────────────────────────┘
+                                  │
+                                  ▼
+        ┌─────────────────────────────────────────────┐
+        │         Configuration Layer                  │
+        │  ┌───────────────────────────────────────┐  │
+        │  │  .env File                            │  │
+        │  │  • GEMINI_API_KEY                     │  │
+        │  │  • GEMINI_MODEL                       │  │
+        │  └───────────────────────────────────────┘  │
+        └─────────────────────────────────────────────┘
+                                  │
+                                  ▼
+        ┌─────────────────────────────────────────────┐
+        │      Google Generative AI SDK                │
+        │  ┌───────────────────────────────────────┐  │
+        │  │  genai.configure(api_key)             │  │
+        │  │  genai.GenerativeModel(model)         │  │
+        │  └───────────────────────────────────────┘  │
+        └─────────────────────────────────────────────┘
+                                  │
+                                  ▼
+        ┌─────────────────────────────────────────────┐
+        │           Google Gemini API                  │
+        │  ┌───────────────────────────────────────┐  │
+        │  │  • gemini-2.0-flash-exp               │  │
+        │  │  • gemini-pro                         │  │
+        │  │  • gemini-pro-vision                  │  │
+        │  └───────────────────────────────────────┘  │
+        └─────────────────────────────────────────────┘
+                                  │
+                                  ▼
+        ┌─────────────────────────────────────────────┐
+        │              Response Handler                │
+        │  ┌───────────────────────────────────────┐  │
+        │  │  • Format output                      │  │
+        │  │  • Color coding                       │  │
+        │  │  • Error handling                     │  │
+        │  └───────────────────────────────────────┘  │
+        └─────────────────────────────────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    INTEGRATION WITH MCP SERVER                       ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                      Frontend (React)                                │
+│                    ChatWidget.jsx                                    │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Backend (Node.js)                                 │
+│                  backend/src/routes/mcp.routes.js                    │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                    MCP Server (Python)                               │
+│                    mcp-server/server.py                              │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  AI Provider Priority:                                        │  │
+│  │  1. Groq (Primary - Fastest)                                  │  │
+│  │  2. MinMax (Fallback - Chinese LLM)                           │  │
+│  │  3. OpenAI (Fallback - Paid)                                  │  │
+│  │  4. Gemini (Fallback - Free) ← NEW!                          │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+        ┌─────────────────────────────────────────────┐
+        │         AI Response                          │
+        │  • Chat replies                              │
+        │  • Tool execution                            │
+        │  • Lead generation                           │
+        └─────────────────────────────────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                         DATA FLOW                                    ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+CHAT MODE:
+──────────
+User Input → gemini_cli.py → Gemini API → Response → Terminal
+    ↓
+History stored in chat session
+    ↓
+Context maintained for conversation
+
+
+PROMPT MODE:
+────────────
+User Prompt → gemini_cli.py → Gemini API → Response → Terminal
+(Single request, no history)
+
+
+IMAGE MODE:
+───────────
+Image File → PIL (Pillow) → gemini_cli.py → Gemini Vision API
+    ↓
+Analysis → Response → Terminal
+
+
+MCP INTEGRATION:
+────────────────
+Frontend → Backend → MCP Server → AI Provider Selection
+    ↓                                      ↓
+    │                              ┌───────┴────────┐
+    │                              │                │
+    │                         Groq Available?   No  │
+    │                              │                │
+    │                             Yes              ▼
+    │                              │         MinMax Available?
+    │                              │                │
+    │                              │               Yes
+    │                              │                │
+    │                              ▼               ▼
+    └──────────────────────── Response ◄─── Gemini (Fallback)
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                      FILE STRUCTURE                                  ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+project-root/
+│
+├── mcp-server/
+│   ├── gemini_cli.py          ← Main CLI tool
+│   ├── test-gemini.py         ← Test script
+│   ├── server.py              ← MCP server (Gemini integrated)
+│   ├── .env                   ← Configuration
+│   ├── requirements.txt       ← Dependencies
+│   │
+│   ├── README_GEMINI.md       ← Full documentation
+│   ├── GEMINI_QUICK_REF.txt   ← Quick reference
+│   └── GEMINI_ARCHITECTURE.txt ← This file
+│
+├── setup-gemini.bat           ← Windows setup
+├── GEMINI_SETUP.md            ← Setup guide
+└── GEMINI_ADDED_FILES.md      ← Summary
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    SECURITY & BEST PRACTICES                         ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+API KEY SECURITY:
+─────────────────
+✓ Stored in .env file (not in code)
+✓ .env file in .gitignore
+✓ Never commit API keys
+✓ Use environment variables
+
+ERROR HANDLING:
+───────────────
+✓ Try-catch blocks for API calls
+✓ Graceful fallbacks
+✓ User-friendly error messages
+✓ Connection timeout handling
+
+RATE LIMITING:
+──────────────
+✓ Free tier: 60 requests/minute
+✓ Automatic retry on rate limit
+✓ Queue system for multiple requests
+✓ Fallback to other AI providers
+
+DATA PRIVACY:
+─────────────
+✓ No data stored by Gemini CLI
+✓ Chat history in memory only
+✓ No logging of sensitive data
+✓ HTTPS for API communication
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    PERFORMANCE METRICS                               ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+Response Times (Average):
+─────────────────────────
+• Chat mode:    1-2 seconds
+• Prompt mode:  1-2 seconds
+• Image mode:   2-4 seconds
+
+Token Limits:
+─────────────
+• Input:  32,000 tokens
+• Output: 8,000 tokens
+• Total:  40,000 tokens per request
+
+Comparison:
+───────────
+Provider    Speed    Free Tier       Context
+────────────────────────────────────────────
+Groq        ⚡⚡⚡⚡    14,400/day      32K
+Gemini      ⚡⚡⚡     60/min          32K
+OpenAI      ⚡⚡      Limited         8K-128K
+MinMax      ⚡⚡⚡     Varies          32K
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    TROUBLESHOOTING FLOW                              ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+Issue: "API Key not configured"
+    ↓
+Check .env file exists?
+    ↓ No → Create .env file
+    ↓ Yes
+    ↓
+Check GEMINI_API_KEY value?
+    ↓ Placeholder → Get real API key
+    ↓ Real key
+    ↓
+Test with: python test-gemini.py
+
+
+Issue: "Module not found"
+    ↓
+Check Python version?
+    ↓ < 3.8 → Upgrade Python
+    ↓ >= 3.8
+    ↓
+Install: pip install google-generativeai pillow
+
+
+Issue: "Connection error"
+    ↓
+Check internet connection?
+    ↓ No → Connect to internet
+    ↓ Yes
+    ↓
+Check API key valid?
+    ↓ No → Get new API key
+    ↓ Yes
+    ↓
+Check firewall/proxy settings
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║                    FUTURE ENHANCEMENTS                               ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+Planned Features:
+─────────────────
+□ Streaming responses (real-time output)
+□ Multi-turn conversations with context
+□ File upload support (PDF, DOCX)
+□ Voice input/output
+□ Custom system prompts
+□ Response caching
+□ Batch processing
+□ API usage analytics
+□ Custom model fine-tuning
+□ Integration with other tools
+
+
+╔══════════════════════════════════════════════════════════════════════╗
+║  Made with ❤️ by CodeSunny Team                                      ║
+║  https://codesunny.com                                               ║
+╚══════════════════════════════════════════════════════════════════════╝

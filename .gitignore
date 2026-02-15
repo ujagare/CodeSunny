@@ -53,3 +53,17 @@ home/
 .next/
 
 .vercel
+
+# Python runtime/cache
+__pycache__/
+*.py[cod]
+mcp-server/logs/
+
+# Local run artifacts
+*.out.log
+*.err.log
+mcp-server/*.out.log
+mcp-server/*.err.log
+mcp-server/data/sessions/
+mcp-server/data/tool_usage.log
+mcp-server/data/backups/
