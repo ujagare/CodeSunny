@@ -26,10 +26,30 @@ app.use(
   )
 );
 
-const allowedOrigin = process.env.CORS_ORIGIN || "*";
+const rawAllowedOrigins = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const allowAllOrigins =
+  rawAllowedOrigins.length === 0 || rawAllowedOrigins.includes("*");
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true; // non-browser clients
+  if (allowAllOrigins) return true;
+  if (rawAllowedOrigins.includes(origin)) return true;
+
+  // Allow Vercel preview/production domains by suffix for frontend deploys.
+  if (origin.endsWith(".vercel.app")) return true;
+
+  return false;
+};
+
 app.use(
   cors({
-    origin: allowedOrigin === "*" ? true : allowedOrigin.split(","),
+    origin: (origin, callback) => {
+      callback(null, isAllowedOrigin(origin));
+    },
     credentials: true,
   })
 );

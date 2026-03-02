@@ -78,7 +78,11 @@ def _get_transport_security():
 
     # Allow explicit disable (useful in managed environments).
     # On Render, default-disable DNS rebinding protection unless explicitly enabled.
-    if os.environ.get("RENDER_EXTERNAL_HOSTNAME") and "MCP_DISABLE_DNS_REBINDING" not in os.environ:
+    is_render = any(
+        os.environ.get(k)
+        for k in ("RENDER_EXTERNAL_HOSTNAME", "RENDER", "RENDER_SERVICE_ID")
+    )
+    if is_render and "MCP_DISABLE_DNS_REBINDING" not in os.environ:
         os.environ["MCP_DISABLE_DNS_REBINDING"] = "true"
 
     disable = os.environ.get("MCP_DISABLE_DNS_REBINDING", "").strip().lower()
