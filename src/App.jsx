@@ -7,7 +7,7 @@ import { useScrollTrigger } from "./hooks/useScrollTrigger";
 import { useImageParallax } from "./hooks/useImageParallax";
 import { useTextReveal } from "./hooks/useTextReveal";
 import ChatWidget from "./Components/ChatWidget";
-import { initFloodlight, trackPageView } from "./utils/floodlight";
+import { initFloodlight, trackPageView } from "./Utils/floodlight";
 
 const App = () => {
   // Initialize smooth scrolling

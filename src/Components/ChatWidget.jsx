@@ -7,7 +7,7 @@ import {
   trackMeetingScheduled,
   trackSEOAudit,
   trackImageGeneration,
-} from "../utils/floodlight";
+} from "../Utils/floodlight";
 
 const initialMessages = [
   {
